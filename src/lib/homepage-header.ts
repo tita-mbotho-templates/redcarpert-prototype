@@ -8,10 +8,18 @@ type StickyHeader = {
 export function preserveHomepageHeader() {
   const header = document.querySelector("#header");
   if (!header || !document.querySelector("footer[data-homepage-footer]")) return;
+  // The theme can initialize before this hook or add the compact class later.
+  // Keep the homepage full-size even in those cases, without touching other pages.
+  const body = document.body;
+  const preventCompact = () => body?.classList.remove("fixed-header-scroll");
+  preventCompact();
+  const compactObserver = body && typeof MutationObserver !== "undefined"
+    ? new MutationObserver(preventCompact) : undefined;
+  compactObserver?.observe(body, { attributes: true, attributeFilter: ["class"] });
   const prototype = (window as Window & {
     PEXETO?: { utils?: { stickyHeader?: { prototype: StickyHeader } } };
   }).PEXETO?.utils?.stickyHeader?.prototype;
-  if (!prototype) return;
+  if (!prototype) return compactObserver ? () => compactObserver.disconnect() : undefined;
   const original = prototype.init;
   const observed: { instance?: StickyHeader; ownPredicate?: PropertyDescriptor } = {};
   function init(this: StickyHeader) {
@@ -26,6 +34,7 @@ export function preserveHomepageHeader() {
   }
   prototype.init = init;
   return () => {
+    compactObserver?.disconnect();
     if (prototype.init === init) prototype.init = original;
     const { instance, ownPredicate } = observed;
     if (instance) {
