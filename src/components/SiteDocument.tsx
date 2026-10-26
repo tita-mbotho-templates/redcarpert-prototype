@@ -7,6 +7,7 @@ import { sitePages } from "@/data/site";
 import { adaptNavigation } from "@/lib/navigation-adapter";
 import { addHomepageFooter } from "@/lib/homepage-footer";
 import { HomepageFooterScroll } from "./HomepageFooterScroll";
+import { HeaderNavigationAlignment } from "./HeaderNavigationAlignment";
 import { SiteRuntime } from "./SiteRuntime";
 
 const attributeNames: Record<string, string> = {
@@ -80,6 +81,7 @@ export function SiteDocument({ document: original }: { document: SiteDocumentDat
       ? <link key={index} rel="stylesheet" href={style.href} media={style.media} />
       : <style key={index} dangerouslySetInnerHTML={{ __html: style.css ?? "" }} />)}
     <SemanticTree nodes={document.nodes} />
+    <HeaderNavigationAlignment />
     {document.route === "/" && <HomepageFooterScroll />}
     <SiteRuntime document={{ bodyClass: document.bodyClass, htmlClass: document.htmlClass, scripts: document.scripts, themeConfig: document.themeConfig, postScripts: document.postScripts }} />
   </>;
