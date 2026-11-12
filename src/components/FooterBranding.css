@@ -222,7 +222,7 @@
   }
   #footer[data-redcarpert-footer] .redcarpert-footer-columns {
     /* Balance all three columns without resizing the approved logo artwork.
-     * The third column has enough width for FITTING ENQUIRIES at 375px. */
+     * The third column has sufficient space for its heading at 375px. */
     grid-template-columns: minmax(0, 36fr) minmax(0, 28fr) minmax(0, 36fr);
     column-gap: 12px;
     row-gap: 0;
