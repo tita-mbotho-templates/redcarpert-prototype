@@ -49,9 +49,9 @@ test('copied footer preserves hierarchy and design except the authorised control
   assert.equal(images[0].attrs.srcset, undefined);
 });
 
-test('all other 142 routes remain the same objects; canonical source is never mutated', () => {
+test('all other 7 routes remain the same objects; canonical source is never mutated', () => {
   const before = JSON.stringify(source);
-  assert.equal(Object.keys(sitePages).length, 143);
+  assert.equal(Object.keys(sitePages).length, 8);
   for (const [route, document] of Object.entries(sitePages)) if (route !== '/') assert.strictEqual(addHomepageFooter(document, source), document);
   addHomepageFooter(sitePages['/'], source);
   assert.equal(JSON.stringify(source), before);

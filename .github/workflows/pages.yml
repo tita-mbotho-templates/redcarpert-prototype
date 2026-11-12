@@ -1,0 +1,57 @@
+name: Verify and deploy static Pages site (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      approve_deployment:
+        description: Approve deployment of reviewed main to GitHub Pages
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm run test:dist
+      - run: npx playwright install --with-deps chromium
+      - name: Test production pages in Chromium
+        run: |
+          npm run preview -- --port 4173 > /tmp/pages-preview.log 2>&1 &
+          pages_preview_pid=$!
+          trap 'kill "$pages_preview_pid"' EXIT
+          curl --fail --retry 10 --retry-delay 1 --retry-connrefused http://localhost:4173/redcarpert-prototype/ > /dev/null
+          npm run test:browser
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    # Run only on explicit manual approval: never publish from a code push or PR.
+    # This same manual workflow performs the build and browser checks first.
+    if: github.ref == 'refs/heads/main' && inputs.approve_deployment
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy approved main artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -71,10 +71,10 @@ export function adaptNavigation(document: SiteDocumentData): SiteDocumentData {
   const catalogue = route === "/product" || /^\/product\/page\/\d+$/.test(route);
   const catalogueChild = /^\/(product\/|product-category\/|product-tag\/|marka\/)/.test(route) && !catalogue;
   const current = new Map<string, string>([
-    ["/", "15418"], ["/about-us", "15416"], ["/contact-us", "15417"], ["/our-brides", "16080"],
+    ["/", "15418"], ["/about-us", "15416"], ["/contact-us", "15417"], ["/our-brides", "16080"], ["/digital-lookbook", "16165"],
     ["/product-category/mermaid", "15421"], ["/product-category/ball_gown", "15422"],
   ]).get(route) ?? (catalogue ? "15821" : undefined);
-  const updateItem = (item: DocumentElement, label: string, disabled = false) => {
+  const updateItem = (item: DocumentElement, label: string, disabled = false, destination?: string) => {
     const id = item.attrs.id.slice("menu-item-".length);
     const active = id === current;
     const parent = id === "15821" && catalogueChild;
@@ -86,6 +86,7 @@ export function adaptNavigation(document: SiteDocumentData): SiteDocumentData {
     }
     const link = elements(item.children)[0];
     const attrs = { ...link.attrs };
+    if (destination) attrs.href = destination;
     delete attrs["aria-current"];
     if (active) attrs["aria-current"] = "page";
     if (disabled) {
@@ -98,7 +99,7 @@ export function adaptNavigation(document: SiteDocumentData): SiteDocumentData {
   };
   const order = [0, 1, 5, 4, 2, 3];
   const labels = ["Home", "Wedding Dresses", "Digital Lookbook", "Our Brides", "About Us", "Contact Us"];
-  order.forEach((index, i) => updateItem(items[index], labels[i], index === 5));
+  order.forEach((index, i) => updateItem(items[index], labels[i], false, index === 5 ? "/digital-lookbook/" : undefined));
   categories.slice(0, 2).forEach((item, i) => updateItem(item, i ? "Ball Gown" : "Mermaid"));
   const reorder = (node: DocumentElement, ordered: DocumentElement[]) => {
     let index = 0;

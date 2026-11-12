@@ -11,7 +11,7 @@ test('all captured pages replace only logo attributes without mutating frozen so
       if(typeof a==='string'){assert.equal(a,b);return;}
       assert.equal(a.tag,b.tag);assert.equal(a.children.length,b.children.length);
       if(a.tag==='img'&&a.attrs.src==='/site-assets/ce75cb7d04ef279275.png'){
-        changed++;assert.deepEqual(b.attrs,{...a.attrs,src:'/redcarpert/brand/redcarpert-logo.png',alt:'Redcarpert',style:'object-fit: contain'});
+        changed++;assert.deepEqual(b.attrs,{...a.attrs,src:'/redcarpert/brand/redcarpert-logo-optimized.webp',alt:'Redcarpert',style:'object-fit: contain'});
       }else assert.deepEqual(a.attrs,b.attrs);
       a.children.forEach((n,i)=>compare(n,b.children[i]));
       if(JSON.stringify(a)===JSON.stringify(b))assert.equal(a,b);

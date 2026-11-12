@@ -1,17 +1,14 @@
-import type { CatalogueProduct } from "@/data/catalogue";
+import { catalogueProducts, type CatalogueProduct } from "../data/catalogue.ts";
 import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/site";
 
 const elements = (nodes: DocumentNode[]) => nodes.filter((n): n is DocumentElement => typeof n !== "string");
 const all = (nodes: DocumentNode[]): DocumentElement[] => elements(nodes).flatMap(n => [n, ...all(n.children)]);
 const node = (tag: string, attrs: Record<string, string>, children: DocumentNode[]): DocumentElement => ({ tag, attrs, children });
 
-/** Clean crops of the documented stock originals, never the blurred homepage composites.
- * Both crops share the captured 53:79 frame ratio; provenance/crop rectangles are in 08B's report.
- */
-export const sampleGalleryImages = {
-  "sample-mermaid": { src: "/redcarpert/gallery/sample-01-mermaid-pexels.webp", width: 1696, height: 2528 },
-  "sample-ball-gown": { src: "/redcarpert/gallery/sample-02-ball-gown-pexels.webp", width: 1484, height: 2212 },
-} as const;
+/** Single source of truth: remote Pexels images are shared by book, grid and details. */
+export const sampleGalleryImages: Record<string, {src: string; width: number; height: number}> = Object.fromEntries(
+  catalogueProducts.map(product => [product.id, {src:product.image,width:1200,height:1800}]),
+);
 
 export function sampleDetailTitle(product: CatalogueProduct): string {
   return `${product.name} — ${product.category === "mermaid" ? "Mermaid" : "Ball Gown"}`;
@@ -25,11 +22,9 @@ export function sampleFittingMessage(product: CatalogueProduct): string {
 export function createProductDetailPreview(source: SiteDocumentData, product: CatalogueProduct): SiteDocumentData {
   const fail = (detail: string): never => { throw new Error(`Product detail preview: incompatible ${detail}`); };
   if (source.route !== "/product/arabella") fail("source route");
-  const expected = product.id === "sample-mermaid"
-    ? ["/product/preview/sample-01-mermaid", "mermaid", "Sample 01"]
-    : product.id === "sample-ball-gown" ? ["/product/preview/sample-02-ball-gown", "ball_gown", "Sample 02"] : null;
-  if (!expected || product.previewRoute !== expected[0] || product.category !== expected[1] || product.name !== expected[2]
-    || product.status !== "sample" || product.detailReference !== null || !product.image.startsWith("/redcarpert/")) fail("sample mapping");
+  const original = catalogueProducts.find(entry => entry.id === product.id);
+  if (!original || JSON.stringify(product) !== JSON.stringify(original)
+    || product.status !== "sample" || product.detailReference !== null) fail("sample mapping");
   const one = (nodes: DocumentElement[], predicate: (n: DocumentElement) => boolean, detail: string) => {
     const matches = nodes.filter(predicate);
     return matches.length === 1 ? matches[0] : fail(detail);

@@ -3,8 +3,6 @@ import test from 'node:test';
 import {sitePages} from '../src/data/site.ts';
 import {catalogueProducts} from '../src/data/catalogue.ts';
 import {createProductDetailPreview,sampleDetailTitle,sampleFittingMessage,sampleGalleryImages} from '../src/lib/product-detail-preview.ts';
-import {readFileSync} from 'node:fs';
-import sharp from 'sharp';
 const all=nodes=>nodes.flatMap(n=>typeof n==='string'?[]:[n,...all(n.children)]);
 const freeze=o=>{if(o&&typeof o==='object'&&!Object.isFrozen(o)){Object.values(o).forEach(freeze);Object.freeze(o);}return o;};
 test('previews are isolated, immutable, collision-free and contain one genuine sample slide with no commerce or inherited dress claims',()=>{
@@ -49,8 +47,13 @@ test('unexpected source structures, commerce content and unverified mappings fai
  ]){const source=structuredClone(sitePages['/product/arabella']);mutate(source);assert.throws(()=>createProductDetailPreview(source,product),/incompatible/);}
  for(const changes of [{previewRoute:'/product/arabella'},{detailReference:'/product/client'},{id:'invented'},{status:'confirmed'},{category:'ball_gown'},{image:'https://example.com/photo.jpg'}])assert.throws(()=>createProductDetailPreview(sitePages['/product/arabella'],{...product,...changes}),/incompatible sample mapping/);
 });
-test('clean gallery assets fully decode at the common portrait ratio without transparency',async()=>{
- for(const gallery of Object.values(sampleGalleryImages)){
-  const input=readFileSync('public'+gallery.src);const metadata=await sharp(input).metadata();assert.equal(metadata.width,gallery.width);assert.equal(metadata.height,gallery.height);assert.equal(metadata.width/metadata.height,848/1264);assert.equal(metadata.hasAlpha,false);assert(metadata.width>=1484);await sharp(input).raw().toBuffer();
+test('each detail reuses the corresponding remote Pexels image without local downloads',()=>{
+ assert.equal(catalogueProducts.length,8);
+ for(const product of catalogueProducts){
+  const gallery=sampleGalleryImages[product.id];
+  assert.equal(gallery.src,product.image);
+  assert.equal(gallery.width,1200);
+  assert.equal(gallery.height,1800);
+  assert.match(gallery.src,/^https:\/\/images\.pexels\.com\/photos\//);
  }
 });

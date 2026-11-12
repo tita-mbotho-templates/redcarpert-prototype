@@ -43,16 +43,37 @@ export function adaptCatalogue(document: SiteDocumentData, catalogueProducts: re
   const replacements = new Map<DocumentElement, DocumentElement>();
   replacements.set(heading, { ...heading, ...(document.route === "/product" ? { attrs: { ...heading.attrs, "data-catalogue-heading": "true" } } : {}), children: [newTitle] });
   replacements.set(result, { ...result, children: ["Sample photographs — not client inventory"] });
-  // Preserve the measured control's box without offering sales, rating or price sorting.
-  replacements.set(ordering, { tag: "div", attrs: { class: "woocommerce-ordering", "aria-hidden": "true", style: "visibility: hidden; pointer-events: none; width: 237px; max-width: 100%" }, children: [
-    { ...select, attrs: { disabled: "", "aria-label": "Catalogue ordering unavailable", style: "width: 100%" }, children: [{ tag: "option", attrs: {}, children: ["Catalogue preview"] }] },
-  ] });
+  // The catalogue landing page receives a working three-option filter.
+  // Category pages retain the legacy ordering placeholder and unchanged layout.
+  if (document.route === "/product") {
+    const categories = [
+      ["all", "All Dresses"],
+      ["mermaid", "Mermaid"],
+      ["ball_gown", "Ball Gown"],
+    ] as const;
+    replacements.set(ordering, {
+      tag: "div",
+      attrs: { class: "woocommerce-ordering redcarpert-catalogue-filter", "data-catalogue-filter": "", role: "group", "aria-label": "Filter wedding dresses by category" },
+      children: [
+        ...categories.map(([id, label]) => ({
+          tag: "button",
+          attrs: { type: "button", "data-filter-category": id, "aria-pressed": id === "all" ? "true" : "false" },
+          children: [label],
+        })),
+        { tag: "span", attrs: { class: "redcarpert-filter-status", "data-filter-status": "", role: "status", "aria-live": "polite" }, children: ["Showing " + products.length + " of " + products.length + " sample dresses"] },
+      ],
+    });
+  } else {
+    replacements.set(ordering, { tag: "div", attrs: { class: "woocommerce-ordering", "aria-hidden": "true", style: "visibility: hidden; pointer-events: none; width: 237px; max-width: 100%" }, children: [
+      { ...select, attrs: { disabled: "", "aria-label": "Catalogue ordering unavailable", style: "width: 100%" }, children: [{ tag: "option", attrs: {}, children: ["Catalogue preview"] }] },
+    ] });
+  }
   const children = products.map((product, index): DocumentElement => {
     const { card, anchor, image, title, price } = cardParts[index];
-    const imageAttrs: Record<string, string> = { ...image.attrs, src: product.image, alt: product.imageAlt, style: "aspect-ratio: 370 / 444; object-fit: cover" };
+    const imageAttrs: Record<string, string> = { ...image.attrs, src: product.image, alt: product.imageAlt, width: "370", height: "370", style: "aspect-ratio: 1 / 1; object-fit: cover; object-position: center 25%" };
     delete imageAttrs.srcset;
     delete imageAttrs.sizes;
-    return { ...card, attrs: { class: `product${index % 4 === 0 ? " first" : index % 4 === 3 ? " last" : ""}`, "data-catalogue-id": product.id }, children: card.children.flatMap<DocumentNode>(node => {
+    return { ...card, attrs: { class: `product${index % 4 === 0 ? " first" : index % 4 === 3 ? " last" : ""}`, "data-catalogue-id": product.id, "data-catalogue-category": product.category }, children: card.children.flatMap<DocumentNode>(node => {
       if (typeof node === "string") return [node];
       if (node !== anchor) return [];
       const attrs: Record<string, string> = { ...anchor.attrs, href: product.previewRoute, "aria-label": `${product.name}: view sample detail demonstration`, style: "cursor: pointer" };

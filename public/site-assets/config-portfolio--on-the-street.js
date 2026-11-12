@@ -1,4 +1,0 @@
-var PEXETO = PEXETO || {};PEXETO.ajaxurl="/wp-admin/admin-ajax.php";PEXETO.lightboxOptions = {"theme":"pp_default","animation_speed":"normal","overlay_gallery":true,"allow_resize":true};PEXETO.disableRightClick=false;PEXETO.stickyHeader=true;jQuery(document).ready(function($){
-PEXETO.init.initSite();PEXETO.woocommerce.init(true);$("#portfolio-slider").pexetoGallery({"ajaxUrl":"https:\/\/bridalvanesa.com\/wp-admin\/admin-ajax.php","singleItem":true,"video":false,"itemId":122,"enableAJAX":true});$(".pexeto-contact-form").each(function(){
-$(this).pexetoContactForm({"wrongCaptchaText":"The text you have entered did not match the text on the image. Please try again.","failText":"An error occurred. Message not sent.","validationErrorText":"Please complete all the fields correctly","messageSentText":"Message sent"});
-});});

@@ -1,0 +1,357 @@
+/* New editorial content only. Original header/footer/page-title CSS remains authoritative. */
+.redcarpert-editorial { padding: 16px 0 42px; color: #636363; font-family: "Open Sans", sans-serif; font-size: 15px; line-height: 1.7; }
+.redcarpert-editorial > h2 { margin: 24px 0 14px; color: #ddb577; font-family: Montserrat, sans-serif; font-weight: 400; }
+.redcarpert-editorial > p { margin: 12px 0 24px; max-width: 850px; }
+.redcarpert-editorial a:not(.button) { color: #b99564; }
+.redcarpert-editorial .button { display: inline-block; margin: 8px 0 24px; cursor: pointer; }
+.redcarpert-inspiration-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px; margin: 24px 0; }
+.redcarpert-inspiration-grid figure { margin: 0; }
+.redcarpert-inspiration-grid img { width: 100%; height: auto; display: block; aspect-ratio: 53 / 79; object-fit: cover; }
+.redcarpert-inspiration-grid figcaption { padding: 14px 0; font-size: 13px; color: #666; }
+
+.redcarpert-lookbook { margin: 24px 0 38px; }
+.redcarpert-lookbook-frame { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); border: 1px solid #e5e5e5; background: #fff; min-width: 0; }
+.redcarpert-lookbook-image { min-width: 0; background: #f8f8f8; }
+.redcarpert-lookbook-image img { width: 100%; height: 100%; max-height: 690px; aspect-ratio: 53 / 79; object-fit: cover; display: block; }
+.redcarpert-lookbook-copy { padding: clamp(22px, 4vw, 58px); min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 15px; }
+.redcarpert-lookbook-eyebrow { font-size: 11px; letter-spacing: .16em; color: #999; }
+.redcarpert-lookbook-copy h3 { color: #ddb577; text-transform: uppercase; font-family: Montserrat, sans-serif; font-size: clamp(24px, 3vw, 36px); font-weight: 400; line-height: 1.3; margin: 0; }
+.redcarpert-lookbook-copy p { margin: 0; }
+.redcarpert-lookbook-note { color: #777; font-size: 13px; }
+.redcarpert-lookbook-controls { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.redcarpert-lookbook-controls button { cursor: pointer; border: 1px solid #b9b9b9; background: white; padding: 9px 13px; color: #333; }
+.redcarpert-lookbook-controls button:disabled { opacity: .35; cursor: not-allowed; }
+.redcarpert-lookbook-controls span { font-size: 12px; }
+.redcarpert-lookbook-download { margin-top: 22px; }
+.redcarpert-lookbook-download a { text-decoration: none; }
+@media (max-width: 768px) {
+  .redcarpert-inspiration-grid { grid-template-columns: 1fr; gap: 22px; }
+  .redcarpert-lookbook-frame { grid-template-columns: minmax(0,1fr); }
+  .redcarpert-lookbook-image img { max-height: none; height: auto; }
+  .redcarpert-lookbook-copy { padding: 24px; }
+}
+
+
+/* Implementation 13 — luxury bridal editorial book, scoped to Digital Lookbook only. */
+.redcarpert-lookbook { --book-ink:#38332f; --book-paper:#fcfaf6; --book-gold:#b99564; margin:26px 0 42px; color:var(--book-ink); }
+.redcarpert-book-intro { max-width:850px; margin:0 auto 26px; text-align:center; font-size:14px; line-height:1.8; }
+.redcarpert-book-shell { max-width:1080px; padding:clamp(8px,2vw,22px); margin:auto; background:#ede7dd; border:1px solid #e3d7c6; box-shadow:0 20px 40px rgba(44,34,26,.09); min-width:0; overflow:hidden; }
+.redcarpert-book { position:relative; margin:0 auto; max-width:100%; min-width:0; }
+.redcarpert-book:not(.is-enhanced) { width:min(100%,430px); aspect-ratio:5/7; }
+.redcarpert-book:not(.is-enhanced) > .redcarpert-book-page {display:none;}
+.redcarpert-book:not(.is-enhanced) > .redcarpert-book-page.is-current {display:flex;}
+.redcarpert-book-page { box-sizing:border-box; flex-direction:column; width:100%; height:100%; overflow:hidden; background:var(--book-paper); border:1px solid #e0d7cd; box-shadow:inset 0 0 22px rgba(64,45,31,.045); color:var(--book-ink); }
+.redcarpert-book-page-inner { width:100%; height:100%; display:flex; flex-direction:column; position:relative; min-height:0; }
+.redcarpert-book-photo { height:72%; overflow:hidden; flex:0 0 72%; background:#e9e4dc; }
+.redcarpert-book-photo img {width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.redcarpert-book-copy { padding:clamp(12px,2vw,26px); min-height:0; display:flex; flex-direction:column; align-items:start; gap:clamp(3px,.5vw,8px); }
+.redcarpert-book-kicker {font:500 9px/1.3 Montserrat,sans-serif;letter-spacing:.17em;color:var(--book-gold);}
+.redcarpert-book-copy h3 {font:400 clamp(17px,2vw,27px)/1.18 Montserrat,sans-serif;color:#5e5348;margin:1px 0 0;}
+.redcarpert-book-copy p {margin:0;font-size:clamp(10px,.94vw,13px);line-height:1.35;}
+.redcarpert-book-copy a {color:#8d6845;text-decoration:underline;text-underline-offset:3px;font-size:clamp(10px,.95vw,13px);}
+.redcarpert-book-copy small {font:10px/1.35 "Open Sans",sans-serif;color:#766d66;}
+.redcarpert-book-folio {position:absolute;bottom:6px;right:13px;color:#8b8178;font:9px Montserrat,sans-serif;}
+.redcarpert-book-cover {background:#eae2d8;}
+.redcarpert-book-cover-inner,.redcarpert-book-back-inner {width:100%;height:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:space-around;padding:clamp(16px,4vw,45px);overflow:hidden;}
+.redcarpert-book-logo {display:block;width:min(72%,260px);height:auto;max-height:80px;object-fit:contain;flex-shrink:1;}
+.redcarpert-book-cover h3 {margin:4px 0 0;font:400 clamp(35px,5vw,57px)/1.04 Georgia,serif;letter-spacing:-.03em;color:#493d33;}
+.redcarpert-book-cover-photo {width:100%;max-width:265px;max-height:45%;flex:1;overflow:hidden;border:6px solid #f7f3ee;box-shadow:0 6px 15px rgba(39,28,19,.15);background:#e2d7ca;}
+.redcarpert-book-cover-photo img {width:100%;height:100%;display:block;object-fit:cover;object-position:center 30%;}
+.redcarpert-book-cover-foot {font:500 11px Montserrat,sans-serif;letter-spacing:.13em;color:#776858;margin:8px 0 0;}
+.redcarpert-book-cover small,.redcarpert-book-back small {font:10px/1.4 "Open Sans",sans-serif;color:#786e63;}
+.redcarpert-book-back {background:linear-gradient(150deg,#f7f3ed,#e8ddcf);}
+.redcarpert-book-back-inner {justify-content:center;gap:clamp(14px,3vw,34px);}
+.redcarpert-book-back h3 {font:400 clamp(27px,4vw,44px)/1.1 Georgia,serif;margin:0;color:#4b3b31;}
+.redcarpert-book-back p {font:14px/1.7 "Open Sans",sans-serif;max-width:290px;margin:0;}
+.redcarpert-book-back-links {display:flex;flex-direction:column;gap:12px;}
+.redcarpert-book-back-links a {font:500 12px Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#8a684a;text-decoration:underline;text-underline-offset:4px;}
+.redcarpert-book-controls {display:flex;justify-content:center;align-items:center;gap:clamp(10px,3vw,25px);margin:22px auto 7px;flex-wrap:wrap;}
+.redcarpert-book-controls button {cursor:pointer;background:#fff;border:1px solid #b9ac9d;padding:11px 14px;min-width:108px;color:#44372c;font:500 12px Montserrat,sans-serif;}
+.redcarpert-book-controls button:disabled {opacity:.35;cursor:not-allowed;}
+.redcarpert-book-controls button:focus-visible,.redcarpert-book a:focus-visible {outline:2px solid #a47749;outline-offset:3px;}
+.redcarpert-book-controls [data-book-status] {font:500 12px Montserrat,sans-serif;min-width:86px;text-align:center;}
+.redcarpert-book-help {text-align:center;color:#776e66;font-size:12px;margin:8px auto 24px;}
+.redcarpert-lookbook-download {text-align:center;margin:24px 0 12px;}
+.redcarpert-lookbook-download p {font-size:12px;color:#777;margin:10px auto;}
+.redcarpert-photo-failed {position:relative;background:#eee6dd;}
+.redcarpert-photo-failed:after {content:"Photograph temporarily unavailable";display:grid;place-items:center;position:absolute;inset:0;font-size:13px;color:#716456;padding:20px;text-align:center;}
+.redcarpert-image-unavailable {visibility:hidden;}
+@media(max-width:768px){
+ .redcarpert-book-shell {padding:8px;}
+ .redcarpert-book:not(.is-enhanced) {width:min(100%,390px);}
+ .redcarpert-book-copy {padding:12px 14px;}
+ .redcarpert-book-photo {height:69%;flex-basis:69%;}
+ .redcarpert-book-copy small {font-size:9px;}
+ .redcarpert-book-cover-inner,.redcarpert-book-back-inner{padding:17px;}
+}
+
+
+/* Implementation 19 — Shared, centred editorial presentation on Lookbook,
+ * About Us and Contact Us. Our Brides and all approved site chrome are unchanged. */
+.redcarpert-editorial-page-title,
+.redcarpert-editorial-page-title h1 {
+  text-align: center;
+}
+.redcarpert-editorial-page-title h1 {
+  float: none;
+  display: block;
+  margin-inline: auto;
+  max-width: 100%;
+}
+.redcarpert-editorial[data-editorial-route="/digital-lookbook"],
+.redcarpert-editorial[data-editorial-route="/about-us"],
+.redcarpert-editorial[data-editorial-route="/contact-us"] {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1100px;
+  padding: clamp(22px, 4vw, 52px) clamp(12px, 2.5vw, 24px) 62px;
+  margin: 0 auto;
+  text-align: center;
+}
+.redcarpert-editorial-hero {
+  box-sizing: border-box;
+  max-width: 820px;
+  margin: 0 auto clamp(32px, 5vw, 64px);
+  padding: 0;
+  text-align: center;
+}
+.redcarpert-editorial-eyebrow {
+  margin: 0 auto 16px;
+  color: #b99564;
+  font-family: Montserrat, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.redcarpert-editorial-hero h2 {
+  margin: 0 auto 16px;
+  max-width: 820px;
+  font: 400 clamp(24px, 3.8vw, 42px)/1.22 Montserrat, sans-serif;
+  color: #b99564;
+  text-align: center;
+}
+.redcarpert-editorial-hero > p:not(.redcarpert-editorial-eyebrow),
+.redcarpert-editorial-panel > p {
+  max-width: 710px;
+  margin: 12px auto 22px;
+  line-height: 1.85;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+.redcarpert-editorial-hero .redcarpert-editorial-lead,
+.redcarpert-editorial-panel .redcarpert-editorial-lead {
+  color: #67564a;
+  font-size: clamp(15px, 1.7vw, 18px);
+  font-weight: 400;
+  line-height: 1.6;
+}
+.redcarpert-editorial .redcarpert-editorial-disclosure {
+  color: #8a8177;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.redcarpert-editorial-panel {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto clamp(22px, 3vw, 38px);
+  padding: clamp(26px, 5vw, 52px) clamp(16px, 4vw, 48px);
+  border: 1px solid #ebe5dc;
+  background: #fcfaf7;
+  text-align: center;
+}
+.redcarpert-editorial-panel h2 {
+  margin: 0 auto 20px;
+  font: 400 clamp(21px, 2.5vw, 30px)/1.3 Montserrat, sans-serif;
+  color: #b99564;
+  text-align: center;
+}
+.redcarpert-editorial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 24px auto 0;
+}
+.redcarpert-editorial .redcarpert-editorial-action {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  min-width: 170px;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  border: 1px solid #b99564;
+  color: #916c46;
+  background: #fff;
+  text-decoration: none;
+  font: 500 12px/1.5 Montserrat, sans-serif;
+  letter-spacing: .025em;
+}
+.redcarpert-editorial .redcarpert-editorial-action:hover,
+.redcarpert-editorial .redcarpert-editorial-action:focus-visible {
+  background: #f0e7dc;
+  color: #725034;
+  outline-offset: 3px;
+}
+.redcarpert-editorial .button[data-whatsapp-preview] {
+  margin: 18px auto 8px;
+  max-width: 100%;
+  white-space: normal;
+}
+.redcarpert-editorial-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  align-items: stretch;
+  gap: clamp(12px, 2vw, 24px);
+  margin-top: 30px;
+}
+.redcarpert-editorial-team-card {
+  min-width: 0;
+  margin: 0;
+  background: #fff;
+  border: 1px solid #e7e0d8;
+  text-align: center;
+  overflow: hidden;
+}
+.redcarpert-editorial-team-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center;
+  background: #f0eae4;
+}
+.redcarpert-editorial-team-card figcaption {
+  box-sizing: border-box;
+  min-height: 122px;
+  padding: 20px 12px;
+}
+.redcarpert-editorial-team-card h3 {
+  margin: 0 0 10px;
+  font: 500 16px/1.4 Montserrat, sans-serif;
+  color: #735e49;
+}
+.redcarpert-editorial-team-card p {
+  margin: 0 auto 10px;
+  font-size: 13px;
+}
+.redcarpert-editorial-team-card small {
+  display: block;
+  color: #8a8177;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.redcarpert-editorial-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 28px auto 10px;
+  counter-reset: redcarpert-step;
+}
+.redcarpert-editorial-steps li {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: clamp(18px, 2.4vw, 28px) 16px;
+  border: 1px solid #e9ded3;
+  background: #fff;
+  text-align: center;
+  counter-increment: redcarpert-step;
+}
+.redcarpert-editorial-steps li::before {
+  content: counter(redcarpert-step, decimal-leading-zero);
+  display: block;
+  margin-bottom: 12px;
+  color: #b99564;
+  font: 400 23px/1.2 Georgia, serif;
+}
+.redcarpert-editorial-steps strong {
+  display: block;
+  font: 500 15px/1.45 Montserrat, sans-serif;
+  color: #65523f;
+}
+.redcarpert-editorial-steps p {
+  margin: 12px auto 0;
+  max-width: 280px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.redcarpert-editorial-map {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 900px;
+  margin: 28px auto 16px;
+  background: #eee9e2;
+  border: 1px solid #ded5ca;
+  overflow: hidden;
+}
+.redcarpert-editorial-map iframe {
+  display: block;
+  width: 100%;
+  height: clamp(280px, 42vw, 430px);
+  border: 0;
+}
+.redcarpert-editorial-panel .redcarpert-editorial-map-link {
+  margin: 12px auto 0;
+  font-size: 13px;
+}
+.redcarpert-editorial-panel .redcarpert-editorial-map-link a {
+  text-underline-offset: 4px;
+}
+.redcarpert-editorial[data-editorial-route="/digital-lookbook"] .redcarpert-lookbook {
+  max-width: 1080px;
+  margin: 0 auto 38px;
+}
+.redcarpert-editorial[data-editorial-route="/digital-lookbook"] .redcarpert-lookbook .redcarpert-book-intro {
+  margin-inline: auto;
+  max-width: 740px;
+  text-align: center;
+}
+@media (max-width: 800px) {
+  .redcarpert-editorial-team-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+  .redcarpert-editorial-steps {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+}
+/* The third team placeholder should remain centred when tablets show two columns. */
+@media (min-width: 561px) and (max-width: 800px) {
+  .redcarpert-editorial-team-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: min(100%, 320px);
+    justify-self: center;
+  }
+}
+@media (max-width: 560px) {
+  .redcarpert-editorial[data-editorial-route="/digital-lookbook"],
+  .redcarpert-editorial[data-editorial-route="/about-us"],
+  .redcarpert-editorial[data-editorial-route="/contact-us"] {
+    padding: 22px 0 44px;
+  }
+  .redcarpert-editorial-panel {
+    padding: 24px 16px 28px;
+  }
+  .redcarpert-editorial-team-grid {
+    grid-template-columns: 1fr;
+    max-width: 390px;
+    margin-inline: auto;
+  }
+  .redcarpert-editorial-hero {
+    padding: 0 8px;
+    margin-bottom: 30px;
+  }
+  .redcarpert-editorial-actions {
+    flex-direction: column;
+  }
+  .redcarpert-editorial .redcarpert-editorial-action {
+    width: min(100%,280px);
+  }
+}

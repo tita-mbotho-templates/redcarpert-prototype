@@ -1,0 +1,371 @@
+/*
+ * Implementation 20 — Redcarpert homepage only.
+ * Native vertical flow with responsive editorial sections. Existing photo
+ * files, header, footer, catalogue, and other page layouts are untouched.
+ */
+body.redcarpert-home-native {
+  overflow-x: clip;
+}
+/* The legacy fullscreen theme forced an absolute, always-full-size header.
+ * Keep the approved top-of-page overlay, but allow the site's existing
+ * fixed-header-scroll compact styling to operate during native scrolling. */
+/* Match the approved SECOND screenshot: a dark translucent glass-like
+ * header over the bridal photograph. The inherited theme can switch it to
+ * solid pitch black in .fixed-header-scroll/.mobile states; override those
+ * states with the SAME translucent background. Keep its wrapper transparent
+ * so the photograph stays visible underneath instead of a black strip. */
+body.redcarpert-home-native #main-container .header-wrapper {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+body.redcarpert-home-native #header,
+body.redcarpert-home-native.fixed-header-scroll #header,
+body.redcarpert-home-native.dark-header #header,
+body.redcarpert-home-native.mobile #header {
+  background: rgba(0, 0, 0, .70) !important;
+  background-color: rgba(0, 0, 0, .70) !important;
+  background-image: none !important;
+}
+body.redcarpert-home-native.fixed-header #header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  transform: translateY(0);
+  transition: transform .26s ease, padding .26s ease, background-color .26s ease;
+  will-change: transform;
+}
+body.redcarpert-home-native.fixed-header-scroll #header {
+  position: fixed !important;
+}
+body.redcarpert-home-native.redcarpert-header-tucked #header {
+  transform: translateY(-110%);
+}
+body.redcarpert-home-native #header #logo-container img {
+  transition: max-height .26s ease;
+}
+/* On mobile the regular header logo is already small; give the compact
+ * version a proportionately smaller height as on the interior pages. */
+@media (max-width: 1000px) {
+  body.redcarpert-home-native.fixed-header-scroll #header {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+  body.redcarpert-home-native.fixed-header-scroll #logo-container img {
+    max-height: 32px !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.redcarpert-home-native.fixed-header #header,
+  body.redcarpert-home-native #header #logo-container img {
+    transition: none;
+  }
+}
+html:has(body.redcarpert-home-native) {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(body.redcarpert-home-native) { scroll-behavior: auto; }
+}
+body.redcarpert-home-native #main-container,
+body.redcarpert-home-native .page-wrapper,
+body.redcarpert-home-native #content-container,
+body.redcarpert-home-native #full-width,
+body.redcarpert-home-native .fullpage-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: auto !important;
+  min-height: 0;
+  margin: 0;
+  float: none;
+  overflow: visible;
+  transform: none !important;
+}
+body.redcarpert-home-native .fullpage-wrapper.loading {
+  background: none !important;
+}
+body.redcarpert-home-native .fullpage-wrapper > .section {
+  --redcarpert-home-gutter: 64px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: auto !important;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 110px var(--redcarpert-home-gutter) 70px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* Preserve the approved full-viewport sections. Portrait ImageKit photos
+   * receive a soft-focus backdrop on wide screens and fill mobile screens
+   * without introducing empty letterbox bands or stretching the subjects. */
+  background-image: none !important;
+  background-color: #242021;
+  isolation: isolate;
+  overflow: clip;
+}
+/* Option B: one original ImageKit portrait per section, framed in a
+ * 60%-wide sharp centre on desktop and tablets. At 1920px viewport width
+ * this is 1152px sharp + 384px of blurred photograph on either side.
+ * On smaller phones the already-approved single photo fills the viewport. */
+body.redcarpert-home-native .fullpage-wrapper > .section {
+  --redcarpert-home-sharp-width: 60%;
+}
+/* The original live panoramas baked their softened sidebands into WebP.
+ * Re-create the composition without changing or downloading ImageKit images. */
+body.redcarpert-home-native .fullpage-wrapper > .section::before {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--redcarpert-home-photo);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(32px) brightness(.66);
+}
+body.redcarpert-home-native .fullpage-wrapper > .section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--redcarpert-home-sharp-width);
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.17) 50%, rgba(0,0,0,.08)),
+    var(--redcarpert-home-photo);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, cover;
+  /* All three portrait photos are top-aligned on wide screens, preserving
+   * the face and upper dress instead of letting a centred vertical crop
+   * hide the head. The sharp centre stays opaque: blur never spills in. */
+  background-position: center center, center top;
+}
+/* The middle photograph has no title overlay, as on the deployed site. */
+body.redcarpert-home-native .fullpage-wrapper > .section:nth-child(2)::after {
+  background-image: var(--redcarpert-home-photo);
+  background-size: cover;
+  background-position: center top;
+}
+/* Desktop and tablets share the same blurred-side / clear-centre composition.
+ * On phones, preserve the already-approved crisp, edge-to-edge cover image. */
+@media (max-width: 640px) {
+  body.redcarpert-home-native .fullpage-wrapper > .section::before {
+    content: none;
+    display: none;
+    background-image: none;
+    filter: none;
+  }
+  body.redcarpert-home-native .fullpage-wrapper > .section::after,
+  body.redcarpert-home-native .fullpage-wrapper > .section:nth-child(2)::after {
+    left: 0;
+    width: 100%;
+    transform: none;
+    background-image: var(--redcarpert-home-photo);
+    background-size: cover;
+    background-position: center center;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+body.redcarpert-home-native .fullpage-wrapper > .section .section-content {
+  box-sizing: border-box;
+  display: flex !important;
+  position: relative !important;
+  z-index: 2;
+  top: auto !important;
+  left: auto !important;
+  width: min(100%, 860px);
+  height: auto;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  animation: none !important;
+}
+body.redcarpert-home-native .fullpage-wrapper > .section .section-title {
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  font-family: Montserrat, sans-serif !important;
+  font-size: clamp(32px, 2.8vw, 40px) !important;
+  font-weight: 600 !important;
+  letter-spacing: .01em !important;
+  line-height: 1.22 !important;
+  text-transform: uppercase;
+  color: #fff !important;
+  text-align: center;
+  overflow-wrap: normal;
+  word-break: normal;
+  text-shadow: 0 2px 12px rgba(0,0,0,.28);
+}
+body.redcarpert-home-native .fullpage-wrapper > .section .section-desc {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 670px;
+  margin: 16px auto 0 !important;
+  padding: 0 !important;
+  color: #fff !important;
+  font: 400 14px/1.6 Montserrat, sans-serif !important;
+  letter-spacing: .06em !important;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,.3);
+}
+body.redcarpert-home-native .fullpage-wrapper > .section .section-desc p {
+  margin: 0 !important;
+  line-height: inherit;
+}
+body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.button {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  width: auto !important;
+  max-width: min(100%, 320px);
+  min-width: 190px;
+  min-height: 48px;
+  margin: 26px auto 0 !important;
+  padding: 10px 28px !important;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.8) !important;
+  border-radius: 2px;
+  background: rgba(17,17,17,.82) !important;
+  color: #fff !important;
+  font: 500 14px/1.45 Montserrat, sans-serif !important;
+  letter-spacing: .04em !important;
+  text-align: center;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  white-space: normal;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.button:hover {
+  background: rgba(17,17,17,.96) !important;
+  border-color: #fff !important;
+}
+body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+body.redcarpert-home-native .fullpage-scroll-arrow {
+  z-index: 3;
+  right: 50%;
+  bottom: 24px;
+  cursor: pointer;
+  transform: translateX(50%);
+  margin-right: 0;
+  font-size: 38px;
+}
+body.redcarpert-home-native .fullpage-scroll-arrow:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+body.redcarpert-home-native .fullpage-data {
+  display: none !important;
+}
+/* Keep the approved homepage footer in document flow, not as a synthetic
+ * fourth fullscreen slide. */
+body.redcarpert-home-native footer[data-homepage-footer] {
+  position: relative;
+  clear: both;
+}
+/* Tablet uses the same composition with reduced type and side gutters. */
+@media (max-width: 1000px) {
+  body.redcarpert-home-native .fullpage-wrapper > .section {
+    --redcarpert-home-gutter: 32px;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-top: 88px;
+    padding-bottom: 60px;
+  }
+  body.redcarpert-home-native .fullpage-wrapper > .section .section-title {
+    /* About 30px at 768px, approaching 32px on larger tablets. */
+    font-size: clamp(26px, 3.90625vw, 32px) !important;
+  }
+  body.redcarpert-home-native .fullpage-wrapper > .section .section-desc {
+    margin-top: 12px !important;
+    font-size: clamp(12px, calc(0.431vw + 8.69px), 13px) !important;
+  }
+  body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.button {
+    min-height: 46px;
+    margin-top: 22px !important;
+    padding: 10px 24px !important;
+    font-size: clamp(12px, calc(0.431vw + 8.69px), 13px) !important;
+  }
+}
+/* Phone portraits: full-screen photographs with readable titles and properly
+ * sized buttons. Each photo panel remains a complete viewport tall. */
+@media (max-width: 640px) {
+  body.redcarpert-home-native .fullpage-wrapper > .section {
+    --redcarpert-home-gutter: 20px;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-top: 80px;
+    padding-bottom: 56px;
+  }
+  body.redcarpert-home-native .fullpage-wrapper > .section .section-title {
+    /* 20px at 320px, 22px at 375px; readable without overwhelming the photo. */
+    font-size: clamp(20px, calc(3.636vw + 8.36px), 25px) !important;
+    line-height: 1.25 !important;
+  }
+  body.redcarpert-home-native .fullpage-wrapper > .section .section-desc {
+    max-width: 340px;
+    margin-top: 10px !important;
+    /* 10px at 320px, 11px at 375px; fluid until reaching 12px. */
+    font-size: clamp(10px, calc(1.818vw + 4.18px), 12px) !important;
+    line-height: 1.6 !important;
+    letter-spacing: .03em !important;
+  }
+  body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.button {
+    min-width: 0;
+    min-height: 44px;
+    max-width: min(100%, 280px);
+    margin-top: 18px !important;
+    padding: 10px 18px !important;
+    /* Match the subtitle's responsive font scale, retaining the 44px target. */
+    font-size: clamp(10px, calc(1.818vw + 4.18px), 12px) !important;
+  }
+  body.redcarpert-home-native .fullpage-scroll-arrow {
+    bottom: 14px;
+    font-size: 30px;
+  }
+}
+@media (max-width: 350px) {
+  body.redcarpert-home-native .fullpage-wrapper > .section {
+    --redcarpert-home-gutter: 16px;
+  }
+}
+/* Every photo panel fills its viewport; the first does not reveal image two
+ * until the visitor scrolls. Minimum heights allow extra room on very short
+ * devices rather than clipping text or interactive controls. */
+body.redcarpert-home-native .fullpage-wrapper > .section:first-child {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.redcarpert-home-native .fullpage-scroll-arrow {
+    animation: none !important;
+  }
+  body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.button {
+    transition: none;
+  }
+}

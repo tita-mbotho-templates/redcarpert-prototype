@@ -1,0 +1,294 @@
+/* Implementation 21 — coherent Font Awesome 7 Free icon presentation.
+ * All selectors are scoped to the new controls; brand artwork and captured
+ * typography remain intact.
+ */
+.fa-solid, .fa-brands { font-style: normal; line-height: 1; }
+
+/* Floating contact control: never show on phones, including 375 x 667.
+ * Keep buttons independent: dismissing must never open the enquiry preview. */
+#redcarpert-floating-whatsapp.redcarpert-whatsapp-float {
+  box-sizing: border-box;
+  display: none !important;
+  position: fixed !important;
+  z-index: 9999 !important;
+  right: clamp(16px, 2.5vw, 32px) !important;
+  bottom: clamp(16px, 2.5vw, 32px) !important;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  transform: none !important;
+}
+#redcarpert-floating-whatsapp.redcarpert-whatsapp-float[data-ready]:not([hidden]) {
+  display: flex !important;
+}
+#redcarpert-floating-whatsapp.redcarpert-whatsapp-float[hidden] {
+  display: none !important;
+}
+#redcarpert-floating-whatsapp .redcarpert-whatsapp-float-trigger,
+#redcarpert-floating-whatsapp .redcarpert-whatsapp-float-dismiss {
+  appearance: none;
+  display: grid;
+  box-sizing: border-box;
+  place-items: center;
+  flex: none;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50%;
+  box-shadow: 0 5px 18px rgb(0 0 0 / 16%);
+  cursor: pointer;
+  transition: transform .2s ease, background-color .2s ease;
+}
+#redcarpert-floating-whatsapp .redcarpert-whatsapp-float-trigger {
+  width: 54px;
+  height: 54px;
+  border: 1px solid #1cac59;
+  background: #25d366;
+  color: #fff;
+  font-size: 29px;
+}
+#redcarpert-floating-whatsapp .redcarpert-whatsapp-float-dismiss {
+  width: 27px;
+  height: 27px;
+  border: 1px solid #dfd9d2;
+  background: #fff;
+  color: #5f5852;
+  font-size: 13px;
+}
+#redcarpert-floating-whatsapp .redcarpert-whatsapp-float-trigger:hover,
+#redcarpert-floating-whatsapp .redcarpert-whatsapp-float-dismiss:hover {
+  transform: translateY(-2px);
+}
+#redcarpert-floating-whatsapp .redcarpert-whatsapp-float-trigger:hover {
+  background: #1fb65a;
+}
+#redcarpert-floating-whatsapp .redcarpert-whatsapp-float-trigger:focus-visible,
+#redcarpert-floating-whatsapp .redcarpert-whatsapp-float-dismiss:focus-visible {
+  outline: 2px solid #3f3a34;
+  outline-offset: 4px;
+}
+@media (max-width: 640px) {
+  #redcarpert-floating-whatsapp.redcarpert-whatsapp-float,
+  #redcarpert-floating-whatsapp.redcarpert-whatsapp-float[data-ready]:not([hidden]) {
+    display: none !important;
+  }
+}
+
+/* The fitting link uses the brand glyph but retains existing dialog behaviour. */
+#footer[data-redcarpert-footer] .redcarpert-footer-items button.redcarpert-footer-book {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  max-width: 100%;
+  white-space: nowrap;
+}
+#footer[data-redcarpert-footer] .redcarpert-footer-book .fa-whatsapp {
+  flex: none;
+  font-size: 1.12em;
+  line-height: 1;
+}
+#footer[data-redcarpert-footer] .redcarpert-footer-book span {
+  white-space: nowrap;
+}
+
+/* Six brand icons occupy the same existing footer row under the tagline.
+ * The five unconfirmed social destinations are labels, not fake links. */
+#footer[data-redcarpert-footer] .widget_media_image .social-icons {
+  gap: 4px;
+}
+#footer[data-redcarpert-footer] .widget_media_image .social-icons li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#footer[data-redcarpert-footer] .widget_media_image .social-icons
+.redcarpert-footer-social-placeholder,
+#footer[data-redcarpert-footer] .widget_media_image .social-icons
+.redcarpert-footer-social-whatsapp {
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  place-items: center;
+  color: #d3cec8;
+  background: transparent;
+  font-size: 19px;
+  line-height: 1;
+  text-decoration: none;
+}
+#footer[data-redcarpert-footer] .widget_media_image
+.redcarpert-footer-social-placeholder {
+  opacity: .62;
+  cursor: default;
+}
+#footer[data-redcarpert-footer] .widget_media_image
+.redcarpert-footer-social-whatsapp {
+  color: #f1f1f1;
+  cursor: pointer;
+}
+#footer[data-redcarpert-footer] .widget_media_image
+.redcarpert-footer-social-whatsapp:hover {
+  color: #25d366;
+}
+#footer[data-redcarpert-footer] .widget_media_image
+.redcarpert-footer-social-whatsapp:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+@media (max-width: 1000px) {
+  #footer[data-redcarpert-footer] .widget_media_image .social-icons
+  .redcarpert-footer-social-placeholder,
+  #footer[data-redcarpert-footer] .widget_media_image .social-icons
+  .redcarpert-footer-social-whatsapp {
+    font-size: 15px;
+  }
+}
+@media (max-width: 640px) {
+  #footer[data-redcarpert-footer] .widget_media_image .social-icons {
+    gap: 2px;
+  }
+  #footer[data-redcarpert-footer] .widget_media_image .social-icons
+  .redcarpert-footer-social-placeholder,
+  #footer[data-redcarpert-footer] .widget_media_image .social-icons
+  .redcarpert-footer-social-whatsapp {
+    font-size: 12px;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-items
+  button.redcarpert-footer-book {
+    gap: 3px;
+    letter-spacing: -.01em;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-book .fa-whatsapp {
+    font-size: 12px;
+  }
+}
+
+/* Replace inherited pictogram-font arrows with accessible FA icons. */
+/* The obsolete hamburger background/padding were removed at their source.
+ * Keep only the single Font Awesome icon and its natural alignment. */
+#header .mob-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+#header .mob-nav-btn .fa-bars {
+  display: inline-block;
+  flex: 0 0 auto;
+  margin: 0;
+  font-size: .93em;
+}
+body.redcarpert-home-native .fullpage-scroll-arrow.redcarpert-modern-down-arrow::before {
+  content: none !important;
+}
+body.redcarpert-home-native .fullpage-scroll-arrow .fa-chevron-down {
+  display: inline-block;
+  font-size: .8em;
+}
+#footer[data-redcarpert-footer] .scroll-to-top::before,
+#footer[data-redcarpert-footer] .scroll-to-top::after,
+#footer[data-redcarpert-footer] .scroll-to-top > span::before {
+  content: none !important;
+}
+#footer[data-redcarpert-footer] .scroll-to-top > .fa-arrow-up {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+}
+.wpgis-popup.redcarpert-modern-zoom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.wpgis-popup.redcarpert-modern-zoom::before {
+  content: none !important;
+}
+.wpgis-popup.redcarpert-modern-zoom .fa-solid {
+  font-size: 16px;
+}
+
+/* Existing bridal-gallery preview affordance, now an actual FA icon. */
+.redcarpert-bride-card .redcarpert-bride-zoom-badge {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  background: rgb(250 248 243 / 92%);
+  color: #675442;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+.redcarpert-bride-card button:hover .redcarpert-bride-zoom-badge,
+.redcarpert-bride-card button:focus-visible .redcarpert-bride-zoom-badge {
+  opacity: 1;
+}
+.redcarpert-bride-dialog-close .fa-xmark {
+  font-size: 21px;
+}
+.redcarpert-book-controls .fa-solid {
+  font-size: .9em;
+  vertical-align: -0.025em;
+}
+.redcarpert-book-controls [data-book-previous] .fa-arrow-left { margin-right: 8px; }
+.redcarpert-book-controls [data-book-next] .fa-arrow-right { margin-left: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  #redcarpert-floating-whatsapp .redcarpert-whatsapp-float-trigger,
+  #redcarpert-floating-whatsapp .redcarpert-whatsapp-float-dismiss,
+  .redcarpert-bride-card .redcarpert-bride-zoom-badge {
+    transition: none;
+  }
+}
+
+/* Use matching icon typography for the header, gallery accents and controls. */
+#header #menu-item-15821 > a > .fa-chevron-down {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: .75em;
+  vertical-align: .08em;
+}
+#header #menu-item-15821 > a::after {
+  content: none !important;
+}
+#main-container [data-whatsapp-preview] > .fa-whatsapp {
+  display: inline-block;
+  margin-right: .5em;
+  font-size: 1.08em;
+  vertical-align: -.04em;
+}
+#main-container .redcarpert-bride-accent-mark.fa-solid {
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  font-size: clamp(16px, 2.1vw, 26px);
+  line-height: 1;
+}
+#enquiry-preview .actions > button,
+#enquiry-preview .actions > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+#enquiry-preview .actions .fa-solid,
+#enquiry-preview .actions .fa-brands {
+  display: inline-block;
+  font-size: .95em;
+}

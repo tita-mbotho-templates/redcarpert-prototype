@@ -18,7 +18,7 @@ export function adaptLogo(document: SiteDocumentData): SiteDocumentData {
   const image = images[0];
   const visit = (node: DocumentNode): DocumentNode => {
     if (typeof node === "string") return node;
-    if (node === image) return { ...node, attrs: { ...node.attrs, src: "/redcarpert/brand/redcarpert-logo.png", alt: "Redcarpert", style: "object-fit: contain" } };
+    if (node === image) return { ...node, attrs: { ...node.attrs, src: "/redcarpert/brand/redcarpert-logo-optimized.webp", alt: "Redcarpert", style: "object-fit: contain" } };
     const children = node.children.map(visit);
     return children.some((child, index) => child !== node.children[index]) ? { ...node, children } : node;
   };

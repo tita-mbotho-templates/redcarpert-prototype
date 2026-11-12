@@ -1,10 +1,12 @@
 import type { DocumentNode, SiteDocumentData } from "@/types/site";
 
-// Closed list of approved homepage backgrounds, not a general style-editing API.
+// Client-supplied ImageKit photographs. Keep the approved layout and order:
+// first panel = home-page-1, second = home-page-2, third = home-page-3.
+// Centralise URL references for hero preload, global loader, and page rendering.
 export const homepageBackgrounds = [
-  { section: 0, original: "/site-assets/ec8b6b2c4222396c44.png", replacement: "/redcarpert/home/brand-pexels-sample.webp" },
-  { section: 1, original: "/site-assets/9def3725208290c4ef.png", replacement: "/redcarpert/home/collection-pexels-sample.webp" },
-  { section: 2, original: "/site-assets/46f8a1c412d65fd42b.png", replacement: "/redcarpert/home/hero-pexels-sample.webp" },
+  { section: 0, original: "/site-assets/ec8b6b2c4222396c44.png", replacement: "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/home-page/home-page-1.webp?updatedAt=1794351596508" },
+  { section: 1, original: "/site-assets/9def3725208290c4ef.png", replacement: "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/home-page/home-page-2.webp?updatedAt=1794351597603" },
+  { section: 2, original: "/site-assets/46f8a1c412d65fd42b.png", replacement: "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/home-page/home-page-3.webp?updatedAt=1794351600184" },
 ] as const;
 
 export function adaptHomepageBackgrounds(document: SiteDocumentData): SiteDocumentData {
@@ -21,7 +23,12 @@ export function adaptHomepageBackgrounds(document: SiteDocumentData): SiteDocume
       if (depth === path.length - 1) {
         if (node.tag !== "div" || node.attrs.class !== "section section-text layout-cc" || node.attrs.style !== expected) return fail();
         return children.map((child, i) => i === index
-          ? { ...node, attrs: { ...node.attrs, style: expected.replace(background.original, background.replacement) } }
+          ? { ...node, attrs: { ...node.attrs,
+              // CSS draws one blurred cover layer plus the uncropped original.
+              // Keep the original background declaration as an image fallback.
+              style: expected.replace(background.original, background.replacement)
+                + `--redcarpert-home-photo:url("${background.replacement}");`,
+            } }
           : child);
       }
       const updated = update(node.children, depth + 1);

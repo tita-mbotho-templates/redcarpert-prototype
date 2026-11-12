@@ -29,10 +29,10 @@ const rule = (changes, target = { tag: "a", attrs: { id: "hero" } }, extra = {})
 });
 const text = { kind: "text", childIndex: 0, expected: "Original", value: "Replacement" };
 
-test("all 143 source documents remain immutable; only the homepage has applicable rules", () => {
+test("all 8 source documents remain immutable; only the homepage has applicable rules", () => {
   assert.equal(contentAdaptations.length, 2, "Only the two approved homepage text rules are enabled");
   assert.ok(contentAdaptations.every((adaptation) => adaptation.route === "/"));
-  assert.equal(Object.keys(sitePages).length, 143);
+  assert.equal(Object.keys(sitePages).length, 8);
   for (const adaptation of contentAdaptations) assert.ok(Object.hasOwn(sitePages, adaptation.route), "unknown configured route");
   const digest = () => createHash("sha256").update(JSON.stringify(sitePages)).digest("hex");
   const before = digest();

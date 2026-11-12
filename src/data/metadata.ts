@@ -1,4 +1,4 @@
 export const siteMetadata = {
-  title: "Bridal Vanesa",
-  description: "Discover the Bridal Vanesa wedding dress collections, atelier, and real brides.",
+  title: "Redcarpert Wedding Dresses",
+  description: "Explore Mermaid and Ball Gown bridal collections and preview fitting enquiries with Redcarpert Wedding Dresses.",
 };

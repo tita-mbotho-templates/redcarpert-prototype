@@ -44,12 +44,21 @@ export function adaptFooterBranding(document: SiteDocumentData): SiteDocumentDat
     { tag: "a", attrs: { href: "/product-category/mermaid/" }, children: ["Mermaid"] },
     { tag: "a", attrs: { href: "/product-category/ball_gown/" }, children: ["Ball Gown"] },
   ] });
-  text(slot(2, "block-21", "p"), [home ? "Phone number to be confirmed" : "+90 533 413 16 09"], "FITTING ENQUIRIES", paragraphClass, paragraphStyle);
+  text(slot(2, "block-21", "p"), [home ? "Phone number to be confirmed" : "+90 533 413 16 09"], "FITTINGS", paragraphClass, paragraphStyle);
   const via = slot(2, "block-22", "p");
-  text(via, [home ? "Contact details to be confirmed" : "bridalvanesa@gmail.com"], "Via WhatsApp", paragraphClass, paragraphStyle);
+  const expectedFittingText = home ? "Contact details to be confirmed" : "bridalvanesa@gmail.com";
+  if (via.children.length !== 1 || via.children[0] !== expectedFittingText
+    || via.attrs.class !== paragraphClass || via.attrs.style !== paragraphStyle) fail("fitting content slot");
+  // Emit the final, current WhatsApp CTA once. No redundant intermediate text.
   replacements.set(via, { ...via, attrs: { class: "redcarpert-footer-items" }, children: [
-    { tag: "button", attrs: { type: "button", "data-whatsapp-preview": "", "aria-haspopup": "dialog" }, children: ["Book a fitting"] },
-    { tag: "span", attrs: {}, children: ["Via WhatsApp"] },
+    { tag: "button", attrs: {
+      type: "button", class: "redcarpert-footer-book",
+      "data-whatsapp-preview": "", "aria-haspopup": "dialog",
+      "aria-label": "Book a fitting via WhatsApp",
+    }, children: [
+      { tag: "i", attrs: { class: "fa-brands fa-whatsapp", "aria-hidden": "true" }, children: [] },
+      { tag: "span", attrs: {}, children: ["Book a fitting"] },
+    ] },
   ] });
   const credit = slot(3, "block-13", "p");
   const [label, br, strong] = credit.children;
@@ -66,13 +75,20 @@ export function adaptFooterBranding(document: SiteDocumentData): SiteDocumentDat
   replacements.set(footer, { ...footer, attrs: { ...footer.attrs, "data-redcarpert-footer": "true" } });
   const copyright = unique(all(footer.children), node => node.attrs.class === "copyrights", "copyright");
   if (copyright.tag !== "span" || copyright.children.length !== 1 || copyright.children[0] !== (home ? "\n© COPYRIGHT Redcarpert Wedding Dresses" : "\n© COPYRIGHT Brıdal Vanesa")) fail("copyright text");
-  replacements.set(copyright, { ...copyright, children: ["\n© COPYRIGHT REDCARPERT WEDDING DRESSES"] });
+  // Supply a build-time fallback so the text exists before JavaScript runs.
+  // The browser replaces the year on each load; GitHub Pages does not require
+  // an annual redeployment for the copyright to stay current.
+  replacements.set(copyright, { ...copyright, children: [
+    "© ",
+    { tag: "span", attrs: { "data-copyright-year": "" }, children: [String(new Date().getFullYear())] },
+    " Redcarpert Wedding Dresses",
+  ] });
 
   const logo = slot(0, "block-9", "img");
   const placeholder = '<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="322" viewBox="0 0 1024 322"><text x="512" y="161" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="52" fill="white">Redcarpert Wedding Dresses</text></svg>';
   const expected = { loading: "lazy", decoding: "async", width: "1024", height: "322", src: home ? `data:image/svg+xml,${encodeURIComponent(placeholder)}` : logoSource, alt: home ? "Redcarpert Wedding Dresses" : "", class: "wp-image-13926", ...(!home ? { srcset: logoSources, sizes: "auto, (max-width: 1024px) 100vw, 1024px" } : {}) };
   if (logo.children.length || Object.keys(logo.attrs).length !== Object.keys(expected).length || Object.entries(expected).some(([key, value]) => logo.attrs[key] !== value)) fail("logo attributes");
-  const attrs: Record<string, string> = { ...logo.attrs, src: "/redcarpert/brand/redcarpert-logo.png", alt: "Redcarpert Wedding Dresses", style: "object-fit: contain; object-position: center" };
+  const attrs: Record<string, string> = { ...logo.attrs, src: "/redcarpert/brand/redcarpert-logo-optimized.webp", alt: "Redcarpert Wedding Dresses", style: "object-fit: contain; object-position: center" };
   delete attrs.srcset;
   delete attrs.sizes;
   replacements.set(logo, { ...logo, attrs });

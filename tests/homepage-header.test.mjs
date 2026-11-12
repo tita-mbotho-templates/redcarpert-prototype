@@ -1,65 +1,60 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { preserveHomepageHeader } from '../src/lib/homepage-header.ts';
+import {initializeHomepageHeaderScroll} from '../src/client/HomepageHeaderScroll.js';
 
-function fixture(home = true) {
-  const header = {};
-  const previous = { window: globalThis.window, document: globalThis.document };
-  class StickyHeader {
-    constructor(element = header) { this.$el = { 0: element }; this.calls = 0; }
-    isScrolled() { return true; }
-    init() { this.calls++; this.compact = this.isScrolled(); }
-  }
-  globalThis.document = { querySelector: selector => selector === '#header' ? header : home ? {} : null };
-  globalThis.window = { PEXETO: { utils: { stickyHeader: StickyHeader } } };
-  return { StickyHeader, restore() { Object.assign(globalThis, previous); } };
+function fixture(home=true,header=true) {
+  const prior={window:globalThis.window,document:globalThis.document,requestAnimationFrame:globalThis.requestAnimationFrame,cancelAnimationFrame:globalThis.cancelAnimationFrame};
+  const tokens=new Set(home?['redcarpert-home-native']:[]);
+  const listeners=new Map();
+  const scheduled=[];
+  globalThis.document={
+    body:{classList:{
+      contains:k=>tokens.has(k),
+      add:(...keys)=>keys.forEach(k=>tokens.add(k)),
+      remove:(...keys)=>keys.forEach(k=>tokens.delete(k)),
+    }},
+    querySelector:selector=>selector==='#header'&&header?{}:null,
+  };
+  globalThis.window={
+    scrollY:0,
+    addEventListener:(name,fn)=>listeners.set(name,fn),
+    removeEventListener:(name,fn)=>{if(listeners.get(name)===fn)listeners.delete(name)},
+  };
+  globalThis.requestAnimationFrame=fn=>(scheduled.push(fn),scheduled.length);
+  globalThis.cancelAnimationFrame=()=>{};
+  const scrollTo=y=>{
+    globalThis.window.scrollY=y;
+    listeners.get('scroll')?.();
+    while(scheduled.length)scheduled.shift()();
+  };
+  return {tokens,listeners,scrollTo,restore(){for(const [key,val] of Object.entries(prior))globalThis[key]=val}};
 }
-
-test('only the homepage instance keeps normal geometry, delegating original initialization once', () => {
-  const f = fixture();
-  try {
-    const original = f.StickyHeader.prototype.init;
-    const predicate = f.StickyHeader.prototype.isScrolled;
-    const release = preserveHomepageHeader();
-    const header = new f.StickyHeader(); header.init();
-    assert.equal(header.compact, false); assert.equal(header.calls, 1);
-    assert.strictEqual(f.StickyHeader.prototype.init, original);
-    assert.strictEqual(f.StickyHeader.prototype.isScrolled, predicate);
-    assert.equal(new f.StickyHeader().isScrolled(), true);
-    release();
-    assert.equal(header.isScrolled(), true); assert.equal(Object.hasOwn(header, 'isScrolled'), false);
-  } finally { f.restore(); }
+test('compact header appears on scrolling up, tucks on down, and restores at top',()=>{
+  const f=fixture();
+  try{
+    const cleanup=initializeHomepageHeaderScroll();
+    assert.equal(f.tokens.has('fixed-header-scroll'),false);
+    f.scrollTo(80);
+    assert(f.tokens.has('fixed-header-scroll'));
+    assert.equal(f.tokens.has('redcarpert-header-tucked'),false);
+    f.scrollTo(180);
+    assert(f.tokens.has('redcarpert-header-tucked'));
+    f.scrollTo(130);
+    assert(!f.tokens.has('redcarpert-header-tucked'));
+    assert(f.tokens.has('fixed-header-scroll'));
+    f.scrollTo(0);
+    assert(!f.tokens.has('fixed-header-scroll'));
+    assert(!f.tokens.has('redcarpert-header-tucked'));
+    cleanup();
+    assert.equal(f.listeners.size,0);
+  }finally{f.restore()}
 });
-
-test('informational pages and other header instances retain original sticky behaviour', () => {
-  for (const home of [false, true]) {
-    const f = fixture(home);
-    try {
-      const original = f.StickyHeader.prototype.init;
-      const release = preserveHomepageHeader();
-      if (!home) { assert.equal(release, undefined); assert.strictEqual(f.StickyHeader.prototype.init, original); }
-      const other = new f.StickyHeader({}); other.init();
-      assert.equal(other.compact, true); assert.equal(other.calls, 1);
-      release?.(); assert.strictEqual(f.StickyHeader.prototype.init, original);
-    } finally { f.restore(); }
-  }
-});
-
-test('cleanup restores a pending hook or an existing own predicate without changing its descriptor', () => {
-  const f = fixture();
-  try {
-    const original = f.StickyHeader.prototype.init;
-    preserveHomepageHeader()(); assert.strictEqual(f.StickyHeader.prototype.init, original);
-    const header = new f.StickyHeader();
-    Object.defineProperty(header, 'isScrolled', { value: () => true, configurable: true, writable: true, enumerable: false });
-    const descriptor = Object.getOwnPropertyDescriptor(header, 'isScrolled');
-    const release = preserveHomepageHeader(); header.init(); release();
-    assert.deepEqual(Object.getOwnPropertyDescriptor(header, 'isScrolled'), descriptor);
-  } finally { f.restore(); }
-});
-
-test('missing theme API is a harmless no-op', () => {
-  const f = fixture();
-  try { globalThis.window = {}; assert.equal(preserveHomepageHeader(), undefined); }
-  finally { f.restore(); }
+test('non-home pages and missing headers retain their own theme behaviour',()=>{
+ for(const [home,header] of [[false,true],[true,false]]){
+   const f=fixture(home,header);
+   try {
+     assert.equal(initializeHomepageHeaderScroll(),undefined);
+     assert.equal(f.listeners.size,0);
+   }finally{f.restore()}
+ }
 });

@@ -1,5 +1,8 @@
-/* Only the guarded 07F footer opts into this layout; captured theme files stay intact. */
+/* Implementation 16: retain the desktop three-column footer across viewports.
+ * Match the existing header's 350 × 150 desktop logo and 40px mobile logo,
+ * and its 12px navigation type. Captured theme/header rules stay unchanged. */
 #footer[data-redcarpert-footer] {
+  --redcarpert-footer-text-size: 12px;
   overflow: visible;
   text-align: left;
 }
@@ -13,7 +16,9 @@
 }
 #footer[data-redcarpert-footer] .redcarpert-footer-columns {
   display: grid;
-  grid-template-columns: 45% 25% 30%;
+  grid-template-columns: minmax(0, 45fr) minmax(0, 25fr) minmax(0, 30fr);
+  /* A real gutter prevents neighbouring text columns from visually merging. */
+  column-gap: clamp(12px, 2vw, 24px);
   align-items: start;
   overflow: visible;
   padding: 44px 0;
@@ -37,40 +42,54 @@
   margin: 0;
 }
 #footer[data-redcarpert-footer] .widget_media_image {
-  width: 360px;
-  max-width: calc(100% - 24px);
+  width: 350px;
+  max-width: 100%;
   margin: 0 auto;
   text-align: center;
 }
 #footer[data-redcarpert-footer] .wp-image-13926 {
   display: block;
-  width: 360px;
+  width: 350px;
   max-width: 100%;
-  height: auto;
+  height: 150px;
+  object-fit: contain;
 }
 #footer[data-redcarpert-footer] .redcarpert-footer-heading {
   margin: 0 0 12px;
   padding: 0;
   color: #f7f7f7;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.1em;
   text-align: left;
+  /* Both footer headings stay on a single line at every supported width. */
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 #footer[data-redcarpert-footer] .redcarpert-footer-tagline,
 #footer[data-redcarpert-footer] .redcarpert-footer-items {
   margin: 0;
   padding: 0;
   color: #c7c7c7;
-  font-size: 14px;
+  font-size: var(--redcarpert-footer-text-size);
   font-weight: 400;
   line-height: 1.5;
   text-align: left;
 }
 #footer[data-redcarpert-footer] .redcarpert-footer-tagline {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin-top: 12px;
   text-align: center;
+  /* The tagline must wrap inside the logo track, not flow into Collections. */
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 #footer[data-redcarpert-footer] .redcarpert-footer-items {
   display: grid;
@@ -118,6 +137,33 @@
   margin: 0;
   text-align: center;
   line-height: 1.7;
+  font-size: 12px;
+}
+/* Match the actual footer link/tagline typography rather than maintaining
+ * a separate copyright scale. Short title-case text fits all phone widths. */
+#footer[data-redcarpert-footer] .copyrights {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: var(--redcarpert-footer-text-size);
+  font-weight: 400;
+  color: #c7c7c7;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+/* A symmetric content box is essential for true copyright centring.
+ * Do not offset the copyright to make room for the floating WhatsApp icon. */
+#footer[data-redcarpert-footer] .footer-bottom > .section-boxed {
+  padding-left: 0;
+  padding-right: 0;
 }
 #footer[data-redcarpert-footer] .widget_media_image .social-profiles {
   display: block;
@@ -139,30 +185,107 @@
   float: none;
   margin: 0;
 }
-#footer[data-redcarpert-footer] .widget_media_image .social-icons img {
-  width: 32px;
-  height: 32px;
-  opacity: 0.7;
-  object-fit: contain;
+/* Header mobile treatment begins at 1000px: preserve logo dimensions and responsive social slots. */
+@media (max-width: 1000px) {
+  #footer[data-redcarpert-footer] .widget_media_image {
+    width: auto;
+    max-width: 100%;
+  }
+  #footer[data-redcarpert-footer] .wp-image-13926 {
+    width: auto;
+    height: 150px;
+    max-height: 40px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-columns {
+    padding: 32px 0;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-columns > .col {
+    padding-right: 12px;
+    overflow-wrap: anywhere;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-columns > .col:first-child,
+  #footer[data-redcarpert-footer] .redcarpert-footer-columns > .col:last-child {
+    padding-right: 0;
+  }
+  #footer[data-redcarpert-footer] .widget_media_image .social-icons li {
+    flex-basis: 24px;
+    width: 24px;
+    height: 24px;
+  }
 }
 @media (max-width: 640px) {
   #footer[data-redcarpert-footer] .redcarpert-footer-columns,
   #footer[data-redcarpert-footer] .footer-bottom > .section-boxed {
-    width: calc(100% - 48px);
+    width: calc(100% - 32px);
   }
   #footer[data-redcarpert-footer] .redcarpert-footer-columns {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-    padding: 28px 0;
+    /* Balance all three columns without resizing the approved logo artwork.
+     * The third column has sufficient space for its heading at 375px. */
+    grid-template-columns: minmax(0, 36fr) minmax(0, 28fr) minmax(0, 36fr);
+    column-gap: 12px;
+    row-gap: 0;
+    padding: 24px 0;
   }
   #footer[data-redcarpert-footer] .redcarpert-footer-columns > .col {
-    padding: 0;
+    padding-right: 6px;
+    /* Avoid breaking a word such as COLLECTIONS into individual lines. */
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-columns > .col:first-child,
+  #footer[data-redcarpert-footer] .redcarpert-footer-columns > .col:last-child {
+    padding-right: 0;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-heading {
+    margin-bottom: 8px;
+    letter-spacing: 0;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-items {
+    gap: 4px;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-tagline {
+    margin-top: 8px;
+  }
+  #footer[data-redcarpert-footer] .widget_media_image .social-profiles {
+    margin-top: 10px;
+  }
+  #footer[data-redcarpert-footer] .widget_media_image .social-icons li {
+    flex-basis: 16px;
+    width: 16px;
+    height: 16px;
+  }
+  #footer[data-redcarpert-footer] .footer-bottom {
+    padding: 12px 0;
+  }
+}
+
+/* Below 360px, three equal-height columns cannot fit both full headings, a
+ * 109px brand logo and usable gutters without collisions or tiny typography.
+ * Keep the same three content blocks, placing branding above two nav columns. */
+@media (max-width: 359px) {
+  #footer[data-redcarpert-footer] .redcarpert-footer-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-columns > .col:first-child {
+    grid-column: 1 / -1;
+  }
+  #footer[data-redcarpert-footer] .redcarpert-footer-columns > .col:nth-child(2) {
+    padding-right: 0;
   }
   #footer[data-redcarpert-footer] .widget_media_image {
-    width: 300px;
+    width: 100%;
     max-width: 100%;
   }
-  #footer[data-redcarpert-footer] .wp-image-13926 {
-    width: 300px;
+}
+
+/* Both headings use subtly tighter tracking at 360–375px, preserving
+ * their 12px font sizes, one-line text, proper gutters and full logo size. */
+@media (min-width: 360px) and (max-width: 375px) {
+  #footer[data-redcarpert-footer] .redcarpert-footer-heading {
+    letter-spacing: -0.05em;
   }
 }

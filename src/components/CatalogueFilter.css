@@ -1,0 +1,27 @@
+/* Subtle, functional category controls on /product/ only. */
+.woocommerce .redcarpert-catalogue-filter,
+.woocommerce-page .redcarpert-catalogue-filter {
+  box-sizing:border-box;float:none!important;clear:both;display:flex;flex-wrap:wrap;
+  justify-content:center;align-items:center;width:100%!important;max-width:100%;
+  gap:clamp(6px,1vw,14px);margin:10px auto 34px!important;padding:15px 10px;
+  border-block:1px solid #eee8df;
+}
+.redcarpert-catalogue-filter button {
+  appearance:none;border:1px solid transparent;background:transparent;color:#71665d;
+  padding:10px clamp(10px,2vw,22px);font:500 clamp(11px,1vw,13px)/1.3 Montserrat,sans-serif;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;
+}
+.redcarpert-catalogue-filter button[aria-pressed="true"] {
+  border-color:#c8ad8b;background:#faf6f0;color:#604b37;
+}
+.redcarpert-catalogue-filter button:hover {color:#a07447;}
+.redcarpert-catalogue-filter button:focus-visible {outline:2px solid #a47c50;outline-offset:3px;}
+.redcarpert-catalogue-filter .redcarpert-filter-status {
+  flex:0 0 100%;text-align:center;margin:0;font:400 11px/1.5 "Open Sans",sans-serif;color:#93877d;
+}
+.woocommerce ul.products[data-catalogue-preview] > li.redcarpert-filtered-out,
+.woocommerce-page ul.products[data-catalogue-preview] > li.redcarpert-filtered-out {display:none!important;}
+@media(max-width:480px){
+  .woocommerce .redcarpert-catalogue-filter,.woocommerce-page .redcarpert-catalogue-filter{gap:2px;margin:10px auto 20px!important;padding:12px 2px;}
+  .redcarpert-catalogue-filter button {padding:9px 8px;font-size:11px;letter-spacing:0;}
+}

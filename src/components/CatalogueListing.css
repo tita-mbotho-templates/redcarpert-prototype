@@ -15,3 +15,16 @@
     font-size: min(38px, 9.9vw);
   }
 }
+
+/* The same square photo crop is used by the Wedding Dresses landing page and
+   both Mermaid / Ball Gown category listings. Captions remain beneath the photo.
+   Product-detail zoom frames intentionally retain their original portrait ratio. */
+.woocommerce ul.products[data-catalogue-preview] li.product a.woocommerce-LoopProduct-link > img,
+.woocommerce-page ul.products[data-catalogue-preview] li.product a.woocommerce-LoopProduct-link > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center 25%;
+}

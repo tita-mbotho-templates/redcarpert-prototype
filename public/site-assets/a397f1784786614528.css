@@ -7339,10 +7339,8 @@ cursor: pointer;
 }
 .mob-nav-btn {
 display: block;
-padding-left: 27px;
+padding-left: 0;
 height: 15px;
-background: url("/site-assets/54680b5d97bca3e0c2.png") no-repeat;
-background-size: 20px 15px;
 color: #ffffff;
 text-transform: uppercase;
 line-height: 15px;
@@ -7414,11 +7412,7 @@ cursor: pointer;
 .pg-filter-btn span {
 display: block;
 margin-left: 10px;
-padding-left: 20px;
 height: 15px;
-background: url("/site-assets/54680b5d97bca3e0c2.png") no-repeat;
-background-position: left center;
-background-size: 14px;
 text-transform: uppercase;
 font-size: 12px;
 line-height: 1.3em;
@@ -8334,9 +8328,7 @@ margin-bottom: 9px;
 } .ps-desc {
 margin-right: 50px;
 }
-.icons-style-dark .mob-nav-btn {
-background-image: url("/site-assets/b4bfc950ddaf86c166.png");
-}  .fullpage-autoplay .fp-side {
+.fullpage-autoplay .fp-side {
 height: 21px;
 } body {
 background-color: #ccc;

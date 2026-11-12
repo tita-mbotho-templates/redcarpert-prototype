@@ -9,7 +9,7 @@ const links=d=>all([footer(d)]).filter(n=>n.tag==='a');
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);Object.values(value).forEach(freeze);}return value;};
 const platforms=['Instagram','YouTube','Twitter','Pinterest','TikTok'];
 
-test('all 142 canonical footers map five exact platforms to accessible disabled anchors',()=>{
+test('all 7 canonical footers map five exact platforms to accessible disabled anchors',()=>{
   for(const original of Object.values(sitePages).filter(d=>d.route!=='/')){
     const d=adaptFooterSocials(original);
     assert.equal(links(d).length,5);

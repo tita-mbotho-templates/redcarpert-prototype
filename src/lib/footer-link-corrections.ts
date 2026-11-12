@@ -1,22 +1,15 @@
 import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/site";
 
-export const legacyInstagramIcon = "https://nirvanatakipcim.com/gelinlik/wp-content/themes/thestory/images/icons_white/instagram.png";
-export const localInstagramIcon = "/redcarpert/instagram.svg";
 const legacyContact = "https://www.instagram.com/bridal_vanesa/?utm_source=chatgpt.com";
 
 /** Runs after footer insertion/neutralisation; copies only changed nodes and ancestors. */
 export function correctFooterLinks(document: SiteDocumentData): SiteDocumentData {
   const fail = (reason: string): never => { throw new Error(`Footer corrections ${document.route}: ${reason}`); };
-  let icons = 0, contacts = 0, controls = 0;
+  let contacts = 0, controls = 0;
   const visit = (node: DocumentNode, inFooter = false): DocumentNode => {
     if (typeof node === "string") return node;
     inFooter ||= node.tag === "footer" && node.attrs.id === "footer";
     let attrs = node.attrs;
-    if (inFooter && node.tag === "img" && attrs.src === legacyInstagramIcon) {
-      if (attrs.alt !== "" || Object.keys(attrs).length !== 2 || node.children.length) fail("Instagram image shape");
-      icons++;
-      attrs = { ...attrs, src: localInstagramIcon };
-    }
     if (inFooter && attrs.class === "scroll-to-top") {
       if (node.tag !== "div" || Object.keys(attrs).length !== 1) fail("scroll control shape");
       controls++;
@@ -34,6 +27,6 @@ export function correctFooterLinks(document: SiteDocumentData): SiteDocumentData
     return attrs !== node.attrs || children.some((child, i) => child !== node.children[i]) ? { ...node, attrs, children } satisfies DocumentElement : node;
   };
   const nodes = document.nodes.map(node => visit(node));
-  if (icons !== 1 || contacts !== (document.route === "/contact-us" ? 1 : 0) || controls !== (document.route === "/" ? 0 : 1)) fail("expected unique icon, contact link and control");
+  if (contacts !== (document.route === "/contact-us" ? 1 : 0) || controls !== (document.route === "/" ? 0 : 1)) fail("expected unique contact link and control");
   return { ...document, nodes };
 }
