@@ -169,7 +169,8 @@ body.redcarpert-home-native .fullpage-wrapper > .section:nth-child(2)::after {
     background-image: none;
     filter: none;
   }
-  body.redcarpert-home-native .fullpage-wrapper > .section::after {
+  body.redcarpert-home-native .fullpage-wrapper > .section::after,
+  body.redcarpert-home-native .fullpage-wrapper > .section:nth-child(2)::after {
     left: 0;
     width: 100%;
     transform: none;
