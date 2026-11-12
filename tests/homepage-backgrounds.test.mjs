@@ -87,22 +87,30 @@ test("all three homepage photos are client-supplied remote WebP assets in natura
   assert.equal(new Set(homepageBackgrounds.map(x=>x.replacement)).size,3);
 });
 
-test("responsive image treatment only blurs on desktop and never on smaller screens", () => {
+test("Option B gives desktop/tablet a sharp 60% centre and 32px blurred sides; mobile stays original", () => {
   const css = readFileSync("src/components/HomepageExperience.css", "utf8");
-  const mobile = css.slice(css.indexOf("@media (max-width: 1000px) {", css.indexOf("filter: blur(36px)")));
-  assert(mobile.startsWith("@media (max-width: 1000px) {"), "missing small-screen image treatment");
+  assert(css.includes("--redcarpert-home-sharp-width: 60%"),
+    "wide screens must have a 60% sharp central photo");
+  assert(css.includes("filter: blur(32px) brightness(.66);"),
+    "wide screens must have the approved 32px blurred photographic backdrop");
+  assert(css.includes("background-size: 100% 100%, cover;"),
+    "foreground photograph must cover the sharp panel");
+  assert(css.includes("background-position: center center, center top;")
+    && css.includes("background-position: center top;"),
+    "desktop/tablet photos must favour face visibility with a top-aligned crop");
+  const mobile = css.slice(css.indexOf("@media (max-width: 640px) {", css.indexOf("filter: blur(32px)")));
+  assert(mobile.startsWith("@media (max-width: 640px) {"),
+    "mobile breakpoint must be 640px; tablets share desktop framing");
   assert(mobile.includes("content: none;") && mobile.includes("display: none;"),
-    "mobile/tablet must not draw a duplicate blurred photo");
+    "phones must not draw a duplicate blurred photo");
   assert(mobile.includes("background-image: none;") && mobile.includes("filter: none;"),
-    "mobile/tablet blur background must be disabled");
+    "phones must not render the blurred background");
   assert(mobile.includes("background-image: var(--redcarpert-home-photo);")
-    && mobile.includes("background-size: cover;"),
-    "mobile/tablet images must fill the viewport without letterbox bars");
-  assert(css.includes("background-size: 100% 100%, auto 132%;")
-    && css.includes("background-size: auto 132%;"),
-    "desktop sharp portrait should be visibly wider than the previous contain framing");
-  assert(css.includes("filter: blur(36px) brightness(.66);"),
-    "desktop soft-focus must remain untouched");
-  assert(!/min-height:\s*(?:80|90)svh/.test(css),
+    && mobile.includes("background-size: cover;")
+    && mobile.includes("background-position: center center;"),
+    "phones must preserve their original full-bleed centred photograph");
+  assert(!css.includes("mask-image: linear-gradient("),
+    "blur must never bleed over the sharp photograph");
+  assert(!/min-height:\\s*(?:80|90)svh/.test(css),
     "no responsive section may be shorter than a full viewport");
 });
