@@ -5,7 +5,7 @@
   "description": "Static Redcarpert Wedding Dresses prototype",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tita-mbotho-studio/redcarpert-prototype.git"
+    "url": "git+https://github.com/tita-mbotho-templates/redcarpert-prototype.git"
   },
   "engines": {
     "node": ">=22.12.0"
