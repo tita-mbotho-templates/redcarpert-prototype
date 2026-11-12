@@ -13,6 +13,12 @@ if(width===1440){
   await p.evaluate(()=>scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));
   await p.waitForTimeout(100);
   assert(await p.evaluate(()=>document.querySelector('footer[data-homepage-footer]').getBoundingClientRect().top<innerHeight),'footer follows photos in natural flow');
+  // The approved header tucks away on downward scroll; reveal it with
+  // an upward wheel gesture before testing the logo's Home reset.
+  await p.mouse.move(width/2,450);
+  await p.mouse.wheel(0,-340);
+  await p.waitForTimeout(550);
+  assert(await p.evaluate(()=>!document.body.classList.contains('redcarpert-header-tucked')),'header returns on upward scroll');
   await p.locator('#header #logo-container > a').click();
   await p.waitForFunction(()=>scrollY<5,{},{timeout:5000});
 }
