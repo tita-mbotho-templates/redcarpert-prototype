@@ -117,8 +117,8 @@ export function renderWeddingMomentEvents(events: readonly WeddingMomentEvent[])
                 "data-wedding-media": media.type,
                 "data-wedding-src": media.url,
                 "aria-haspopup": "dialog",
-                "aria-label": media.type === "video"
-                  ? "Watch " + media.caption : "Enlarge " + (media.caption || media.alt),
+                "aria-label": media.type === "photo"
+                  ? "Enlarge " + (media.caption || media.alt) : "Watch " + media.caption,
               },
             }, [
               ...(media.type === "photo"
