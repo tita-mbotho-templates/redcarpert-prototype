@@ -184,3 +184,121 @@
   }
 }
 @media(prefers-reduced-motion:reduce){.redcarpert-bride-card button img{transition:none;}}
+
+
+/* Implementation 25 — Wedding Moments: couple, guests and event media. */
+.redcarpert-moments-intro,
+.redcarpert-moments-empty,
+.redcarpert-moments-permission {
+  box-sizing: border-box;
+  max-width: 850px;
+  margin: 18px auto 26px;
+  text-align: center;
+}
+.redcarpert-moments-intro h2 {
+  color: #ddb577;
+  margin: 0 0 14px;
+  font: 400 clamp(23px, 2.5vw, 31px)/1.35 Montserrat, sans-serif;
+  text-align: center;
+}
+.redcarpert-moments-intro p,
+.redcarpert-moments-empty p,
+.redcarpert-moments-permission {
+  font: 400 clamp(12px, 1.15vw, 15px)/1.75 Montserrat, sans-serif;
+  color: #6b6259;
+  text-align: center;
+}
+.redcarpert-moments-empty {
+  padding: clamp(24px, 3vw, 44px) clamp(16px, 3vw, 36px);
+  background: #f8f3ed;
+  border: 1px solid #eee3d8;
+  margin-bottom: 38px;
+}
+.redcarpert-moments-empty h3 {
+  font: 400 clamp(19px, 2vw, 25px)/1.35 Georgia, serif;
+  color: #796451;
+  margin: 0 0 10px;
+  text-align: center;
+}
+.redcarpert-moments-empty p { max-width: 660px; margin: 0 auto; }
+.redcarpert-moments-event { width: 100%; margin: 30px auto 45px; }
+.redcarpert-moments-event-title {
+  font: 400 clamp(22px, 2.4vw, 30px)/1.3 Montserrat, sans-serif;
+  color: #97774f; text-align: center; margin: 0 auto 12px;
+}
+.redcarpert-moments-event-description {
+  max-width: 740px; margin: 0 auto 28px;
+  font: 400 14px/1.75 Montserrat, sans-serif;
+  text-align: center; color: #6b6259;
+}
+.redcarpert-moments-media-grid {
+  box-sizing: border-box; display: grid;
+  grid-template-columns: repeat(4, minmax(0, 22.1%));
+  column-gap: 3.8%; row-gap: clamp(20px, 3vw, 36px);
+  align-items: start; width: 100%;
+  margin: 25px 0 30px; container-type: inline-size;
+}
+.redcarpert-moments-media-card {
+  box-sizing: border-box; margin: 0; min-width: 0; padding: 0 1cqw;
+}
+.redcarpert-moments-media-card > button {
+  position: relative; display: block !important; width: 100% !important;
+  aspect-ratio: 1 / 1; box-sizing: border-box; padding: 0 !important;
+  margin: 0 !important; border: 0 !important; border-radius: 0 !important;
+  background: #e7ded4; overflow: hidden; cursor: pointer;
+  appearance: none; line-height: 0; box-shadow: none !important;
+}
+.redcarpert-moments-media-card > button > img {
+  display: block; width: 100% !important; height: 100% !important;
+  aspect-ratio: 1 / 1; object-fit: cover; object-position: center;
+  transition: transform .4s ease;
+}
+.redcarpert-moments-media-card > button:hover > img { transform: scale(1.035); }
+.redcarpert-moments-media-card > button:focus-visible {
+  outline: 2px solid #9f744a; outline-offset: 3px;
+}
+.redcarpert-moments-media-card figcaption {
+  display: block; box-sizing: border-box; min-height: 44px;
+  padding: 11px 0 2px; text-align: center; color: #756b61;
+  font: 400 13px/1.4 Montserrat, sans-serif;
+}
+.redcarpert-moment-video-fallback {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%; color: #806d59;
+  font: 400 clamp(13px, 1.6vw, 19px)/1.5 Georgia, serif;
+  background: linear-gradient(135deg, #eee3d7, #d8c8b9);
+}
+.redcarpert-moment-play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  display: grid; place-items: center; width: 58px; height: 58px;
+  border-radius: 50%; color: #fff;
+  background: rgba(0,0,0,.50); font-size: 19px; line-height: 1;
+  pointer-events: none; transition: background-color .2s ease;
+}
+.redcarpert-moments-media-card > button:hover .redcarpert-moment-play {
+  background: rgba(0,0,0,.7);
+}
+.redcarpert-wedding-dialog [hidden] { display: none !important; }
+.redcarpert-wedding-dialog .redcarpert-wedding-preview-video {
+  display: block; box-sizing: border-box;
+  width: min(960px, calc(100vw - 52px)) !important;
+  max-width: 100%; max-height: calc(100dvh - 52px) !important;
+  object-fit: contain; background: #171615;
+}
+@media (max-width: 768px) {
+  .redcarpert-moments-media-grid {
+    grid-template-columns: repeat(2, minmax(0, 47.7%));
+    column-gap: 4.6%; row-gap: clamp(14px, 3vw, 25px);
+  }
+}
+@media (max-width: 480px) {
+  .redcarpert-moments-media-grid { row-gap: 16px; }
+  .redcarpert-moments-media-card figcaption {
+    min-height: 41px; padding: 8px 0 1px; font-size: 11px;
+  }
+  .redcarpert-moment-play { width: 44px; height: 44px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .redcarpert-moments-media-card > button > img,
+  .redcarpert-moment-play { transition: none; }
+}
