@@ -10,6 +10,13 @@ export function initializeWeddingMomentsGallery() {
   const template = document.querySelector('template[data-wedding-moments-remaining]');
   const loadMore = document.querySelector('[data-wedding-load-more]');
   const batchSize = 16;
+  const count = document.querySelector('[data-wedding-count]');
+  const total = Number(count?.getAttribute('data-wedding-total'));
+  const updateCount = () => {
+    if (count && Number.isSafeInteger(total) && total >= 0) {
+      count.textContent = 'Showing ' + grid.children.length + ' of ' + total + ' wedding moments';
+    }
+  };
 
   if (template instanceof HTMLTemplateElement && loadMore instanceof HTMLButtonElement) {
     loadMore.addEventListener('click', () => {
@@ -18,6 +25,7 @@ export function initializeWeddingMomentsGallery() {
       const fragment = document.createDocumentFragment();
       fragment.append(...next);
       grid.append(fragment);
+      updateCount();
       if (!template.content.firstElementChild) {
         const controls = loadMore.closest('.redcarpert-moments-more');
         if (controls) controls.hidden = true;

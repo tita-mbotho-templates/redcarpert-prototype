@@ -141,6 +141,13 @@ export function renderWeddingMomentGallery(
       id: "redcarpert-wedding-grid", class: "redcarpert-moments-media-grid",
       "data-wedding-moments-grid": "",
     }, initial),
+    node("p", {
+      class: "redcarpert-moments-count",
+      "data-wedding-count": "",
+      "data-wedding-total": String(media.length),
+      role: "status",
+      "aria-live": "polite",
+    }, ["Showing " + initial.length + " of " + media.length + " wedding moments"]),
     ...(remaining.length ? [
       node("template", { "data-wedding-moments-remaining": "" }, remaining),
       node("div", { class: "redcarpert-moments-more" }, [
@@ -167,7 +174,7 @@ export function renderWeddingMomentGallery(
         node("button", {
           type: "button", class: "redcarpert-wedding-preview-close",
           "data-wedding-preview-close": "", "aria-label": "Close media preview",
-        }, ["×"]),
+        }, [node("i", { class: "fa-solid fa-xmark", "aria-hidden": "true" })]),
       ]),
     ]),
   ];
