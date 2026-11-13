@@ -142,15 +142,15 @@ export function renderWeddingMomentEvents(events: readonly WeddingMomentEvent[])
     ])
   );
   sections.push(node("dialog", {
-    id: "redcarpert-wedding-preview", class: "redcarpert-bride-dialog redcarpert-wedding-dialog",
+    id: "redcarpert-wedding-preview", class: "redcarpert-wedding-dialog",
     "aria-label": "Wedding moments photo and video preview",
   }, [
-    node("div", { class: "redcarpert-bride-dialog-inner" }, [
-      node("img", { class: "redcarpert-bride-preview-image", "data-wedding-preview-photo": "",
+    node("div", { class: "redcarpert-moment-dialog-inner" }, [
+      node("img", { class: "redcarpert-wedding-preview-image", "data-wedding-preview-photo": "",
         alt: "", decoding: "async", hidden: "hidden" }),
       node("video", { class: "redcarpert-wedding-preview-video", "data-wedding-preview-video": "",
         controls: "controls", playsinline: "playsinline", preload: "none", hidden: "hidden" }),
-      node("button", { type: "button", class: "redcarpert-bride-dialog-close",
+      node("button", { type: "button", class: "redcarpert-wedding-preview-close",
         "data-wedding-preview-close": "", "aria-label": "Close media preview" }, ["×"]),
     ]),
   ]));
