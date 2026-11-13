@@ -17,6 +17,10 @@ Open `http://localhost:5173/redcarpert-prototype/`. Editing document data or ada
 
 Store image links in [`src/data/image-links.json`](src/data/image-links.json), grouped by page. The three homepage ImageKit images, 8 catalogue samples, 18 Our Brides inspiration pictures, and 3 About Us team illustrations now read from the same manifest. Pexels source/credit URLs are stored alongside the relevant records. Empty sections remain available for future client uploads; replacing an existing sample requires a separate content and attribution review. See [Implementation 24](docs/implementation-24-image-links.md) for upload folders, example entries and the branch review workflow.
 
+## Wedding Moments (photos and films)
+
+The former **Our Brides** page is now **Wedding Moments**, covering the couple, guests, families and wedding celebrations in photos and videos. Its original `/our-brides/` address remains available. Edit `wedding_moments.events` in [`src/data/image-links.json`](src/data/image-links.json) to group each approved event's photos and videos. Until client-approved media is supplied, the page clearly labels its existing Pexels images as inspiration only. See [Implementation 25](docs/implementation-25-wedding-moments.md) for the JSON schema, permissions and playback behaviour.
+
 ## Validate and preview
 
 ```sh
