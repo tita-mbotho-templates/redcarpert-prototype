@@ -119,8 +119,7 @@ export function renderWeddingMomentEvents(events: readonly WeddingMomentEvent[])
                 "aria-haspopup": "dialog",
                 "aria-label": media.type === "photo"
                   ? "Enlarge " + (media.caption || media.alt) : "Watch " + media.caption,
-              },
-            }, [
+              }, [
               ...(media.type === "photo"
                 ? [node("img", { src: media.url, alt: media.alt, width: "370", height: "370",
                     loading: index < 4 ? "eager" : "lazy", decoding: "async" })]
