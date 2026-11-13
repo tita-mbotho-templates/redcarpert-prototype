@@ -19,7 +19,8 @@ export function initializeWeddingMomentsGallery() {
       fragment.append(...next);
       grid.append(fragment);
       if (!template.content.firstElementChild) {
-        loadMore.closest('.redcarpert-moments-more').hidden = true;
+        const controls = loadMore.closest('.redcarpert-moments-more');
+        if (controls) controls.hidden = true;
       }
     });
   }
