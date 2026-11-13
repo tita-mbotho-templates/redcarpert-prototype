@@ -1,12 +1,28 @@
 import type { DocumentNode, SiteDocumentData } from "@/types/site";
+import imageLinks from "../data/image-links.json" with { type: "json" };
 
-// Client-supplied ImageKit photographs. Keep the approved layout and order:
-// first panel = home-page-1, second = home-page-2, third = home-page-3.
-// Centralise URL references for hero preload, global loader, and page rendering.
+// Keep all user-supplied image URLs in image-links.json, not in source code.
+// The three approved homepage panels have stable IDs and ordering. The same
+// manifest drives both the rendered backgrounds and the hero preload.
+const approvedHeroImages = imageLinks.home_page.hero;
+if (approvedHeroImages.length !== 3) {
+  throw new Error("image-links.json: home_page.hero must contain exactly three photographs");
+}
+function approvedHeroUrl(section: number, id: string): string {
+  const image = approvedHeroImages[section];
+  if (!image || image.id !== id || typeof image.url !== "string") {
+    throw new Error(`image-links.json: missing or reordered homepage photograph ${id}`);
+  }
+  const url = new URL(image.url);
+  if (url.protocol !== "https:" || /["'\\\\\n\r<>]/.test(image.url)) {
+    throw new Error(`image-links.json: invalid image URL for ${id}`);
+  }
+  return image.url;
+}
 export const homepageBackgrounds = [
-  { section: 0, original: "/site-assets/ec8b6b2c4222396c44.png", replacement: "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/home-page/home-page-1.webp?updatedAt=1794351596508" },
-  { section: 1, original: "/site-assets/9def3725208290c4ef.png", replacement: "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/home-page/home-page-2.webp?updatedAt=1794351597603" },
-  { section: 2, original: "/site-assets/46f8a1c412d65fd42b.png", replacement: "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/home-page/home-page-3.webp?updatedAt=1794351600184" },
+  { section: 0, original: "/site-assets/ec8b6b2c4222396c44.png", replacement: approvedHeroUrl(0, "home-page-1") },
+  { section: 1, original: "/site-assets/9def3725208290c4ef.png", replacement: approvedHeroUrl(1, "home-page-2") },
+  { section: 2, original: "/site-assets/46f8a1c412d65fd42b.png", replacement: approvedHeroUrl(2, "home-page-3") },
 ] as const;
 
 export function adaptHomepageBackgrounds(document: SiteDocumentData): SiteDocumentData {
