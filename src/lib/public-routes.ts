@@ -12,7 +12,7 @@ export const approvedCapturedRoutes = [
   "/product-category/ball_gown",
   "/about-us",
   "/contact-us",
-  "/our-brides",
+  "/wedding-moments",
 ] as const;
 
 export const authoredPrototypeRoutes = ["/digital-lookbook"] as const;

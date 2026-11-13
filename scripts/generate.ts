@@ -22,7 +22,7 @@ validateCatalogue(catalogueProducts);
 const routes = ['/',...publicStaticRoutes(sitePages,catalogueProducts.map(p=>p.previewRoute))];
 await rm(root, {recursive:true,force:true});
 await mkdir(root,{recursive:true});
-const cssFiles = ['src/styles/globals.css',...['FooterBranding','CatalogueListing','ProductDetailPreview','EditorialPages','HomepageExperience'].map(n=>'src/components/'+n+'.css'),'src/client/enquiry.css','src/components/CatalogueFilter.css','src/components/BridesGallery.css','src/components/ModernIcons.css'];
+const cssFiles = ['src/styles/globals.css',...['FooterBranding','CatalogueListing','ProductDetailPreview','EditorialPages','HomepageExperience'].map(n=>'src/components/'+n+'.css'),'src/client/enquiry.css','src/components/CatalogueFilter.css','src/components/WeddingMoments.css','src/components/ModernIcons.css'];
 // Native homepage scrolling should retain the browser's vertical scrollbar.
 // No synthetic scrollbar hiding or fullpage/footer handoff is necessary.
 const extraCss = (await Promise.all(cssFiles.map(f=>readFile(f,'utf8')))).join('\n');

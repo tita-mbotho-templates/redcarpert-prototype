@@ -5,7 +5,6 @@ import { SiteRuntime } from './SiteRuntime.js';
 import { initializeEnquiryPreview } from './enquiry-preview.js';
 import { initializeLookbookReader } from './lookbook-reader.js';
 import { initializeCatalogueFilter } from './catalogue-filter.js';
-import { initializeBridesGallery } from './brides-gallery.js';
 import { initializeWeddingMomentsGallery } from './wedding-moments.js';
 import { initializeFloatingWhatsApp } from './WhatsAppFloating.js';
 import { initializePageLoader } from './PageLoader.js';
@@ -36,7 +35,6 @@ document.addEventListener('visibilitychange', () => {
 initializeEnquiryPreview();
 initializeLookbookReader(import.meta.env.BASE_URL);
 initializeCatalogueFilter();
-initializeBridesGallery();
 initializeWeddingMomentsGallery();
 initializeFloatingWhatsApp();
 HeaderNavigationAlignment();
