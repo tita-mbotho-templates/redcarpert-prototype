@@ -93,7 +93,7 @@
 }
 
 /* Override the inherited editorial paragraph alignment and width, for all viewports. */
-#content-container.layout-full .redcarpert-editorial[data-editorial-route="/wedding-moments"] > p.redcarpert-moments-count {
+#content-container.layout-full .redcarpert-moments-content-box .redcarpert-moments-count {
   display: block;
   box-sizing: border-box;
   width: 100%;
