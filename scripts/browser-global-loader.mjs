@@ -72,7 +72,7 @@ try {
     const transparent = color => color === 'transparent' || /^rgba\([^)]*,\s*0(?:\.0+)?\)$/.test(color);
     const approvedTint = color => {
       const match = color.match(/^rgba\(0,\s*0,\s*0,\s*([\d.]+)\)$/);
-      return !!match && Math.abs(Number(match[1])-.70)<.01;
+      return !!match && Math.abs(Number(match[1])-.60)<.01;
     };
     assert(approvedTint(appearance.headerBackground),
       width+'px header must be dark and translucent (not solid black or clear): '+appearance.headerBackground);

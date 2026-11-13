@@ -27,8 +27,8 @@ body.redcarpert-home-native #header,
 body.redcarpert-home-native.fixed-header-scroll #header,
 body.redcarpert-home-native.dark-header #header,
 body.redcarpert-home-native.mobile #header {
-  background: rgba(0, 0, 0, .70) !important;
-  background-color: rgba(0, 0, 0, .70) !important;
+  background: rgba(0, 0, 0, .60) !important;
+  background-color: rgba(0, 0, 0, .60) !important;
   background-image: none !important;
 }
 body.redcarpert-home-native.fixed-header #header {
