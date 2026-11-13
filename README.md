@@ -13,6 +13,10 @@ npm run dev
 
 Open `http://localhost:5173/redcarpert-prototype/`. Editing document data or adapters requires restarting the dev server to regenerate static HTML.
 
+## Adding page photographs
+
+Store client-approved image links in [`src/data/image-links.json`](src/data/image-links.json), grouped by page. The three homepage ImageKit links are active; all other page sections are reserved for future client photos and do not replace the existing illustrative placeholders yet. See [Implementation 24](docs/implementation-24-image-links.md) for upload folders, example entries and the branch review workflow.
+
 ## Validate and preview
 
 ```sh
