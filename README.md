@@ -19,7 +19,7 @@ Client-approved and illustrative media URLs are managed in [`src/data/image-link
 
 ## Wedding Moments
 
-Visit **`/wedding-moments/`** to view real client wedding photographs and video in one uninterrupted, responsive square gallery. The page has only the **Wedding Moments** title, the subtitle *“The love, the laughter, the unforgettable moments.”*, and the media grid — no categories or captions. The real client collection currently contains **86 photographs and one directly hosted ImageKit MP4**. The first 16 cards load initially; **Load More** reveals subsequent batches of 16.
+Visit **`/wedding-moments/`** to view real client wedding photographs and video in one uninterrupted, responsive square gallery. The page has only the **Wedding Moments** title, the subtitle *“The love, the laughter, the unforgettable moments.”*, and the media grid — no categories or captions. The real client collection currently contains **86 photographs and one directly hosted ImageKit MP4**. The first 16 cards load initially; **Load More** reveals subsequent batches of 16. A live counter below the gallery reads **Showing 16 of 87 wedding moments** and updates to 32, 48, 64, 80 and finally 87.
 
 Client media URLs are stored in `wedding_moments.events` inside [`src/data/image-links.json`](src/data/image-links.json). This initial upload batch retains the exact order the client sent. New upload batches can be appended to the JSON and appear first. [Implementation 25](docs/implementation-25-wedding-moments.md) documents the workflow and publication safeguards.
 

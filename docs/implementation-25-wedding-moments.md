@@ -14,7 +14,7 @@ The page contains **86 real client JPG photographs** and one directly hosted **I
 
 Every card is **square** (four across on desktop, two on mobile), and contains **only an image**, with a discreet play icon on videos. There are no visible event categories, section titles, captions, descriptions or placeholder panels. A photograph opens uncropped in the blurred-background lightbox; the video opens a native player with controls.
 
-**Scalable loading:** The first 16 cards are rendered. The remaining **71 cards** are placed into an inert HTML template, not loaded or requested initially. **Load More** adds 16 per click; five clicks reveal the remaining 71 items (ending with a seven-item batch).
+**Scalable loading:** The first 16 cards are rendered. The remaining **71 cards** are placed into an inert HTML template, not loaded or requested initially. **Load More** adds 16 per click; five clicks reveal the remaining 71 items (ending with a seven-item batch). A readable, live-updating status beneath the grid displays **Showing 16 of 87 wedding moments** initially and updates after every new batch.
 
 **Video thumbnail:** The first frame of `wedding-moments-88.mp4` is used as its poster through ImageKit's documented `/ik-thumbnail.jpg` suffix. The original video URL is played on demand.
 
@@ -69,3 +69,9 @@ The business has identified these URLs as real client media. Before merging or d
 Do not edit the homepage hero layout, catalogue, header, footer, fitting WhatsApp flow or shared responsive widths as part of media replacement.
 
 Run `npm run check` and preview using `npm run dev`. GitHub Actions and deployment happen **only** when explicitly requested by the project owner.
+
+## Image URLs and local verification
+
+The original ImageKit JPG, MP4 and `/ik-thumbnail.jpg` URLs must remain **unchanged** in the generated HTML. `scripts/lib/assets.ts` rewrites local site paths to the GitHub Pages base, but must never rewrite `/wedding-moments/` inside the ImageKit CDN URLs. This is covered by `tests/routing-prefix.test.mjs` and the production HTML checks.
+
+Use `npm run check` locally. This command now lints, type-checks and **builds first**, then runs the unit and generated-site tests against the current output, not a stale `dist/` from an earlier page name. No GitHub Actions dispatch is required.
