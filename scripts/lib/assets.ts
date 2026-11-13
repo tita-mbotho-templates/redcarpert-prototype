@@ -6,7 +6,7 @@ const base = REPOSITORY_BASE;
 // Rewrite known local URL namespaces only: a slash in JavaScript or SVG is not a path.
 export const prefix = (s: string) => s
  .replace(/((?:href|action)=["'])\/(?=["'])/g, '$1'+base)
- .replace(/\/(?=(?:site-assets|redcarpert|seo|images|product(?:-category)?|digital-lookbook|our-brides|about-us|contact-us)(?:\/|["'?#]))/g,base);
+ .replace(/\/(?=(?:site-assets|redcarpert|seo|images|product(?:-category)?|digital-lookbook|wedding-moments|about-us|contact-us)(?:\/|["'?#]))/g,base);
 
 export const assets = new Set<string>();
 export function track(text: string) {
