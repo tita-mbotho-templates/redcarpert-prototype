@@ -132,7 +132,7 @@ try {
 
   // The loader must apply to every editorial/catalogue route; never leave
   // a permanent overlay even when a request for remote imagery is aborted.
-  const routes=['/product/','/our-brides/','/about-us/','/contact-us/','/digital-lookbook/'];
+  const routes=['/product/','/wedding-moments/','/about-us/','/contact-us/','/digital-lookbook/'];
   for(const route of routes){
     const page=await browser.newPage({viewport:{width:390,height:844}});
     await page.route('https://images.pexels.com/**',r=>r.abort());
