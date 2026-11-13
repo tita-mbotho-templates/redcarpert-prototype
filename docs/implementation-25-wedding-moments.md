@@ -4,19 +4,23 @@
 
 Wedding Moments documents not only bridal styling but **the couple, family, friends, ceremony, reception and celebrations** through photos and films.
 
-## Visible design
+## Current page design and real client media
 
-The page shows just **Wedding Moments** and the subtitle:
+Only the **Wedding Moments** title and subtitle appear above a continuous media grid:
 
 > The love, the laughter, the unforgettable moments.
 
-Beneath them is **one continuous square gallery**: four columns on desktop and two on mobile. Cards have **no visible titles, event groups, captions or descriptions**. Photography stays edge-to-edge within each card; videos have a small play icon.
+The page contains **86 real client JPG photographs** and one directly hosted **ImageKit MP4 video**, for **87 media cards** in total. They are preserved in the **exact order provided by the business**, starting with the film. All wedding-specific Pexels stock photos and stock film links have been removed from the JSON and the page.
 
-For the current demonstration, the gallery contains 12 wedding-focused stock photographs and two linked Pexels sample films. A subtle notice below the grid says that the examples are not Redcarpert client events. The stock links are in `wedding_moments.showcase`; they are replaced by real photos/films automatically when `wedding_moments.events` has approved client content.
+Every card is **square** (four across on desktop, two on mobile), and contains **only an image**, with a discreet play icon on videos. There are no visible event categories, section titles, captions, descriptions or placeholder panels. A photograph opens uncropped in the blurred-background lightbox; the video opens a native player with controls.
 
-**Scalability:** The first 16 cards are rendered immediately. If there are more, the remaining cards are stored in an inert HTML template (their images are not requested), and **Load More** inserts 16 at a time. New wedding events should be appended to the end of the JSON `events` array. The website displays these **newest event first**, while keeping the original order of photographs within each event. JSON grouping is internal only; visitors see one gallery with no categories.
+**Scalable loading:** The first 16 cards are rendered. The remaining **71 cards** are placed into an inert HTML template, not loaded or requested initially. **Load More** adds 16 per click; five clicks reveal the remaining 71 items (ending with a seven-item batch).
 
-No old bridal-only gallery scripts, CSS, data keys or content are retained. The currently displayed images are demonstrative stock photography, not actual Redcarpert weddings.
+**Video thumbnail:** The first frame of `wedding-moments-88.mp4` is used as its poster through ImageKit's documented `/ik-thumbnail.jpg` suffix. The original video URL is played on demand.
+
+**Internal grouping:** Because the supplied links weren't separated by individual weddings, they are stored under an internal batch `client-upload-batch-01`, not falsely assigned to a particular couple or event. New approved upload batches can be appended to the JSON; the newest batch appears first without a visible grouping.
+
+**Input inventory:** All 86 supplied JPGs are distinct. There is no `wedding-moments-55.jpg` in the supplied list, so no link was fabricated.
 
 ## Adding real wedding events
 
@@ -56,11 +60,11 @@ This is a **fragment/example**, not a full replacement for the manifest. Only po
 
 Each event requires a unique lowercase hyphenated ID and title. Each media item needs a unique ID, type, HTTPS URL, and appropriate descriptive text. Photos require `alt`; videos require `caption`. Direct video files must end in `.mp4` or `.webm` (query strings allowed). A video `poster` is **required** so every video card has an image thumbnail. It carries no visible text label.
 
-When at least one approved event exists, it automatically replaces the stock showcase. All events are visually flattened into one gallery, and the newest appended event appears at the top. Native videos only begin downloading when opened; they have player controls and are paused/unloaded when the preview closes. This is a static website: the client is responsible for hosting the files and managing the links.
+All media is displayed in one gallery, and the newest appended batch appears at the top. Native videos only begin downloading when opened; they have player controls and are paused/unloaded when the preview closes. This is a static website: the client is responsible for hosting the files and managing the links.
 
 ## Publication and design safeguards
 
-Only publish client media after confirming the couple and identifiable people (including children) have provided any necessary permissions. Do not present stock subjects as Redcarpert customers or imply their endorsement. Source links for all stock examples are retained in the JSON file.
+The business has identified these URLs as real client media. Before merging or deploying, confirm the appropriate public-display permission from the couple and other identifiable people (including children). This was not independently verified from the URLs alone. The public site should not expose private or unapproved material.
 
 Do not edit the homepage hero layout, catalogue, header, footer, fitting WhatsApp flow or shared responsive widths as part of media replacement.
 
