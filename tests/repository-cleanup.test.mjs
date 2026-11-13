@@ -45,7 +45,7 @@ test("the captured public archive has been pruned without removing Redcarpert ar
 test("Redcarpert owns its package metadata and preserves no inherited software licence claim", () => {
   const pkg = JSON.parse(readFileSync("package.json", "utf8"));
   const lock = JSON.parse(readFileSync("package-lock.json", "utf8"));
-  assert.equal(pkg.repository.url, "git+https://github.com/tita-mbotho-studio/redcarpert-prototype.git");
+  assert.equal(pkg.repository.url, "git+https://github.com/tita-mbotho-templates/redcarpert-prototype.git");
   assert.ok(!("author" in pkg));
   assert.ok(!("license" in pkg));
   assert.ok(!("homepage" in pkg));
