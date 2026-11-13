@@ -3,7 +3,8 @@ import type { DocumentElement, DocumentNode } from "../types/site.ts";
 
 export type WeddingMomentMedia =
   | { id: string; type: "photo"; url: string; alt: string; caption?: string }
-  | { id: string; type: "video"; url: string; caption: string; poster?: string };
+  | { id: string; type: "video"; url: string; caption: string; poster?: string }
+  | { id: string; type: "video_link"; url: string; caption: string; poster: string };
 export interface WeddingMomentEvent {
   id: string;
   title: string;
@@ -65,10 +66,13 @@ export function parseWeddingMomentEvents(input: unknown): WeddingMomentEvent[] {
         throw new Error("Wedding Moments: duplicate or invalid media id " + mediaId);
       }
       mediaIds.add(mediaId);
-      if (entry.type !== "photo" && entry.type !== "video") {
-        throw new Error("Wedding Moments: " + mediaId + " type must be photo or video");
+      if (entry.type !== "photo" && entry.type !== "video" && entry.type !== "video_link") {
+        throw new Error("Wedding Moments: " + mediaId + " type must be photo, video or video_link");
       }
       const url = safeUrl(entry.url, mediaId + " url", entry.type === "video");
+      if (entry.type === "video_link" && !/^https:\/\/www\.pexels\.com\/video\/[a-z0-9-]+\d+\/$/.test(url)) {
+        throw new Error("Wedding Moments: only verified Pexels preview-page links are allowed");
+      }
       if (entry.type === "photo") {
         const alt = text(entry.alt, mediaId + " alt");
         const caption = optionalText(entry.caption, mediaId + " caption");
@@ -77,6 +81,10 @@ export function parseWeddingMomentEvents(input: unknown): WeddingMomentEvent[] {
       const caption = text(entry.caption, mediaId + " caption");
       const poster = entry.poster === undefined
         ? undefined : safeUrl(entry.poster, mediaId + " poster");
+      if (entry.type === "video_link") {
+        if (!poster) throw new Error("Wedding Moments: external stock film needs a poster");
+        return { id: mediaId, type: "video_link", url, caption, poster };
+      }
       return { id: mediaId, type: "video", url, caption, ...(poster ? { poster } : {}) };
     });
     return { id, title, ...(description ? { description } : {}), media };
@@ -84,6 +92,7 @@ export function parseWeddingMomentEvents(input: unknown): WeddingMomentEvent[] {
 }
 
 export const weddingMomentEvents = parseWeddingMomentEvents(imageLinks.wedding_moments.events);
+export const weddingMomentShowcase = parseWeddingMomentEvents(imageLinks.wedding_moments.showcase);
 
 const node = (tag: string, attrs: Record<string, string>, children: DocumentNode[] = []): DocumentElement =>
   ({ tag, attrs, children });
@@ -98,13 +107,19 @@ export function renderWeddingMomentEvents(events: readonly WeddingMomentEvent[])
       node("div", { class: "redcarpert-moments-media-grid", "data-wedding-moments-grid": "" },
         event.media.map((media, index) =>
           node("figure", { class: "redcarpert-moments-media-card", "data-wedding-moment-id": media.id }, [
-            node("button", {
-              type: "button",
-              "data-wedding-media": media.type,
-              "data-wedding-src": media.url,
-              "aria-haspopup": "dialog",
-              "aria-label": media.type === "video"
-                ? "Watch " + media.caption : "Enlarge " + (media.caption || media.alt),
+            node(media.type === "video_link" ? "a" : "button", media.type === "video_link"
+              ? {
+                href: media.url, target: "_blank", rel: "noopener noreferrer",
+                "aria-label": "Watch sample wedding film on Pexels: " + media.caption,
+              }
+              : {
+                type: "button",
+                "data-wedding-media": media.type,
+                "data-wedding-src": media.url,
+                "aria-haspopup": "dialog",
+                "aria-label": media.type === "video"
+                  ? "Watch " + media.caption : "Enlarge " + (media.caption || media.alt),
+              },
             }, [
               ...(media.type === "photo"
                 ? [node("img", { src: media.url, alt: media.alt, width: "370", height: "370",
@@ -114,7 +129,7 @@ export function renderWeddingMomentEvents(events: readonly WeddingMomentEvent[])
                       loading: "lazy", decoding: "async" })]
                   : [node("span", { class: "redcarpert-moment-video-fallback", "aria-hidden": "true" },
                       ["Wedding film"])]),
-              ...(media.type === "video" ? [
+              ...(media.type !== "photo" ? [
                 node("span", { class: "redcarpert-moment-play", "aria-hidden": "true" }, [
                   node("i", { class: "fa-solid fa-play", "aria-hidden": "true" }),
                 ]),
