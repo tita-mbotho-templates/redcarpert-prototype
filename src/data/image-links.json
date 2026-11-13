@@ -61,99 +61,140 @@
       }
     ]
   },
-  "our_brides": [
-    {
-      "id": "inspiration-01",
-      "url": "https://images.pexels.com/photos/4545094/pexels-photo-4545094.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/woman-in-white-floral-lace-wedding-dress-4545094/"
-    },
-    {
-      "id": "inspiration-02",
-      "url": "https://images.pexels.com/photos/10587269/pexels-photo-10587269.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/portrait-of-bride-in-white-dress-and-veil-10587269/"
-    },
-    {
-      "id": "inspiration-03",
-      "url": "https://images.pexels.com/photos/33435175/pexels-photo-33435175.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/elegant-bride-in-outdoor-wedding-ceremony-33435175/"
-    },
-    {
-      "id": "inspiration-04",
-      "url": "https://images.pexels.com/photos/39903996/pexels-photo-39903996.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/elegant-bridal-portrait-with-lace-veil-39903996/"
-    },
-    {
-      "id": "inspiration-05",
-      "url": "https://images.pexels.com/photos/10587270/pexels-photo-10587270.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/wedding-photo-of-bride-in-white-dress-and-long-veil-10587270/"
-    },
-    {
-      "id": "inspiration-06",
-      "url": "https://images.pexels.com/photos/2495648/pexels-photo-2495648.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/woman-in-wedding-dress-2495648/"
-    },
-    {
-      "id": "inspiration-07",
-      "url": "https://images.pexels.com/photos/4645961/pexels-photo-4645961.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/portrait-of-bride-wearing-veil-and-wedding-dress-4645961/"
-    },
-    {
-      "id": "inspiration-08",
-      "url": "https://images.pexels.com/photos/19751829/pexels-photo-19751829.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/portrait-of-a-bride-in-a-white-embroidered-wedding-dress-and-a-chiffon-veil-19751829/"
-    },
-    {
-      "id": "inspiration-09",
-      "url": "https://images.pexels.com/photos/4456481/pexels-photo-4456481.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/woman-in-white-floral-dress-4456481/"
-    },
-    {
-      "id": "inspiration-10",
-      "url": "https://images.pexels.com/photos/5646476/pexels-photo-5646476.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/a-beautiful-bride-wearing-white-gown-and-veil-5646476/"
-    },
-    {
-      "id": "inspiration-11",
-      "url": "https://images.pexels.com/photos/34328152/pexels-photo-34328152.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/elegant-bride-in-white-wedding-veil-portrait-34328152/"
-    },
-    {
-      "id": "inspiration-12",
-      "url": "https://images.pexels.com/photos/39903999/pexels-photo-39903999.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/smiling-bride-in-elegant-white-wedding-dress-39903999/"
-    },
-    {
-      "id": "inspiration-13",
-      "url": "https://images.pexels.com/photos/3031777/pexels-photo-3031777.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/woman-wearing-wedding-dress-and-veil-3031777/"
-    },
-    {
-      "id": "inspiration-14",
-      "url": "https://images.pexels.com/photos/7289121/pexels-photo-7289121.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/wedding-fashion-model-in-white-clothing-covered-with-tulle-fabric-7289121/"
-    },
-    {
-      "id": "inspiration-15",
-      "url": "https://images.pexels.com/photos/5038574/pexels-photo-5038574.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/woman-in-white-dress-wearing-straw-hat-and-veil-holding-flowers-5038574/"
-    },
-    {
-      "id": "inspiration-16",
-      "url": "https://images.pexels.com/photos/15865463/pexels-photo-15865463.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/bride-in-wedding-dress-and-hat-15865463/"
-    },
-    {
-      "id": "inspiration-17",
-      "url": "https://images.pexels.com/photos/39980506/pexels-photo-39980506.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/bride-in-wedding-dress-under-serene-tree-39980506/"
-    },
-    {
-      "id": "inspiration-18",
-      "url": "https://images.pexels.com/photos/39837863/pexels-photo-39837863.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "sourceUrl": "https://www.pexels.com/photo/elegant-outdoor-wedding-bride-with-bouquet-39837863/"
-    }
-  ],
   "wedding_moments": {
+    "showcase": [
+      {
+        "id": "couples-and-ceremonies",
+        "title": "Together, at last",
+        "description": "The walk down the aisle, a look across the room and the first moments of a lifetime together.",
+        "media": [
+          {
+            "id": "couple-entrance",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/14788185/pexels-photo-14788185.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/bride-and-groom-surrounded-by-the-wedding-guests-walking-and-smiling-14788185/",
+            "alt": "Newlyweds walking among smiling wedding guests",
+            "caption": "Together, surrounded by love"
+          },
+          {
+            "id": "wedding-couple",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/5729155/pexels-photo-5729155.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/bride-and-groom-at-wedding-celebration-5729155/",
+            "alt": "A newly married couple celebrating their wedding day indoors",
+            "caption": "A beautiful beginning"
+          },
+          {
+            "id": "confetti-exit",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/8063143/pexels-photo-8063143.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/wedding-guest-throwing-confetti-at-a-married-couple-8063143/",
+            "alt": "Wedding guests celebrating a couple with confetti outdoors",
+            "caption": "Showered with joy"
+          },
+          {
+            "id": "first-dance",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/32142659/pexels-photo-32142659.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/romantic-wedding-couple-dancing-under-chandelier-32142659/",
+            "alt": "A newly married couple dancing beneath chandeliers",
+            "caption": "Just the two of them"
+          }
+        ]
+      },
+      {
+        "id": "people-and-connection",
+        "title": "The people who make it special",
+        "description": "The proud families, closest friends and happy faces who turn a wedding day into a shared memory.",
+        "media": [
+          {
+            "id": "family-outdoors",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/35211716/pexels-photo-35211716.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/outdoor-wedding-celebration-with-family-and-friends-35211716/",
+            "alt": "Family and friends celebrating an outdoor wedding",
+            "caption": "With everyone who matters"
+          },
+          {
+            "id": "guests-dancing",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/13434438/pexels-photo-13434438.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/bride-groom-and-wedding-guests-dancing-at-the-wedding-reception-13434438/",
+            "alt": "Newlyweds dancing at a wedding reception among guests",
+            "caption": "Dancing together"
+          },
+          {
+            "id": "happy-reception",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/18839051/pexels-photo-18839051.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/people-on-a-party-18839051/",
+            "alt": "Bride and groom celebrating at a lively reception with guests",
+            "caption": "An evening of laughter"
+          },
+          {
+            "id": "groom-celebration",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/30146380/pexels-photo-30146380.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/joyful-wedding-celebration-with-dancing-crowd-30146380/",
+            "alt": "Wedding guests lifting the groom during an energetic celebration",
+            "caption": "All in celebration"
+          }
+        ]
+      },
+      {
+        "id": "reception-and-celebration",
+        "title": "When the celebration begins",
+        "description": "Confetti, music, dancing and the joy that carries long into the evening.",
+        "media": [
+          {
+            "id": "night-confetti",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/20518725/pexels-photo-20518725.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/wedding-couple-and-gusts-celebrating-with-confetti-at-night-20518725/",
+            "alt": "Wedding couple and guests cheering beneath falling confetti at night",
+            "caption": "A night to remember"
+          },
+          {
+            "id": "reception-dance",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/8063137/pexels-photo-8063137.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/bride-and-groom-dancing-on-the-floor-in-front-of-their-visitors-8063137/",
+            "alt": "Bride and groom dancing in front of their wedding guests",
+            "caption": "Our favourite song"
+          },
+          {
+            "id": "dance-with-guests",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/29002709/pexels-photo-29002709.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/beautiful-wedding-dance-with-bride-and-groom-29002709/",
+            "alt": "Bride and groom dancing surrounded by wedding guests",
+            "caption": "Celebrating every step"
+          },
+          {
+            "id": "joyful-dance",
+            "type": "photo",
+            "url": "https://images.pexels.com/photos/27379787/pexels-photo-27379787.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "sourceUrl": "https://www.pexels.com/photo/a-couple-dancing-at-their-wedding-reception-27379787/",
+            "alt": "People celebrating and dancing together at an indoor wedding reception",
+            "caption": "The dance floor comes alive"
+          },
+          {
+            "id": "outdoor-wedding-film",
+            "type": "video_link",
+            "url": "https://www.pexels.com/video/joyful-wedding-party-celebration-at-venue-35740772/",
+            "poster": "https://images.pexels.com/photos/8063143/pexels-photo-8063143.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "caption": "Wedding celebrations in motion · Stock film on Pexels"
+          },
+          {
+            "id": "indoor-wedding-film",
+            "type": "video_link",
+            "url": "https://www.pexels.com/video/elegant-indoor-wedding-celebration-moments-37690796/",
+            "poster": "https://images.pexels.com/photos/29002709/pexels-photo-29002709.jpeg?auto=compress&cs=tinysrgb&w=1200",
+            "caption": "The dance floor in motion · Stock film on Pexels"
+          }
+        ]
+      }
+    ],
     "events": []
   },
   "about_us": {
