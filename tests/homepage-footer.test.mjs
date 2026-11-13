@@ -11,7 +11,7 @@ const source = sitePages['/about-us'];
 
 test('three informational footers are identical; homepage receives one independent footer after unchanged page-wrapper', () => {
   freeze(sitePages);
-  for (const route of ['/contact-us', '/our-brides']) assert.deepEqual(sitePages[route].nodes[1].children[3], source.nodes[1].children[3]);
+  for (const route of ['/contact-us', '/wedding-moments']) assert.deepEqual(sitePages[route].nodes[1].children[3], source.nodes[1].children[3]);
   const home = adaptHomepageBackgrounds(adaptSiteDocument(sitePages['/'], contentAdaptations));
   const before = JSON.stringify(home);
   const output = addHomepageFooter(home, source);

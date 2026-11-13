@@ -7,7 +7,7 @@ import { createSampleLookbookPdf } from '../src/lib/lookbook-pdf.ts';
 
 const nodes = list => list.flatMap(n => typeof n === 'string' ? [] : [n, ...nodes(n.children)]);
 test('new Redcarpert editorial content reuses source shell and never exposes original business copy', () => {
-  for (const route of ['/about-us', '/contact-us', '/our-brides', '/digital-lookbook']) {
+  for (const route of ['/about-us', '/contact-us', '/wedding-moments', '/digital-lookbook']) {
     const capture = sitePages[route === '/digital-lookbook' ? '/about-us' : route];
     const source = { ...capture, route };
     const before = JSON.stringify(capture);

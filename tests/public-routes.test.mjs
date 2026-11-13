@@ -12,7 +12,7 @@ import {
 test("08C only generates approved Redcarpert and sample preview routes", () => {
   assert.deepEqual([...approvedCapturedRoutes], [
     "/", "/product", "/product-category/mermaid", "/product-category/ball_gown",
-    "/about-us", "/contact-us", "/our-brides",
+    "/about-us", "/contact-us", "/wedding-moments",
   ]);
 
   const previews = catalogueProducts.map((product) => product.previewRoute);
