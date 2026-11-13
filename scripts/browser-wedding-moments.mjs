@@ -11,41 +11,58 @@ try {
       status: 200, contentType: "image/svg+xml",
       body: '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><rect width="900" height="600" fill="#eee0d2"/></svg>',
     }));
+
     await page.goto("http://localhost:4173/redcarpert-prototype/wedding-moments/",
       { waitUntil: "domcontentloaded" });
     assert.equal(await page.title(), "Wedding Moments | Redcarpert Wedding Dresses");
     assert.equal(await page.locator("h1").filter({ hasText: "Wedding Moments" }).count(), 1);
-    const grids = page.locator("[data-wedding-moments-grid]");
-    assert.equal(await grids.count(), 3, "three wedding-story themes");
-    const photos = page.locator("button[data-wedding-media=photo]");
-    const filmLinks = page.locator("a[href^='https://www.pexels.com/video/']");
-    assert.equal(await photos.count(), 12, "twelve event-focused stock photographs");
-    assert.equal(await filmLinks.count(), 2, "two linked stock wedding films");
+    const pageContent = page.locator('[data-editorial-route="/wedding-moments"]');
+    assert.equal(await pageContent.locator(".redcarpert-moments-subtitle").textContent(),
+      "The love, the laughter, the unforgettable moments.");
+    assert.equal(await pageContent.locator("h2,h3,figcaption").count(), 0,
+      "no event categories, descriptions or visible media captions");
+
+    const gallery = page.locator("[data-wedding-moments-grid]");
+    assert.equal(await gallery.count(), 1, "exactly one continuous gallery");
+    const photos = gallery.locator("button[data-wedding-media=photo]");
+    const films = gallery.locator("a[href^='https://www.pexels.com/video/']");
+    const cards = gallery.locator("[data-wedding-moment-id]");
+    assert.equal(await photos.count(), 12);
+    assert.equal(await films.count(), 2);
+    assert.equal(await cards.count(), 14);
+    assert.equal(await page.locator("[data-wedding-load-more]").count(), 0,
+      "a 14-item preview needs no Load More button");
     assert.equal(await page.locator("[data-brides-gallery],[data-bride-card]").count(), 0);
+
     const geometry = await page.evaluate(() => {
       const grid = document.querySelector("[data-wedding-moments-grid]");
       const photo = document.querySelector("[data-wedding-media=photo] img");
-      const r = photo.getBoundingClientRect();
+      const bounds = photo.getBoundingClientRect();
       return {
         cols: getComputedStyle(grid).gridTemplateColumns.split(" ").length,
-        ratio: r.width / r.height,
-        overflow: Math.max(document.documentElement.scrollWidth,document.body.scrollWidth) > innerWidth + 2,
+        ratio: bounds.width / bounds.height,
+        overflow: Math.max(document.documentElement.scrollWidth,
+          document.body.scrollWidth) > innerWidth + 2,
       };
     });
-    assert.equal(geometry.cols, width > 768 ? 4 : 2, "responsive gallery columns");
-    assert(Math.abs(geometry.ratio - 1) < 0.02, "all cards have square photography");
+    assert.equal(geometry.cols, width > 768 ? 4 : 2,
+      "four columns on desktop and two on mobile");
+    assert(Math.abs(geometry.ratio - 1) < .02, "all cards are square");
     assert.equal(geometry.overflow, false, "no horizontal overflow");
+
     await photos.first().click();
     const dialog = page.locator("#redcarpert-wedding-preview");
     assert(await dialog.evaluate(el => el.open), "photo lightbox opens");
     const image = dialog.locator("[data-wedding-preview-photo]");
-    assert(await image.isVisible(), "photo is displayed");
+    assert(await image.isVisible(), "photo opens uncropped");
     assert.equal(await image.evaluate(el => getComputedStyle(el).objectFit), "contain");
     await page.keyboard.press("Escape");
-    assert.equal(await dialog.evaluate(el => el.open), false, "Escape closes photo lightbox");
-    assert.equal(await image.getAttribute("src"), null, "closed photos unload");
-    assert.deepEqual(errors, [], "no page errors at " + width + "px");
-    console.log("Wedding Moments PASS", width + "px");
+    assert.equal(await dialog.evaluate(el => el.open), false);
+    assert.equal(await image.getAttribute("src"), null, "closed photo unloads");
+    assert.deepEqual(errors, [], "no JavaScript errors at " + width + "px");
+    console.log("Wedding Moments square gallery PASS", width + "px");
     await page.close();
   }
-} finally { await browser.close(); }
+} finally {
+  await browser.close();
+}
