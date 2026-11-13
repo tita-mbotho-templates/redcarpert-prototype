@@ -10,12 +10,13 @@ The file **`src/data/image-links.json`** stores all live photo URLs by page: 3 a
 | `products.mermaid` | Mermaid catalogue | **Live:** 4 Pexels sample photos |
 | `products.ball_gown` | Ball Gown catalogue | **Live:** 4 Pexels sample photos |
 | `our_brides` | Bridal inspiration gallery | **Live:** 18 Pexels sample photos (not real clients) |
+| `wedding_moments.events` | Real wedding photos and videos | Ready for approved event media; see Implementation 25 |
 | `about_us.atelier` | Atelier/studio imagery | Ready for future client uploads |
 | `about_us.team` | About Us illustrations | **Live:** 3 Pexels sample photos (not staff portraits) |
 | `contact_us` | Contact/studio imagery | Ready for future client uploads |
 | `digital_lookbook` | Client-approved lookbook pages | Ready for future client uploads |
 
-**Important:** `home_page.hero`, `products.mermaid`, `products.ball_gown`, `our_brides`, and `about_us.team` are now **live** and read their URLs from the manifest. These Pexels photos remain stock placeholders, not verified Redcarpert inventory, clients or staff. The interactive lookbook reuses the eight catalogue images, so their URLs are not duplicated.
+**Important:** `home_page.hero`, `products.mermaid`, `products.ball_gown`, `our_brides`, and `about_us.team` are now **live** and read their URLs from the manifest. These Pexels photos remain stock placeholders, not verified Redcarpert inventory, clients or staff. The `our_brides` list supplies the clearly labelled temporary stock preview for the renamed Wedding Moments page; real event media belongs under `wedding_moments.events`, as explained in [Implementation 25](implementation-25-wedding-moments.md). The interactive lookbook reuses the eight catalogue images, so their URLs are not duplicated.
 
 Do **not** casually replace an active Pexels URL with a real client photo. The relevant page implementation must also update sample-only text, image alt text, credits, approval status, and the intentionally strict catalogue validation. The still-empty `about_us.atelier`, `contact_us` and `digital_lookbook` slots remain **staging only** until connected to the page.
 
