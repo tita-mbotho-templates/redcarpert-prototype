@@ -1,7 +1,7 @@
 import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/site";
 import imageLinks from "../data/image-links.json" with { type: "json" };
 import { requireImageLink } from "./image-links.ts";
-import { weddingMomentEvents, weddingMomentShowcase, flattenWeddingMomentEvents, renderWeddingMomentGallery } from "./wedding-moments.ts";
+import { weddingMomentEvents, flattenWeddingMomentEvents, renderWeddingMomentGallery } from "./wedding-moments.ts";
 
 const node = (tag: string, attrs: Record<string, string>, children: DocumentNode[]): DocumentElement => ({ tag, attrs, children });
 const elements = (list: DocumentNode[]) => list.filter((x): x is DocumentElement => typeof x !== "string");
@@ -26,18 +26,10 @@ function editorialContent(route: EditorialRoute): DocumentNode[] {
     node("div", { "data-lookbook-viewer": "true" }, []),
   ];
   if (route === "/wedding-moments") {
-    const hasClientEvents = weddingMomentEvents.length > 0;
-    const visibleMedia = hasClientEvents
-      ? flattenWeddingMomentEvents(weddingMomentEvents)
-      : flattenWeddingMomentEvents(weddingMomentShowcase, false);
     return [
       node("p", { class: "redcarpert-moments-subtitle" },
         ["The love, the laughter, the unforgettable moments."]),
-      ...renderWeddingMomentGallery(visibleMedia),
-      ...(!hasClientEvents ? [
-        node("p", { class: "redcarpert-moments-disclaimer" },
-          ["Stock wedding photography and film previews from Pexels — not Redcarpert client events."]),
-      ] : []),
+      ...renderWeddingMomentGallery(flattenWeddingMomentEvents(weddingMomentEvents)),
     ];
   }
   if (route === "/about-us") return [
