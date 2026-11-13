@@ -89,7 +89,7 @@ try {
     const dialog = page.locator("#redcarpert-wedding-preview");
     assert(await dialog.evaluate(el => el.open));
     const fullImage = dialog.locator("[data-wedding-preview-photo]");
-    assert(await fullImage.isVisible());
+    await fullImage.waitFor({ state: "visible", timeout: 12000 });
     assert.equal(await fullImage.evaluate(el => getComputedStyle(el).objectFit), "contain");
     await page.keyboard.press("Escape");
     assert.equal(await dialog.evaluate(el => el.open), false);
@@ -98,7 +98,7 @@ try {
     const filmButton = gallery.locator("button[data-wedding-media=video]").first();
     await filmButton.click();
     const player = dialog.locator("[data-wedding-preview-video]");
-    assert(await player.isVisible());
+    await player.waitFor({ state: "visible", timeout: 12000 });
     assert.equal(await player.getAttribute("src"), base + "wedding-moments-88.mp4");
     assert(await player.evaluate(el => el.controls), "native video controls");
     await page.keyboard.press("Escape");
