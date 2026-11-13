@@ -219,30 +219,6 @@ body.redcarpert-home-native .fullpage-scroll-arrow .fa-chevron-down {
   font-size: 16px;
 }
 
-/* Existing bridal-gallery preview affordance, now an actual FA icon. */
-.redcarpert-bride-card .redcarpert-bride-zoom-badge {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  background: rgb(250 248 243 / 92%);
-  color: #675442;
-  font-size: 14px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .2s ease;
-}
-.redcarpert-bride-card button:hover .redcarpert-bride-zoom-badge,
-.redcarpert-bride-card button:focus-visible .redcarpert-bride-zoom-badge {
-  opacity: 1;
-}
-.redcarpert-bride-dialog-close .fa-xmark {
-  font-size: 21px;
-}
 .redcarpert-book-controls .fa-solid {
   font-size: .9em;
   vertical-align: -0.025em;
@@ -252,10 +228,10 @@ body.redcarpert-home-native .fullpage-scroll-arrow .fa-chevron-down {
 
 @media (prefers-reduced-motion: reduce) {
   #redcarpert-floating-whatsapp .redcarpert-whatsapp-float-trigger,
-  #redcarpert-floating-whatsapp .redcarpert-whatsapp-float-dismiss,
-  .redcarpert-bride-card .redcarpert-bride-zoom-badge {
+  #redcarpert-floating-whatsapp .redcarpert-whatsapp-float-dismiss {
     transition: none;
   }
+
 }
 
 /* Use matching icon typography for the header, gallery accents and controls. */
@@ -273,12 +249,6 @@ body.redcarpert-home-native .fullpage-scroll-arrow .fa-chevron-down {
   margin-right: .5em;
   font-size: 1.08em;
   vertical-align: -.04em;
-}
-#main-container .redcarpert-bride-accent-mark.fa-solid {
-  font-family: "Font Awesome 7 Free";
-  font-weight: 900;
-  font-size: clamp(16px, 2.1vw, 26px);
-  line-height: 1;
 }
 #enquiry-preview .actions > button,
 #enquiry-preview .actions > a {
