@@ -1,15 +1,14 @@
 import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/site";
-import { bridalGalleryPhotos } from "../data/bridal-gallery.ts";
 import imageLinks from "../data/image-links.json" with { type: "json" };
 import { requireImageLink } from "./image-links.ts";
-import { weddingMomentEvents, renderWeddingMomentEvents } from "./wedding-moments.ts";
+import { weddingMomentEvents, weddingMomentShowcase, renderWeddingMomentEvents } from "./wedding-moments.ts";
 
 const node = (tag: string, attrs: Record<string, string>, children: DocumentNode[]): DocumentElement => ({ tag, attrs, children });
 const elements = (list: DocumentNode[]) => list.filter((x): x is DocumentElement => typeof x !== "string");
 const all = (list: DocumentNode[]): DocumentElement[] => elements(list).flatMap((x) => [x, ...all(x.children)]);
 
-type EditorialRoute = "/digital-lookbook" | "/our-brides" | "/about-us" | "/contact-us";
-const editorialRoutes: readonly EditorialRoute[] = ["/digital-lookbook", "/our-brides", "/about-us", "/contact-us"];
+type EditorialRoute = "/digital-lookbook" | "/wedding-moments" | "/about-us" | "/contact-us";
+const editorialRoutes: readonly EditorialRoute[] = ["/digital-lookbook", "/wedding-moments", "/about-us", "/contact-us"];
 
 const p = (text: string) => node("p", {}, [text]);
 const h = (text: string, id?: string) => node("h2", id ? { id } : {}, [text]);
@@ -26,55 +25,24 @@ function editorialContent(route: EditorialRoute): DocumentNode[] {
     ]),
     node("div", { "data-lookbook-viewer": "true" }, []),
   ];
-  if (route === "/our-brides") {
-    const hasEvents = weddingMomentEvents.length > 0;
+  if (route === "/wedding-moments") {
+    const hasClientEvents = weddingMomentEvents.length > 0;
     return [
       node("div", { class: "redcarpert-moments-intro" }, [
         h("Every celebration tells a story"),
-        p("The couple, the people they love and the unforgettable moments in between. This space is for photographs and films from wedding celebrations — from heartfelt ceremonies to joyful receptions."),
+        p("From the first look and shared vows to the laughter, dancing and unforgettable celebrations: the moments that make a wedding day special belong to everyone who shares it."),
       ]),
-      ...(hasEvents ? [
+      ...(hasClientEvents ? [
         node("p", { class: "redcarpert-moments-permission" },
-          ["Wedding memories shared with permission from the people involved."]),
+          ["A collection of wedding-day memories featuring couples, family, friends and the celebrations they shared."]),
         ...renderWeddingMomentEvents(weddingMomentEvents),
       ] : [
-        node("section", { class: "redcarpert-moments-empty", "aria-label": "Client wedding moments coming soon" }, [
-          node("h3", {}, ["Wedding stories are coming soon"]),
-          p("We are preparing a collection of real wedding-day photographs and videos, including couples, family, friends and the celebrations they share."),
-        ]),
-        node("div", { class: "redcarpert-brides-intro" }, [
-          h("Bridal inspiration — preview gallery"),
-          p("While client-approved event media is being prepared, these are Pexels stock photographs for inspiration only. They do not show Redcarpert clients, weddings or completed fittings."),
-        ]),
-    node("div", { class: "redcarpert-inspiration-grid", "data-brides-gallery": "true", "aria-label": "Sample bridal inspiration photographs" }, bridalGalleryPhotos.map((photo, index) =>
-      node("figure", { class: "redcarpert-bride-card", "data-bride-card": photo.id }, [
-        node("button", {
-          type: "button", "data-bride-preview": photo.id, "data-bridal-caption": photo.caption,
-          "data-bridal-photographer": photo.photographer, "aria-haspopup": "dialog",
-          "aria-label": "Enlarge " + photo.caption + " (sample photograph)"
-        }, [
-          node("img", {
-            src: photo.image, alt: photo.alt, width: "370", height: "370",
-            loading: index < 4 ? "eager" : "lazy", decoding: "async"
-          }, []),
-        ]),
-        node("figcaption", {}, [photo.caption]),
-      ])
-    )),
-    node("p", { class: "redcarpert-brides-disclosure" },
-      ["Gallery inspiration only. Client-approved wedding photos and videos will replace these samples when available."]),
-    node("dialog", {
-      id: "redcarpert-bride-preview", class: "redcarpert-bride-dialog",
-      "aria-label": "Enlarged bridal inspiration photograph"
-    }, [
-      node("figure", { class: "redcarpert-bride-dialog-inner" }, [
-        node("img", { class: "redcarpert-bride-preview-image", "data-bride-preview-image": "",
-          alt: "Enlarged bridal inspiration photograph", decoding: "async" }, []),
-        node("button", { class: "redcarpert-bride-dialog-close", type: "button",
-          "data-bride-preview-close": "", "aria-label": "Close photo preview" }, ["×"]),
+        node("p", { class: "redcarpert-moments-permission" },
+          ["WEDDING INSPIRATION · The photographs and linked videos below are stock examples from Pexels, not Redcarpert clients, events or services."]),
+        ...renderWeddingMomentEvents(weddingMomentShowcase),
       ]),
-    ]),
-      ]),
+      node("p", { class: "redcarpert-moments-closing" },
+        ["Real wedding-day photographs and films will be featured here once approved for publication."]),
     ];
   }
   if (route === "/about-us") return [
@@ -201,7 +169,7 @@ export function adaptEditorialDocument(document: SiteDocumentData): SiteDocument
   // Wedding Dresses page uses a full-width four-column catalogue shell.
   // Adopt its content geometry without altering the shared header/footer.
   const replacements = new Map<DocumentElement, DocumentElement>();
-  if (route === "/our-brides" || route === "/contact-us") {
+  if (route === "/wedding-moments" || route === "/contact-us") {
     const container = one(n => n.attrs.id === "content-container", "page layout");
     const content = one(n => n.attrs.id === "content" && n.attrs.class === "content", "main content column");
     const sidebar = one(n => n.attrs.id === "sidebar" && n.attrs.class === "sidebar", "unused sidebar");
@@ -218,14 +186,14 @@ export function adaptEditorialDocument(document: SiteDocumentData): SiteDocument
     });
     replacements.set(content, { ...content, attrs: { ...content.attrs, id: "full-width" } });
   }
-  if (route !== "/our-brides") {
+  if (route !== "/wedding-moments") {
     replacements.set(pageTitle, {
       ...pageTitle,
       attrs: { ...pageTitle.attrs, class: "page-title redcarpert-editorial-page-title" },
     });
   }
-  replacements.set(title, { ...title, children: [route === "/digital-lookbook" ? "Digital Lookbook" : route === "/our-brides" ? "Wedding Moments" : route === "/about-us" ? "About Us" : "Contact Us"] });
-  replacements.set(box, { ...box, attrs: { ...box.attrs, class: route === "/our-brides" ? "content-box pexeto-woo-columns-4 redcarpert-brides-content-box" : box.attrs.class }, children: [node("div", { class: "redcarpert-editorial", "data-editorial-route": route }, editorialContent(route))] });
+  replacements.set(title, { ...title, children: [route === "/digital-lookbook" ? "Digital Lookbook" : route === "/wedding-moments" ? "Wedding Moments" : route === "/about-us" ? "About Us" : "Contact Us"] });
+  replacements.set(box, { ...box, attrs: { ...box.attrs, class: route === "/wedding-moments" ? "content-box pexeto-woo-columns-4 redcarpert-moments-content-box" : box.attrs.class }, children: [node("div", { class: "redcarpert-editorial", "data-editorial-route": route }, editorialContent(route))] });
   const visit = (current: DocumentNode): DocumentNode => {
     if (typeof current === "string") return current;
     const chosen = replacements.get(current) ?? current;
