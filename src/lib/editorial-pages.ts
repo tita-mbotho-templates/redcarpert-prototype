@@ -1,7 +1,7 @@
 import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/site";
 import imageLinks from "../data/image-links.json" with { type: "json" };
 import { requireImageLink } from "./image-links.ts";
-import { weddingMomentEvents, weddingMomentShowcase, renderWeddingMomentEvents } from "./wedding-moments.ts";
+import { weddingMomentEvents, weddingMomentShowcase, flattenWeddingMomentEvents, renderWeddingMomentGallery } from "./wedding-moments.ts";
 
 const node = (tag: string, attrs: Record<string, string>, children: DocumentNode[]): DocumentElement => ({ tag, attrs, children });
 const elements = (list: DocumentNode[]) => list.filter((x): x is DocumentElement => typeof x !== "string");
@@ -27,22 +27,17 @@ function editorialContent(route: EditorialRoute): DocumentNode[] {
   ];
   if (route === "/wedding-moments") {
     const hasClientEvents = weddingMomentEvents.length > 0;
+    const visibleMedia = hasClientEvents
+      ? flattenWeddingMomentEvents(weddingMomentEvents)
+      : flattenWeddingMomentEvents(weddingMomentShowcase, false);
     return [
-      node("div", { class: "redcarpert-moments-intro" }, [
-        h("Every celebration tells a story"),
-        p("From the first look and shared vows to the laughter, dancing and unforgettable celebrations: the moments that make a wedding day special belong to everyone who shares it."),
-      ]),
-      ...(hasClientEvents ? [
-        node("p", { class: "redcarpert-moments-permission" },
-          ["A collection of wedding-day memories featuring couples, family, friends and the celebrations they shared."]),
-        ...renderWeddingMomentEvents(weddingMomentEvents),
-      ] : [
-        node("p", { class: "redcarpert-moments-permission" },
-          ["WEDDING INSPIRATION · The photographs and linked videos below are stock examples from Pexels, not Redcarpert clients, events or services."]),
-        ...renderWeddingMomentEvents(weddingMomentShowcase),
-      ]),
-      node("p", { class: "redcarpert-moments-closing" },
-        ["Real wedding-day photographs and films will be featured here once approved for publication."]),
+      node("p", { class: "redcarpert-moments-subtitle" },
+        ["The love, the laughter, the unforgettable moments."]),
+      ...renderWeddingMomentGallery(visibleMedia),
+      ...(!hasClientEvents ? [
+        node("p", { class: "redcarpert-moments-disclaimer" },
+          ["Stock wedding photography and film previews from Pexels — not Redcarpert client events."]),
+      ] : []),
     ];
   }
   if (route === "/about-us") return [
