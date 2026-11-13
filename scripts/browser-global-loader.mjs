@@ -72,10 +72,16 @@ try {
     const transparent = color => color === 'transparent' || /^rgba\([^)]*,\s*0(?:\.0+)?\)$/.test(color);
     const approvedTint = color => {
       const match = color.match(/^rgba\(0,\s*0,\s*0,\s*([\d.]+)\)$/);
-      return !!match && Math.abs(Number(match[1])-.60)<.01;
+      return !!match && Math.abs(Number(match[1])-.50)<.01;
     };
     assert(approvedTint(appearance.headerBackground),
       width+'px header must be dark and translucent (not solid black or clear): '+appearance.headerBackground);
+    const homeButtons = await page.locator('.fullpage-wrapper > .section .section-content > a.button').all();
+    for (const button of homeButtons) {
+      const background = await button.evaluate(element => getComputedStyle(element).backgroundColor);
+      assert(approvedTint(background),
+        width+'px homepage CTA must match header 50% black opacity: '+background);
+    }
     assert(transparent(appearance.wrapperBackground),width+'px wrapper must be transparent: '+appearance.wrapperBackground);
     assert.equal(appearance.wrapperPosition,'fixed',width+'px wrapper must not push photo downward');
     assert(appearance.wrapperPadding<=1,width+'px header wrapper must not reserve an opaque top strip');

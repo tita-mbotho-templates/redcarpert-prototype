@@ -27,8 +27,8 @@ body.redcarpert-home-native #header,
 body.redcarpert-home-native.fixed-header-scroll #header,
 body.redcarpert-home-native.dark-header #header,
 body.redcarpert-home-native.mobile #header {
-  background: rgba(0, 0, 0, .60) !important;
-  background-color: rgba(0, 0, 0, .60) !important;
+  background: rgba(0, 0, 0, .50) !important;
+  background-color: rgba(0, 0, 0, .50) !important;
   background-image: none !important;
 }
 body.redcarpert-home-native.fixed-header #header {
@@ -248,7 +248,7 @@ body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.bu
   justify-content: center;
   border: 1px solid rgba(255,255,255,.8) !important;
   border-radius: 2px;
-  background: rgba(17,17,17,.82) !important;
+  background: rgba(0,0,0,.50) !important;
   color: #fff !important;
   font: 500 14px/1.45 Montserrat, sans-serif !important;
   letter-spacing: .04em !important;
@@ -259,7 +259,7 @@ body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.bu
   transition: background-color .2s ease, border-color .2s ease;
 }
 body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.button:hover {
-  background: rgba(17,17,17,.96) !important;
+  background: rgba(0,0,0,.50) !important;
   border-color: #fff !important;
 }
 body.redcarpert-home-native .fullpage-wrapper > .section .section-content > a.button:focus-visible {
