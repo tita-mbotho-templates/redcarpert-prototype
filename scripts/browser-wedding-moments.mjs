@@ -45,6 +45,19 @@ try {
     assert.equal(await loadMore.count(), 1);
     const counter = page.locator("[data-wedding-count]");
     assert.equal(await counter.textContent(), "Showing 16 of 87 wedding moments");
+    const assertCenteredCounter = async () => {
+      const alignment = await counter.evaluate(node => {
+        const box = node.getBoundingClientRect();
+        const parent = node.parentElement.getBoundingClientRect();
+        return {
+          textAlign: getComputedStyle(node).textAlign,
+          horizontalOffset: Math.abs((box.left + box.right) / 2 - (parent.left + parent.right) / 2),
+        };
+      });
+      assert.equal(alignment.textAlign, "center", "counter text must be centred at " + width + "px");
+      assert(alignment.horizontalOffset < 2, "counter must align with gallery centre at " + width + "px");
+    };
+    await assertCenteredCounter();
     assert.equal(await gallery.locator("button[data-wedding-media=video]").count(), 1);
     assert.equal(await gallery.locator("button[data-wedding-media=photo]").count(), 15);
     assert.equal(await gallery.locator("a[href*='pexels.com']").count(), 0,
@@ -97,6 +110,7 @@ try {
     }
     assert.equal(await template.evaluate(el => el.content.children.length), 0);
     assert.equal(await loadMore.isVisible(), false, "Load More disappears when finished");
+    await assertCenteredCounter();
     assert.equal(await gallery.locator("img").count(), 87);
     assert.deepEqual(errors, [], "no JavaScript errors at " + width + "px");
     console.log("Wedding Moments real media PASS", width + "px",
