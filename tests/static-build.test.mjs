@@ -113,6 +113,13 @@ test('release readiness: all public pages have Redcarpert metadata and safe outb
           assert.equal(outbound.searchParams.size,2,'external map link must not contain tracking parameters');
           continue;
         }
+        if(host==='www.pexels.com') {
+          assert.equal(route,'/wedding-moments','only Wedding Moments may link to stock film previews');
+          assert(/^\/video\/[a-z0-9-]+\d+\/$/.test(outbound.pathname),
+            'only Pexels stock video detail pages are permitted: '+href);
+          assert.equal(outbound.search,'','stock film links must not contain tracking parameters');
+          continue;
+        }
         assert(['images.pexels.com','wa.me'].includes(host),
           route+' links to an unapproved external site: '+href);
         if(outbound.hostname==='wa.me') {
