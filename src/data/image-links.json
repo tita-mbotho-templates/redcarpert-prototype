@@ -195,7 +195,537 @@
         ]
       }
     ],
-    "events": []
+    "events": [
+      {
+        "id": "client-upload-batch-01",
+        "title": "Client wedding moments — first media upload",
+        "media": [
+          {
+            "id": "wedding-moments-88",
+            "type": "video",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-88.mp4",
+            "poster": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-88.mp4/ik-thumbnail.jpg",
+            "caption": "Wedding Moments film 88"
+          },
+          {
+            "id": "wedding-moments-56",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-56.jpg",
+            "alt": "Wedding Moments client photograph 56"
+          },
+          {
+            "id": "wedding-moments-19",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-19.jpg",
+            "alt": "Wedding Moments client photograph 19"
+          },
+          {
+            "id": "wedding-moments-20",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-20.jpg",
+            "alt": "Wedding Moments client photograph 20"
+          },
+          {
+            "id": "wedding-moments-31",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-31.jpg",
+            "alt": "Wedding Moments client photograph 31"
+          },
+          {
+            "id": "wedding-moments-23",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-23.jpg",
+            "alt": "Wedding Moments client photograph 23"
+          },
+          {
+            "id": "wedding-moments-14",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-14.jpg",
+            "alt": "Wedding Moments client photograph 14"
+          },
+          {
+            "id": "wedding-moments-13",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-13.jpg",
+            "alt": "Wedding Moments client photograph 13"
+          },
+          {
+            "id": "wedding-moments-16",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-16.jpg",
+            "alt": "Wedding Moments client photograph 16"
+          },
+          {
+            "id": "wedding-moments-61",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-61.jpg",
+            "alt": "Wedding Moments client photograph 61"
+          },
+          {
+            "id": "wedding-moments-27",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-27.jpg",
+            "alt": "Wedding Moments client photograph 27"
+          },
+          {
+            "id": "wedding-moments-11",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-11.jpg",
+            "alt": "Wedding Moments client photograph 11"
+          },
+          {
+            "id": "wedding-moments-53",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-53.jpg",
+            "alt": "Wedding Moments client photograph 53"
+          },
+          {
+            "id": "wedding-moments-87",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-87.jpg",
+            "alt": "Wedding Moments client photograph 87"
+          },
+          {
+            "id": "wedding-moments-54",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-54.jpg",
+            "alt": "Wedding Moments client photograph 54"
+          },
+          {
+            "id": "wedding-moments-28",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-28.jpg",
+            "alt": "Wedding Moments client photograph 28"
+          },
+          {
+            "id": "wedding-moments-79",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-79.jpg",
+            "alt": "Wedding Moments client photograph 79"
+          },
+          {
+            "id": "wedding-moments-59",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-59.jpg",
+            "alt": "Wedding Moments client photograph 59"
+          },
+          {
+            "id": "wedding-moments-72",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-72.jpg",
+            "alt": "Wedding Moments client photograph 72"
+          },
+          {
+            "id": "wedding-moments-60",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-60.jpg",
+            "alt": "Wedding Moments client photograph 60"
+          },
+          {
+            "id": "wedding-moments-4",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-4.jpg",
+            "alt": "Wedding Moments client photograph 4"
+          },
+          {
+            "id": "wedding-moments-86",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-86.jpg",
+            "alt": "Wedding Moments client photograph 86"
+          },
+          {
+            "id": "wedding-moments-37",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-37.jpg",
+            "alt": "Wedding Moments client photograph 37"
+          },
+          {
+            "id": "wedding-moments-50",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-50.jpg",
+            "alt": "Wedding Moments client photograph 50"
+          },
+          {
+            "id": "wedding-moments-6",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-6.jpg",
+            "alt": "Wedding Moments client photograph 6"
+          },
+          {
+            "id": "wedding-moments-48",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-48.jpg",
+            "alt": "Wedding Moments client photograph 48"
+          },
+          {
+            "id": "wedding-moments-73",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-73.jpg",
+            "alt": "Wedding Moments client photograph 73"
+          },
+          {
+            "id": "wedding-moments-30",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-30.jpg",
+            "alt": "Wedding Moments client photograph 30"
+          },
+          {
+            "id": "wedding-moments-9",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-9.jpg",
+            "alt": "Wedding Moments client photograph 9"
+          },
+          {
+            "id": "wedding-moments-8",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-8.jpg",
+            "alt": "Wedding Moments client photograph 8"
+          },
+          {
+            "id": "wedding-moments-12",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-12.jpg",
+            "alt": "Wedding Moments client photograph 12"
+          },
+          {
+            "id": "wedding-moments-45",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-45.jpg",
+            "alt": "Wedding Moments client photograph 45"
+          },
+          {
+            "id": "wedding-moments-58",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-58.jpg",
+            "alt": "Wedding Moments client photograph 58"
+          },
+          {
+            "id": "wedding-moments-32",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-32.jpg",
+            "alt": "Wedding Moments client photograph 32"
+          },
+          {
+            "id": "wedding-moments-18",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-18.jpg",
+            "alt": "Wedding Moments client photograph 18"
+          },
+          {
+            "id": "wedding-moments-35",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-35.jpg",
+            "alt": "Wedding Moments client photograph 35"
+          },
+          {
+            "id": "wedding-moments-78",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-78.jpg",
+            "alt": "Wedding Moments client photograph 78"
+          },
+          {
+            "id": "wedding-moments-51",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-51.jpg",
+            "alt": "Wedding Moments client photograph 51"
+          },
+          {
+            "id": "wedding-moments-84",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-84.jpg",
+            "alt": "Wedding Moments client photograph 84"
+          },
+          {
+            "id": "wedding-moments-29",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-29.jpg",
+            "alt": "Wedding Moments client photograph 29"
+          },
+          {
+            "id": "wedding-moments-85",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-85.jpg",
+            "alt": "Wedding Moments client photograph 85"
+          },
+          {
+            "id": "wedding-moments-46",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-46.jpg",
+            "alt": "Wedding Moments client photograph 46"
+          },
+          {
+            "id": "wedding-moments-21",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-21.jpg",
+            "alt": "Wedding Moments client photograph 21"
+          },
+          {
+            "id": "wedding-moments-22",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-22.jpg",
+            "alt": "Wedding Moments client photograph 22"
+          },
+          {
+            "id": "wedding-moments-81",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-81.jpg",
+            "alt": "Wedding Moments client photograph 81"
+          },
+          {
+            "id": "wedding-moments-10",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-10.jpg",
+            "alt": "Wedding Moments client photograph 10"
+          },
+          {
+            "id": "wedding-moments-57",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-57.jpg",
+            "alt": "Wedding Moments client photograph 57"
+          },
+          {
+            "id": "wedding-moments-47",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-47.jpg",
+            "alt": "Wedding Moments client photograph 47"
+          },
+          {
+            "id": "wedding-moments-44",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-44.jpg",
+            "alt": "Wedding Moments client photograph 44"
+          },
+          {
+            "id": "wedding-moments-43",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-43.jpg",
+            "alt": "Wedding Moments client photograph 43"
+          },
+          {
+            "id": "wedding-moments-77",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-77.jpg",
+            "alt": "Wedding Moments client photograph 77"
+          },
+          {
+            "id": "wedding-moments-15",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-15.jpg",
+            "alt": "Wedding Moments client photograph 15"
+          },
+          {
+            "id": "wedding-moments-5",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-5.jpg",
+            "alt": "Wedding Moments client photograph 5"
+          },
+          {
+            "id": "wedding-moments-42",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-42.jpg",
+            "alt": "Wedding Moments client photograph 42"
+          },
+          {
+            "id": "wedding-moments-17",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-17.jpg",
+            "alt": "Wedding Moments client photograph 17"
+          },
+          {
+            "id": "wedding-moments-33",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-33.jpg",
+            "alt": "Wedding Moments client photograph 33"
+          },
+          {
+            "id": "wedding-moments-7",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-7.jpg",
+            "alt": "Wedding Moments client photograph 7"
+          },
+          {
+            "id": "wedding-moments-24",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-24.jpg",
+            "alt": "Wedding Moments client photograph 24"
+          },
+          {
+            "id": "wedding-moments-26",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-26.jpg",
+            "alt": "Wedding Moments client photograph 26"
+          },
+          {
+            "id": "wedding-moments-38",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-38.jpg",
+            "alt": "Wedding Moments client photograph 38"
+          },
+          {
+            "id": "wedding-moments-83",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-83.jpg",
+            "alt": "Wedding Moments client photograph 83"
+          },
+          {
+            "id": "wedding-moments-49",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-49.jpg",
+            "alt": "Wedding Moments client photograph 49"
+          },
+          {
+            "id": "wedding-moments-36",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-36.jpg",
+            "alt": "Wedding Moments client photograph 36"
+          },
+          {
+            "id": "wedding-moments-34",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-34.jpg",
+            "alt": "Wedding Moments client photograph 34"
+          },
+          {
+            "id": "wedding-moments-41",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-41.jpg",
+            "alt": "Wedding Moments client photograph 41"
+          },
+          {
+            "id": "wedding-moments-40",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-40.jpg",
+            "alt": "Wedding Moments client photograph 40"
+          },
+          {
+            "id": "wedding-moments-69",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-69.jpg",
+            "alt": "Wedding Moments client photograph 69"
+          },
+          {
+            "id": "wedding-moments-62",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-62.jpg",
+            "alt": "Wedding Moments client photograph 62"
+          },
+          {
+            "id": "wedding-moments-80",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-80.jpg",
+            "alt": "Wedding Moments client photograph 80"
+          },
+          {
+            "id": "wedding-moments-52",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-52.jpg",
+            "alt": "Wedding Moments client photograph 52"
+          },
+          {
+            "id": "wedding-moments-25",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-25.jpg",
+            "alt": "Wedding Moments client photograph 25"
+          },
+          {
+            "id": "wedding-moments-76",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-76.jpg",
+            "alt": "Wedding Moments client photograph 76"
+          },
+          {
+            "id": "wedding-moments-68",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-68.jpg",
+            "alt": "Wedding Moments client photograph 68"
+          },
+          {
+            "id": "wedding-moments-82",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-82.jpg",
+            "alt": "Wedding Moments client photograph 82"
+          },
+          {
+            "id": "wedding-moments-3",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-3.jpg",
+            "alt": "Wedding Moments client photograph 3"
+          },
+          {
+            "id": "wedding-moments-39",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-39.jpg",
+            "alt": "Wedding Moments client photograph 39"
+          },
+          {
+            "id": "wedding-moments-70",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-70.jpg",
+            "alt": "Wedding Moments client photograph 70"
+          },
+          {
+            "id": "wedding-moments-63",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-63.jpg",
+            "alt": "Wedding Moments client photograph 63"
+          },
+          {
+            "id": "wedding-moments-74",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-74.jpg",
+            "alt": "Wedding Moments client photograph 74"
+          },
+          {
+            "id": "wedding-moments-71",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-71.jpg",
+            "alt": "Wedding Moments client photograph 71"
+          },
+          {
+            "id": "wedding-moments-65",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-65.jpg",
+            "alt": "Wedding Moments client photograph 65"
+          },
+          {
+            "id": "wedding-moments-67",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-67.jpg",
+            "alt": "Wedding Moments client photograph 67"
+          },
+          {
+            "id": "wedding-moments-75",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-75.jpg",
+            "alt": "Wedding Moments client photograph 75"
+          },
+          {
+            "id": "wedding-moments-66",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-66.jpg",
+            "alt": "Wedding Moments client photograph 66"
+          },
+          {
+            "id": "wedding-moments-2",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-2.jpg",
+            "alt": "Wedding Moments client photograph 2"
+          },
+          {
+            "id": "wedding-moments-1",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-1.jpg",
+            "alt": "Wedding Moments client photograph 1"
+          },
+          {
+            "id": "wedding-moments-64",
+            "type": "photo",
+            "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/wedding-moments-64.jpg",
+            "alt": "Wedding Moments client photograph 64"
+          }
+        ]
+      }
+    ]
   },
   "about_us": {
     "atelier": [],
