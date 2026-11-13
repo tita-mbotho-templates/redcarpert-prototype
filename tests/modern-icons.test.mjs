@@ -21,7 +21,7 @@ function fixture(route){
 const getText=n=>n.children.map(c=>typeof c==='string'?c:getText(c)).join('');
 
 test('every approved editorial footer has modern Brands social icons, minimal fitting copy and one WhatsApp CTA',()=>{
-  for(const route of ['/','/about-us','/contact-us','/our-brides','/digital-lookbook']){
+  for(const route of ['/','/about-us','/contact-us','/wedding-moments','/digital-lookbook']){
     const before=fixture(route),json=JSON.stringify(before);
     const doc=modernizeSiteIcons(before);
     const footer=find(doc,n=>n.attrs['data-redcarpert-footer']==='true')[0];
@@ -65,9 +65,11 @@ test('all custom legacy image and glyph icons become modern FA icons',()=>{
   assert(up&&all([up]).some(n=>n.attrs.class==='fa-solid fa-arrow-up'));
   const menu=find(inner,n=>n.attrs.class?.split(/\s+/).includes('mob-nav-btn'))[0];
   assert(menu&&all([menu]).some(n=>n.attrs.class==='fa-solid fa-bars'));
-  const gallery=modernizeSiteIcons(fixture('/our-brides'));
-  assert.equal(find(gallery,n=>n.attrs.class==='redcarpert-bride-zoom-badge').length,18);
-  const close=find(gallery,n=>n.attrs['data-bride-preview-close']==='')[0];
+  const gallery=modernizeSiteIcons(fixture('/wedding-moments'));
+  assert.equal(find(gallery,n=>n.attrs.class==='redcarpert-moment-play').length,1,
+    'one native video card should use the modern Font Awesome play icon');
+  const close=find(gallery,n=>n.attrs['data-wedding-preview-close']==='')[0];
+  assert(close,'Wedding Moments requires an accessible preview close button');
   assert(all([close]).some(n=>n.attrs.class==='fa-solid fa-xmark'));
 });
 
@@ -99,6 +101,7 @@ test('deleted icon artwork has no remaining published asset or stylesheet depend
  assert(!runtime.includes('ht-ctc-chat'),'legacy WhatsApp wrapper should not return');
  const footerCSS=readFileSync('src/components/FooterBranding.css','utf8');
  assert(!footerCSS.includes('.social-icons img'),'unused image-based footer icon styling should not return');
- const galleryCSS=readFileSync('src/components/BridesGallery.css','utf8');
+ const galleryCSS=readFileSync('src/components/WeddingMoments.css','utf8');
  assert(!galleryCSS.includes('button:after'),'old text-glyph gallery overlay should not return');
+ assert(!galleryCSS.includes('redcarpert-bride'),'old bridal-only gallery style should not return');
 });
