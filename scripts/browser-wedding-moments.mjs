@@ -29,7 +29,9 @@ try {
     await page.locator("[data-wedding-moments-grid] button").first().waitFor();
     assert.equal(await page.title(), "Wedding Moments | Redcarpert Wedding Dresses");
     assert.equal(await page.locator("h1").filter({ hasText: "Wedding Moments" }).count(), 1);
-    const content = page.locator('[data-editorial-route="/wedding-moments"]');
+    const content = page.locator(".redcarpert-moments-content-box");
+    assert.equal(await page.locator('[data-editorial-route="/wedding-moments"]').count(), 1,
+      "page metadata route must not be rewritten as a navigation URL");
     assert.equal(await content.locator(".redcarpert-moments-subtitle").textContent(),
       "The love, the laughter, the unforgettable moments.");
     assert.equal(await content.locator("h2,h3,figcaption").count(), 0);
