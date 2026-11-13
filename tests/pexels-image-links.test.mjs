@@ -10,16 +10,15 @@ import { sitePages } from "../src/data/site.ts";
 const descendants = children => children.flatMap(node =>
   typeof node === "string" ? [] : [node, ...descendants(node.children)]);
 
-test("all live Pexels photos are unique across catalogue, team and Wedding Moments", () => {
+test("remaining Pexels stock imagery is limited to catalogue and team illustrations", () => {
   const collection = [
     ...imageLinks.products.mermaid,
     ...imageLinks.products.ball_gown,
     ...imageLinks.about_us.team,
-    ...imageLinks.wedding_moments.showcase.flatMap(group => group.media).filter(item => item.type === "photo"),
   ];
-  assert.equal(collection.length, 23);
-  assert.equal(new Set(collection.map(item => item.id)).size, 23);
-  assert.equal(new Set(collection.map(item => item.url)).size, 23);
+  assert.equal(collection.length, 11);
+  assert.equal(new Set(collection.map(item => item.id)).size, 11);
+  assert.equal(new Set(collection.map(item => item.url)).size, 11);
   for (const item of collection) {
     const url = new URL(item.url);
     assert.equal(url.hostname, "images.pexels.com");
@@ -32,11 +31,8 @@ test("all live Pexels photos are unique across catalogue, team and Wedding Momen
       assert(id && source.pathname.endsWith(id + "/"));
     }
   }
-  assert.equal(collection.filter(x => "sourceUrl" in x).length, 20);
-  const filmLinks = imageLinks.wedding_moments.showcase.flatMap(group => group.media)
-    .filter(item => item.type === "video_link");
-  assert.equal(filmLinks.length, 2);
-  assert(filmLinks.every(item => new URL(item.url).hostname === "www.pexels.com"));
+  assert.equal(collection.filter(x => "sourceUrl" in x).length, 8);
+
 });
 
 test("catalogue photos and lookbook links stay identical", () => {

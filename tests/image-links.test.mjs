@@ -19,7 +19,6 @@ test("the image manifest provides predictable sections for every editable page",
   assert.deepEqual(Object.keys(imageLinks.products), ["mermaid", "ball_gown"]);
   assert(Array.isArray(imageLinks.products.mermaid));
   assert(Array.isArray(imageLinks.products.ball_gown));
-  assert(Array.isArray(imageLinks.wedding_moments.showcase));
   assert(Array.isArray(imageLinks.wedding_moments.events));
   assert.deepEqual(Object.keys(imageLinks.about_us), ["atelier", "team"]);
   assert(Array.isArray(imageLinks.about_us.atelier));
@@ -41,7 +40,7 @@ test("homepage uses manifest URLs directly, in the approved order", () => {
 test("future photo groups accept empty lists but require well-formed records when populated", () => {
   const entries = [
     ...imageLinks.products.mermaid, ...imageLinks.products.ball_gown,
-    ...imageLinks.wedding_moments.showcase.flatMap(section => section.media), ...imageLinks.about_us.atelier,
+    ...imageLinks.wedding_moments.events.flatMap(event => event.media), ...imageLinks.about_us.atelier,
     ...imageLinks.about_us.team, ...imageLinks.contact_us,
     ...imageLinks.digital_lookbook,
   ];
