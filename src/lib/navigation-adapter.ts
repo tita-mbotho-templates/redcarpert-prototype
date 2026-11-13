@@ -3,7 +3,7 @@ import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/si
 const originalItems = [
   ["15418", "HOME", "/"], ["15821", "PRODUCTS", "/product/"],
   ["15416", "About Us", "/about-us/"], ["15417", "Contact Us", "/contact-us/"],
-  ["16080", "OUR BRIDES", "/our-brides/"], ["16165", "ATELIER", "/atelier-2/"],
+  ["16080", "WEDDING MOMENTS", "/wedding-moments/"], ["16165", "ATELIER", "/atelier-2/"],
   ["16171", "STORE", "/store/"],
 ] as const;
 const originalCategories = [
@@ -71,7 +71,7 @@ export function adaptNavigation(document: SiteDocumentData): SiteDocumentData {
   const catalogue = route === "/product" || /^\/product\/page\/\d+$/.test(route);
   const catalogueChild = /^\/(product\/|product-category\/|product-tag\/|marka\/)/.test(route) && !catalogue;
   const current = new Map<string, string>([
-    ["/", "15418"], ["/about-us", "15416"], ["/contact-us", "15417"], ["/our-brides", "16080"], ["/digital-lookbook", "16165"],
+    ["/", "15418"], ["/about-us", "15416"], ["/contact-us", "15417"], ["/wedding-moments", "16080"], ["/digital-lookbook", "16165"],
     ["/product-category/mermaid", "15421"], ["/product-category/ball_gown", "15422"],
   ]).get(route) ?? (catalogue ? "15821" : undefined);
   const updateItem = (item: DocumentElement, label: string, disabled = false, destination?: string) => {
@@ -98,7 +98,7 @@ export function adaptNavigation(document: SiteDocumentData): SiteDocumentData {
     if (className !== item.attrs.class) replacements.set(item, { ...item, attrs: { ...item.attrs, class: className } });
   };
   const order = [0, 1, 5, 4, 2, 3];
-  const labels = ["Home", "Wedding Dresses", "Digital Lookbook", "Our Brides", "About Us", "Contact Us"];
+  const labels = ["Home", "Wedding Dresses", "Digital Lookbook", "Wedding Moments", "About Us", "Contact Us"];
   order.forEach((index, i) => updateItem(items[index], labels[i], false, index === 5 ? "/digital-lookbook/" : undefined));
   categories.slice(0, 2).forEach((item, i) => updateItem(item, i ? "Ball Gown" : "Mermaid"));
   const reorder = (node: DocumentElement, ordered: DocumentElement[]) => {

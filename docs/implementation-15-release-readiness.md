@@ -7,9 +7,9 @@
 ## Current prototype
 
 - **Vite static site** designed for GitHub Pages at `/redcarpert-prototype/`, no backend or checkout.
-- **16 routes**: homepage, Wedding Dresses, Mermaid and Ball Gown categories, eight sample detail previews, About Us, Contact Us, Our Brides and Digital Lookbook.
+- **16 routes**: homepage, Wedding Dresses, Mermaid and Ball Gown categories, eight sample detail previews, About Us, Contact Us, Wedding Moments and Digital Lookbook.
 - **Wedding Dresses:** eight remote Pexels demonstration photographs, square card thumbnails, category filter.
-- **Our Brides:** 18 remote sample photographs in fixed order with six complementary shade cards randomized between five curated patterns; square cards and full-photo preview.
+- **Wedding Moments:** 12 wedding-focused stock photos of couples, guests and celebrations, plus 2 linked example films. Photo previews and client-hosted MP4/WebM support. Stock media is clearly disclosed and replaced when approved client events are provided.
 - **Digital Lookbook:** ten-page online reader with a PDF containing the original two sample pictures.
 - **Fitting enquiry:** live WhatsApp destination **+27 68 045 8811** (South Africa; `https://wa.me/27680458811`). Each existing sample-dress preview has its own prefilled fitting enquiry. The review dialog requires a deliberate **Continue to WhatsApp** action; the visitor must still press Send in WhatsApp. No backend, checkout, prices, sizes or verified inventory.
 

@@ -13,9 +13,15 @@ npm run dev
 
 Open `http://localhost:5173/redcarpert-prototype/`. Editing document data or adapters requires restarting the dev server to regenerate static HTML.
 
-## Adding page photographs
+## Adding page photographs and wedding films
 
-Store image links in [`src/data/image-links.json`](src/data/image-links.json), grouped by page. The three homepage ImageKit images, 8 catalogue samples, 18 Our Brides inspiration pictures, and 3 About Us team illustrations now read from the same manifest. Pexels source/credit URLs are stored alongside the relevant records. Empty sections remain available for future client uploads; replacing an existing sample requires a separate content and attribution review. See [Implementation 24](docs/implementation-24-image-links.md) for upload folders, example entries and the branch review workflow.
+Client-approved and illustrative media URLs are managed in [`src/data/image-links.json`](src/data/image-links.json). The homepage, catalogue and About Us retain their existing images. [Implementation 24](docs/implementation-24-image-links.md) describes the manifest.
+
+## Wedding Moments
+
+Visit **`/wedding-moments/`** to view real client wedding photographs and video in one uninterrupted, responsive square gallery. The page has only the **Wedding Moments** title, the subtitle *“The love, the laughter, the unforgettable moments.”*, and the media grid — no categories or captions. The real client collection currently contains **86 photographs and one directly hosted ImageKit MP4**. The first 16 cards load initially; **Load More** reveals subsequent batches of 16. A live counter below the gallery reads **Showing 16 of 87 wedding moments** and updates to 32, 48, 64, 80 and finally 87.
+
+Client media URLs are stored in `wedding_moments.events` inside [`src/data/image-links.json`](src/data/image-links.json). This initial upload batch retains the exact order the client sent. New upload batches can be appended to the JSON and appear first. [Implementation 25](docs/implementation-25-wedding-moments.md) documents the workflow and publication safeguards.
 
 ## Validate and preview
 
@@ -42,7 +48,7 @@ The fitting-enquiry interaction now opens a **live WhatsApp chat at +27 68 045 8
 - `public/`: only production-relevant visuals, fonts, scripts and theme dependencies
 - `tests/`: source, build and browser regression checks
 
-Third-party theme effects remain temporarily to preserve the approved interactions. Implementation 12 refactored the supporting code without replacing these dependencies. Theme replacement remains deferred until separately approved and regression-tested. The modern page-turn lookbook is Implementation 13. Implementation 14 adds the All Dresses / Mermaid / Ball Gown catalogue filter and a five-pattern randomized Our Brides gallery with 18 Pexels photographs and blurred-backdrop image previews. See [the gallery specification](docs/implementation-14-gallery-filter.md). See [asset credits](docs/asset-credits.md).
+Third-party theme effects remain temporarily to preserve the approved interactions. Implementation 12 refactored the supporting code without replacing these dependencies. The page-turn lookbook is Implementation 13. The catalogue retains its All Dresses / Mermaid / Ball Gown filters. Wedding Moments now uses an independent media gallery with photos and native video support; see [Implementation 25](docs/implementation-25-wedding-moments.md). See [asset credits](docs/asset-credits.md).
 
 ## Engineering notes
 

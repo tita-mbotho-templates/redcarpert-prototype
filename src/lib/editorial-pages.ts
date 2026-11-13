@@ -1,14 +1,14 @@
 import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/site";
-import { bridalGalleryPhotos } from "../data/bridal-gallery.ts";
 import imageLinks from "../data/image-links.json" with { type: "json" };
 import { requireImageLink } from "./image-links.ts";
+import { weddingMomentEvents, flattenWeddingMomentEvents, renderWeddingMomentGallery } from "./wedding-moments.ts";
 
 const node = (tag: string, attrs: Record<string, string>, children: DocumentNode[]): DocumentElement => ({ tag, attrs, children });
 const elements = (list: DocumentNode[]) => list.filter((x): x is DocumentElement => typeof x !== "string");
 const all = (list: DocumentNode[]): DocumentElement[] => elements(list).flatMap((x) => [x, ...all(x.children)]);
 
-type EditorialRoute = "/digital-lookbook" | "/our-brides" | "/about-us" | "/contact-us";
-const editorialRoutes: readonly EditorialRoute[] = ["/digital-lookbook", "/our-brides", "/about-us", "/contact-us"];
+type EditorialRoute = "/digital-lookbook" | "/wedding-moments" | "/about-us" | "/contact-us";
+const editorialRoutes: readonly EditorialRoute[] = ["/digital-lookbook", "/wedding-moments", "/about-us", "/contact-us"];
 
 const p = (text: string) => node("p", {}, [text]);
 const h = (text: string, id?: string) => node("h2", id ? { id } : {}, [text]);
@@ -25,40 +25,13 @@ function editorialContent(route: EditorialRoute): DocumentNode[] {
     ]),
     node("div", { "data-lookbook-viewer": "true" }, []),
   ];
-  if (route === "/our-brides") return [
-    node("div", { class: "redcarpert-brides-intro" }, [
-      h("Bridal Inspiration"),
-      p("An editorial gallery of bridal moments and silhouettes. These are sample Pexels photographs, not pictures of Redcarpert clients or completed fittings."),
-    ]),
-    node("div", { class: "redcarpert-inspiration-grid", "data-brides-gallery": "true", "aria-label": "Sample bridal inspiration photographs" }, bridalGalleryPhotos.map((photo, index) =>
-      node("figure", { class: "redcarpert-bride-card", "data-bride-card": photo.id }, [
-        node("button", {
-          type: "button", "data-bride-preview": photo.id, "data-bridal-caption": photo.caption,
-          "data-bridal-photographer": photo.photographer, "aria-haspopup": "dialog",
-          "aria-label": "Enlarge " + photo.caption + " (sample photograph)"
-        }, [
-          node("img", {
-            src: photo.image, alt: photo.alt, width: "370", height: "370",
-            loading: index < 4 ? "eager" : "lazy", decoding: "async"
-          }, []),
-        ]),
-        node("figcaption", {}, [photo.caption]),
-      ])
-    )),
-    node("p", { class: "redcarpert-brides-disclosure" },
-      ["Gallery inspiration only. Client-approved photographs will replace these samples when available."]),
-    node("dialog", {
-      id: "redcarpert-bride-preview", class: "redcarpert-bride-dialog",
-      "aria-label": "Enlarged bridal inspiration photograph"
-    }, [
-      node("figure", { class: "redcarpert-bride-dialog-inner" }, [
-        node("img", { class: "redcarpert-bride-preview-image", "data-bride-preview-image": "",
-          alt: "Enlarged bridal inspiration photograph", decoding: "async" }, []),
-        node("button", { class: "redcarpert-bride-dialog-close", type: "button",
-          "data-bride-preview-close": "", "aria-label": "Close photo preview" }, ["×"]),
-      ]),
-    ]),
-  ];
+  if (route === "/wedding-moments") {
+    return [
+      node("p", { class: "redcarpert-moments-subtitle" },
+        ["The love, the laughter, the unforgettable moments."]),
+      ...renderWeddingMomentGallery(flattenWeddingMomentEvents(weddingMomentEvents)),
+    ];
+  }
   if (route === "/about-us") return [
     node("section", { class: "redcarpert-editorial-hero", "aria-labelledby": "redcarpert-story-title" }, [
       node("p", { class: "redcarpert-editorial-eyebrow" }, ["OUR STORY"]),
@@ -183,7 +156,7 @@ export function adaptEditorialDocument(document: SiteDocumentData): SiteDocument
   // Wedding Dresses page uses a full-width four-column catalogue shell.
   // Adopt its content geometry without altering the shared header/footer.
   const replacements = new Map<DocumentElement, DocumentElement>();
-  if (route === "/our-brides" || route === "/contact-us") {
+  if (route === "/wedding-moments" || route === "/contact-us") {
     const container = one(n => n.attrs.id === "content-container", "page layout");
     const content = one(n => n.attrs.id === "content" && n.attrs.class === "content", "main content column");
     const sidebar = one(n => n.attrs.id === "sidebar" && n.attrs.class === "sidebar", "unused sidebar");
@@ -200,14 +173,14 @@ export function adaptEditorialDocument(document: SiteDocumentData): SiteDocument
     });
     replacements.set(content, { ...content, attrs: { ...content.attrs, id: "full-width" } });
   }
-  if (route !== "/our-brides") {
+  if (route !== "/wedding-moments") {
     replacements.set(pageTitle, {
       ...pageTitle,
       attrs: { ...pageTitle.attrs, class: "page-title redcarpert-editorial-page-title" },
     });
   }
-  replacements.set(title, { ...title, children: [route === "/digital-lookbook" ? "Digital Lookbook" : route === "/our-brides" ? "Our Brides" : route === "/about-us" ? "About Us" : "Contact Us"] });
-  replacements.set(box, { ...box, attrs: { ...box.attrs, class: route === "/our-brides" ? "content-box pexeto-woo-columns-4 redcarpert-brides-content-box" : box.attrs.class }, children: [node("div", { class: "redcarpert-editorial", "data-editorial-route": route }, editorialContent(route))] });
+  replacements.set(title, { ...title, children: [route === "/digital-lookbook" ? "Digital Lookbook" : route === "/wedding-moments" ? "Wedding Moments" : route === "/about-us" ? "About Us" : "Contact Us"] });
+  replacements.set(box, { ...box, attrs: { ...box.attrs, class: route === "/wedding-moments" ? "content-box pexeto-woo-columns-4 redcarpert-moments-content-box" : box.attrs.class }, children: [node("div", { class: "redcarpert-editorial", "data-editorial-route": route }, editorialContent(route))] });
   const visit = (current: DocumentNode): DocumentNode => {
     if (typeof current === "string") return current;
     const chosen = replacements.get(current) ?? current;

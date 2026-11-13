@@ -147,18 +147,6 @@ export function modernizeSiteIcons(document: SiteDocumentData): SiteDocumentData
       children: [icon("solid", "up-right-and-down-left-from-center")],
     });
   }
-  for (const n of all.filter(n => n.tag === "button" && n.attrs["data-bride-preview"] !== undefined)) {
-    const images = elements(n.children);
-    if (images.length !== 1 || images[0].tag !== "img") fail("bride thumbnail");
-    replacements.set(n, { ...n, children: [...n.children,
-      node("span", { class: "redcarpert-bride-zoom-badge", "aria-hidden": "true" },
-        [icon("solid", "up-right-and-down-left-from-center")]),
-    ] });
-  }
-  for (const n of all.filter(n => n.tag === "button" && n.attrs["data-bride-preview-close"] !== undefined)) {
-    replacements.set(n, { ...n, children: [icon("solid", "xmark")] });
-  }
-
   const visit = (n: DocumentNode): DocumentNode | null => {
     if (typeof n === "string") return n;
     if (n === legacyChat) return null;

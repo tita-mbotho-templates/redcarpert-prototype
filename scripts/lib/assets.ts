@@ -3,10 +3,12 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { REPOSITORY_BASE } from '../../src/config/site.ts';
 const base = REPOSITORY_BASE;
-// Rewrite known local URL namespaces only: a slash in JavaScript or SVG is not a path.
+// Only prefix root-relative paths at the start of a string or an attribute / CSS
+// URL boundary. Never rewrite a matching segment inside an external CDN URL.
 export const prefix = (s: string) => s
  .replace(/((?:href|action)=["'])\/(?=["'])/g, '$1'+base)
- .replace(/\/(?=(?:site-assets|redcarpert|seo|images|product(?:-category)?|digital-lookbook|our-brides|about-us|contact-us)(?:\/|["'?#]))/g,base);
+ .replace(/(^|[("'=])\/(?=(?:site-assets|redcarpert|seo|images|product(?:-category)?|digital-lookbook|wedding-moments|about-us|contact-us)(?:\/|["'?#]))/g,
+   (_, boundary: string) => boundary + base);
 
 export const assets = new Set<string>();
 export function track(text: string) {
