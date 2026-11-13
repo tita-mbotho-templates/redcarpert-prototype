@@ -8,7 +8,12 @@ const base = REPOSITORY_BASE;
 export const prefix = (s: string) => s
  .replace(/((?:href|action)=["'])\/(?=["'])/g, '$1'+base)
  .replace(/(^|[("'=])\/(?=(?:site-assets|redcarpert|seo|images|product(?:-category)?|digital-lookbook|wedding-moments|about-us|contact-us)(?:\/|["'?#]))/g,
-   (_, boundary: string) => boundary + base);
+   (match, boundary: string, offset: number, source: string) => {
+     // Metadata such as data-editorial-route is an identity, not a navigable URL.
+     // Rewriting it breaks route-specific CSS and browser selection.
+     const before = source.slice(Math.max(0, offset - 90), offset + boundary.length);
+     return /\bdata-[\w-]+=["']$/.test(before) ? match : boundary + base;
+   });
 
 export const assets = new Set<string>();
 export function track(text: string) {
