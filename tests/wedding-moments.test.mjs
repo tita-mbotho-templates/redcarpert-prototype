@@ -3,7 +3,7 @@ import test from "node:test";
 import imageLinks from "../src/data/image-links.json" with { type: "json" };
 import { sitePages } from "../src/data/site.ts";
 import { adaptEditorialDocument } from "../src/lib/editorial-pages.ts";
-import { parseWeddingMomentEvents, renderWeddingMomentEvents, weddingMomentEvents }
+import { parseWeddingMomentEvents, renderWeddingMomentEvents, weddingMomentEvents, weddingMomentShowcase }
   from "../src/lib/wedding-moments.ts";
 import { adaptNavigation } from "../src/lib/navigation-adapter.ts";
 
@@ -24,69 +24,72 @@ const fixture = () => [{
   ],
 }];
 
-test("live wedding moments collection is empty until approved media arrives", () => {
+test("preview features wedding scenes, guests and films rather than old bridal portraits", () => {
   assert.deepEqual(imageLinks.wedding_moments.events, []);
   assert.deepEqual(weddingMomentEvents, []);
-  assert.equal(renderWeddingMomentEvents(weddingMomentEvents).length, 0);
+  assert.equal(weddingMomentShowcase.length, 3);
+  const media = weddingMomentShowcase.flatMap(section => section.media);
+  assert.equal(media.filter(item => item.type === "photo").length, 12);
+  assert.equal(media.filter(item => item.type === "video_link").length, 2);
+  assert(media.some(item => item.alt?.includes("guests")));
+  assert(!Object.hasOwn(imageLinks, "our_brides"), "old image manifest is retired");
 });
 
-test("photo and video records retain event groupings and render native media preview", () => {
+test("real client events support native photo and direct video playback", () => {
   const events = parseWeddingMomentEvents(fixture());
   assert.equal(events.length, 1);
-  assert.equal(events[0].media.length, 2);
   const nodes = allNodes(renderWeddingMomentEvents(events));
   const cards = nodes.filter(n => n.attrs["data-wedding-moment-id"]);
   assert.deepEqual(cards.map(n => n.attrs["data-wedding-moment-id"]), ["couple-portrait", "dance-film"]);
   const triggers = nodes.filter(n => n.attrs["data-wedding-media"]);
   assert.deepEqual(triggers.map(n => n.attrs["data-wedding-media"]), ["photo", "video"]);
-  assert(triggers[1].attrs["aria-label"].startsWith("Watch"));
-  assert.equal(triggers[1].attrs["data-wedding-src"], fixture()[0].media[1].url);
-  assert.equal(nodes.filter(n => n.tag === "img").length, 2, "Photo and video poster appear as tiles");
-  const dialog = nodes.find(n => n.tag === "dialog" && n.attrs.id === "redcarpert-wedding-preview");
-  assert(dialog);
-  const nativeVideo = nodes.find(n => n.tag === "video");
-  assert(nativeVideo);
-  assert.equal(nativeVideo.attrs.controls, "controls");
-  assert.equal(nativeVideo.attrs.preload, "none");
-  assert.equal(nativeVideo.attrs.src, undefined, "Video must not load until a card is opened");
-  assert.equal(nativeVideo.attrs.hidden, "hidden");
+  assert.equal(nodes.filter(n => n.tag === "img").length, 2);
+  assert(nodes.some(n => n.tag === "dialog" && n.attrs.id === "redcarpert-wedding-preview"));
+  const video = nodes.find(n => n.tag === "video");
+  assert.equal(video.attrs.controls, "controls");
+  assert.equal(video.attrs.preload, "none");
+  assert.equal(video.attrs.src, undefined, "Native video is loaded only after opening");
 });
 
-test("videos remain usable without a poster, with a labelled fallback tile", () => {
-  const input = fixture();
-  delete input[0].media[1].poster;
-  const nodes = allNodes(renderWeddingMomentEvents(parseWeddingMomentEvents(input)));
+test("stock video examples link to real Pexels pages without pretending to be MP4 files", () => {
+  const nodes = allNodes(renderWeddingMomentEvents(weddingMomentShowcase));
+  const links = nodes.filter(n => n.tag === "a" && n.attrs.href?.includes("pexels.com/video/"));
+  assert.equal(links.length, 2);
+  assert(links.every(link => link.attrs.target === "_blank" && link.attrs.rel === "noopener noreferrer"));
+  assert(links.every(link => link.attrs["data-wedding-media"] === undefined));
+});
+
+test("native videos accept an optional poster; thumbnails fall back when omitted", () => {
+  const source = fixture(); delete source[0].media[1].poster;
+  const nodes = allNodes(renderWeddingMomentEvents(parseWeddingMomentEvents(source)));
   assert(nodes.some(n => n.attrs.class === "redcarpert-moment-video-fallback"));
 });
 
-test("invalid media is never emitted into page HTML", () => {
-  const mutated = mutate => {
-    const item = fixture(); mutate(item); return () => parseWeddingMomentEvents(item);
-  };
+test("invalid media, unsafe URLs, unsupported videos and duplicate IDs fail closed", () => {
+  const mutated = fn => { const source = fixture(); fn(source); return () => parseWeddingMomentEvents(source); };
   assert.throws(() => parseWeddingMomentEvents({}), /events must be an array/);
-  assert.throws(mutated(e => { e[0].media = []; }), /requires at least one/);
-  assert.throws(mutated(e => { e[0].media[0].alt = ""; }), /nonempty text/);
-  assert.throws(mutated(e => { e[0].media[1].url = "http://example.com/film.mp4"; }), /HTTPS/);
-  assert.throws(mutated(e => { e[0].media[1].url = "https://example.com/film.avi"; }), /MP4 or WebM/);
-  assert.throws(mutated(e => { e[0].media[0].url = "https://example.com/pic.jpg\""; }), /unsafe/);
-  assert.throws(mutated(e => { e[0].media[1].id = e[0].media[0].id; }), /duplicate or invalid media id/);
-  assert.throws(mutated(e => { e.push(structuredClone(e[0])); }), /duplicate or invalid event id/);
-  assert.throws(mutated(e => { e[0].media[1].type = "audio"; }), /type must be photo or video/);
+  assert.throws(mutated(x => { x[0].media = []; }), /requires at least one/);
+  assert.throws(mutated(x => { x[0].media[0].alt = ""; }), /nonempty text/);
+  assert.throws(mutated(x => { x[0].media[1].url = "http://example.com/film.mp4"; }), /HTTPS/);
+  assert.throws(mutated(x => { x[0].media[1].url = "https://example.com/film.avi"; }), /MP4 or WebM/);
+  assert.throws(mutated(x => { x[0].media[0].url = 'https://example.com/pic.jpg"'; }), /unsafe/);
+  assert.throws(mutated(x => { x[0].media[1].id = x[0].media[0].id; }), /duplicate or invalid media id/);
+  assert.throws(mutated(x => { x.push(structuredClone(x[0])); }), /duplicate or invalid event id/);
+  assert.throws(mutated(x => { x[0].media[1].type = "audio"; }), /type must be photo, video or video_link/);
 });
 
-test("legacy URL stays functional, but visible navigation and page title say Wedding Moments", () => {
-  const source = sitePages["/our-brides"];
-  const editorial = adaptEditorialDocument(source);
-  const nodes = allNodes(editorial.nodes);
-  const title = nodes.find(n => n.tag === "h1" && n.children.join("") === "Wedding Moments");
-  assert(title);
-  const sample = nodes.filter(n => n.attrs["data-bride-card"]);
-  assert.equal(sample.length, 18, "Preview keeps clearly labelled stock photos until real media is provided");
-  assert(nodes.some(n => n.attrs.class === "redcarpert-moments-empty"));
-  assert.match(JSON.stringify(editorial), /Pexels stock photographs for inspiration only/);
-  assert.match(JSON.stringify(editorial), /photographs and videos/);
-  const header = adaptNavigation(source);
-  const links = allNodes(header.nodes);
-  assert(links.some(n => n.tag === "a" && n.attrs.href === "/our-brides/" &&
+test("Wedding Moments is its own public URL with no rendered old gallery", () => {
+  const source = sitePages["/wedding-moments"];
+  assert(source);
+  assert.equal(sitePages["/our-brides"], undefined);
+  const document = adaptEditorialDocument(source);
+  const nodes = allNodes(document.nodes);
+  assert(nodes.some(n => n.tag === "h1" && n.children.includes("Wedding Moments")));
+  assert.equal(nodes.filter(n => n.attrs["data-bride-card"]).length, 0);
+  assert.equal(nodes.filter(n => n.attrs["data-wedding-moment-id"]).length, 14);
+  assert(!JSON.stringify(document).includes("Bridal inspiration — preview gallery"));
+  assert.match(JSON.stringify(document), /not Redcarpert clients, events or services/);
+  const menu = allNodes(adaptNavigation(source).nodes);
+  assert(menu.some(n => n.tag === "a" && n.attrs.href === "/wedding-moments/" &&
     n.children.includes("Wedding Moments")));
 });
