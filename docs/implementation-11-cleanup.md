@@ -16,7 +16,7 @@ Prune legacy Bridal Vanesa/AI Site Cloner material while retaining the **approve
 | `public/` tracked bytes | 1,375,182,430 | 13,594,409 | 1,361,588,021 (~99.0%) |
 | Historical `codex-reports/` documents | 22 | 0 | 22 |
 
-Retained document trees: `/`, `/product`, `/product-category/mermaid`, `/product-category/ball_gown`, `/about-us`, `/contact-us`, `/our-brides`, and a **private** `/product/arabella` sample-detail donor. Only approved public routes are emitted. The private donor is **not** a published page.
+Retained document trees: `/`, `/product`, `/product-category/mermaid`, `/product-category/ball_gown`, `/about-us`, `/contact-us`, `/wedding-moments` (renamed in Implementation 25), and a **private** `/product/arabella` sample-detail donor. Only approved public routes are emitted. The private donor is **not** a published page.
 
 The retained 140 assets are the local dependencies found in the previously passing Implementation 10 GitHub Actions production manifest, plus the three original homepage comparison images still used by source tests. They include the approved Redcarpert photos, logo, SEO icons, styles, fonts and effect scripts. `scripts/generate.ts` continues to copy only required resources to `dist/`; it does not publish all retained public assets.
 
