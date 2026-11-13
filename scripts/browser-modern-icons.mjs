@@ -5,7 +5,7 @@ const browser=await chromium.launch({args:['--no-sandbox']});
 const base='http://localhost:4173/redcarpert-prototype';
 try {
   for (const width of [320,375,390,768,1440]) {
-    for (const route of ['/','/our-brides/','/about-us/']) {
+    for (const route of ['/','/wedding-moments/','/about-us/']) {
       const page=await browser.newPage({viewport:{width,height:width===375?667:900}});
       const errors=[];
       page.on('pageerror',e=>errors.push(e.message));
