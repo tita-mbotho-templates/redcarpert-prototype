@@ -1,37 +1,47 @@
 # Implementation 25 — Wedding Moments
 
-The former **Our Brides** page is now presented as **Wedding Moments**. It is designed for event photos and films featuring couples, family, guests, ceremonies and celebrations. The existing URL `/our-brides/` remains in place for backwards compatibility; page title, navigation and browser metadata use the new name.
+**Page:** `/wedding-moments/` (the previous bridal-only page and gallery are retired).
 
-## Media workflow
+Wedding Moments documents not only bridal styling but **the couple, family, friends, ceremony, reception and celebrations** through photos and films.
 
-The single source of image and video URLs is `src/data/image-links.json`, under `wedding_moments.events`. Photos from a particular celebration belong together in one event, alongside their videos.
+## Visible content today
 
-**Publish only media for which the business has permission from the relevant couple and identifiable guests, including permission for public display.** The JSON file is committed into a public website; do not store private or unapproved URLs there, even temporarily. Never describe stock photographs as real Redcarpert couples or events.
+- Three gallery stories: **Together, at last**, **The people who make it special**, and **When the celebration begins**
+- Twelve Pexels stock photos featuring couples and guests instead of isolated bridal portraits
+- Two linked Pexels sample wedding films, marked as examples and opening the video source page in a new tab
+- Responsive square gallery cards (four columns desktop, two columns mobile), photo lightbox and a blurred backdrop
+- An explicit stock-media disclosure: **none of the current examples depict Redcarpert clients or events**
 
-Example structure (placeholder URLs for documentation only):
+The Pexels photo links and film source pages reside in `src/data/image-links.json` under `wedding_moments.showcase`, grouped by editorial theme. The showcase is displayed **only while `wedding_moments.events` is empty**. The separate bridal-only gallery, scripts, CSS and JSON keys have been removed.
+
+The client has not provided approved real wedding photographs or video URLs yet; no real couple or event is claimed.
+
+## Adding real wedding events
+
+Upload photos and films to ImageKit in **one folder per event**. For instance:
 
 ```json
 {
   "wedding_moments": {
     "events": [
       {
-        "id": "celebration-2026",
+        "id": "wedding-2027-01",
         "title": "A day to remember",
-        "description": "A joyful ceremony with family and friends",
+        "description": "Family, friends and joyful celebrations",
         "media": [
           {
-            "id": "celebration-2026-couple",
+            "id": "wedding-2027-01-couple",
             "type": "photo",
-            "url": "https://YOUR-IMAGEKIT-HOST/wedding-moments/event/couple.webp",
-            "alt": "Newly married couple surrounded by family",
-            "caption": "A moment together"
+            "url": "https://YOUR-IMAGEKIT-HOST/wedding-moments/wedding-2027-01/couple.webp",
+            "alt": "Newlyweds sharing a moment surrounded by family",
+            "caption": "Together at last"
           },
           {
-            "id": "celebration-2026-dance",
+            "id": "wedding-2027-01-dance",
             "type": "video",
-            "url": "https://YOUR-IMAGEKIT-HOST/wedding-moments/event/dance.mp4",
-            "poster": "https://YOUR-IMAGEKIT-HOST/wedding-moments/event/dance-cover.webp",
-            "caption": "Celebrating on the dance floor"
+            "url": "https://YOUR-IMAGEKIT-HOST/wedding-moments/wedding-2027-01/dance.mp4",
+            "poster": "https://YOUR-IMAGEKIT-HOST/wedding-moments/wedding-2027-01/dance-cover.webp",
+            "caption": "The celebration begins"
           }
         ]
       }
@@ -40,21 +50,16 @@ Example structure (placeholder URLs for documentation only):
 }
 ```
 
-Keep the other top-level JSON sections intact; only edit the `events` array. Every event needs a unique lowercase hyphenated `id`, a descriptive `title`, and at least one photo or video. `description` is optional. Each media item needs its own unique ID and an HTTPS URL. Photos require `alt` text. Videos require a short `caption`, and accept MP4 or WebM URLs. An HTTPS `poster` is recommended for video thumbnail cards, but not required (the site uses a neutral cover when absent).
+This is a **fragment/example**, not a full replacement for the manifest. Only populate the existing `wedding_moments.events` array, leaving the other page sections untouched.
 
-Media is shown in the order of events and items in JSON. Photos appear in square gallery cards and open in an uncropped preview. Videos appear in matching cards with a play symbol, and use the browser's native player with controls. Videos are **not autoplayed**, and media is paused and unloaded when the preview closes. Media loads from the external host, not from the repository.
+Each event requires a unique lowercase hyphenated ID and title. Each media item needs a unique ID, type, HTTPS URL, and appropriate descriptive text. Photos require `alt`; videos require `caption`. Direct video files must end in `.mp4` or `.webm` (query strings allowed). A video `poster` is optional but recommended.
 
-## Current preview status
+When at least one approved event exists, it automatically replaces the themed stock showcase. Native videos only begin downloading when opened; they have player controls and are paused/unloaded when the preview closes. This is a static website: the client is responsible for hosting the files and managing the links.
 
-No approved client event media URLs have been provided yet, so `wedding_moments.events` is empty. The page therefore displays clear **coming soon** copy and retains the existing 18 Pexels bridal-inspiration photos with an explicit stock-photography disclaimer. They are not described as Redcarpert couples, weddings or clients.
+## Publication and design safeguards
 
-When client event media is added, the actual grouped event gallery takes the place of the stock-photo preview automatically. The separate `our_brides` JSON array is intentionally retained for those historical Pexels placeholders, not used to store approved event footage.
+Only publish client media after confirming the couple and identifiable people (including children) have provided any necessary permissions. Do not present stock subjects as Redcarpert customers or imply their endorsement. Source links for all stock examples are retained in the JSON file.
 
-## Implementation protections
+Do not edit the homepage hero layout, catalogue, header, footer, fitting WhatsApp flow or shared responsive widths as part of media replacement.
 
-- Existing site header, footer, gallery card sizes, mobile layout, catalogue, lookbook and homepage are preserved
-- Navigation text and page title change to Wedding Moments; the old address still works
-- Photo and video URLs share the one central JSON manifest
-- Malformed links, duplicate IDs, missing photo descriptions and unsupported video formats are rejected by build-time validation
-- Test locally with `npm run check` and `npm run dev` before seeking approval to merge
-- **No GitHub Actions workflow**, automatic merge or deployment is part of this implementation
+Run `npm run check` and preview using `npm run dev`. GitHub Actions and deployment happen **only** when explicitly requested by the project owner.

@@ -13,13 +13,13 @@ npm run dev
 
 Open `http://localhost:5173/redcarpert-prototype/`. Editing document data or adapters requires restarting the dev server to regenerate static HTML.
 
-## Adding page photographs
+## Adding page photographs and wedding films
 
-Store image links in [`src/data/image-links.json`](src/data/image-links.json), grouped by page. The three homepage ImageKit images, 8 catalogue samples, 18 Our Brides inspiration pictures, and 3 About Us team illustrations now read from the same manifest. Pexels source/credit URLs are stored alongside the relevant records. Empty sections remain available for future client uploads; replacing an existing sample requires a separate content and attribution review. See [Implementation 24](docs/implementation-24-image-links.md) for upload folders, example entries and the branch review workflow.
+Client-approved and illustrative media URLs are managed in [`src/data/image-links.json`](src/data/image-links.json). The homepage, catalogue and About Us retain their existing images. [Implementation 24](docs/implementation-24-image-links.md) describes the manifest.
 
-## Wedding Moments (photos and films)
+## Wedding Moments
 
-The former **Our Brides** page is now **Wedding Moments**, covering the couple, guests, families and wedding celebrations in photos and videos. Its original `/our-brides/` address remains available. Edit `wedding_moments.events` in [`src/data/image-links.json`](src/data/image-links.json) to group each approved event's photos and videos. Until client-approved media is supplied, the page clearly labels its existing Pexels images as inspiration only. See [Implementation 25](docs/implementation-25-wedding-moments.md) for the JSON schema, permissions and playback behaviour.
+Visit **`/wedding-moments/`** to view couples, family, guests and wedding celebrations. The old bridal-only page and supporting gallery files have been removed. Until approved client material is supplied, the page displays 12 wedding-themed Pexels stock photos and links to two sample Pexels wedding films, clearly labelled as **examples, not client events**. Add approved event photos and MP4/WebM files under `wedding_moments.events` in the JSON manifest; see [Implementation 25](docs/implementation-25-wedding-moments.md). Real wedding events will replace the stock showcase when provided.
 
 ## Validate and preview
 
@@ -46,7 +46,7 @@ The fitting-enquiry interaction now opens a **live WhatsApp chat at +27 68 045 8
 - `public/`: only production-relevant visuals, fonts, scripts and theme dependencies
 - `tests/`: source, build and browser regression checks
 
-Third-party theme effects remain temporarily to preserve the approved interactions. Implementation 12 refactored the supporting code without replacing these dependencies. Theme replacement remains deferred until separately approved and regression-tested. The modern page-turn lookbook is Implementation 13. Implementation 14 adds the All Dresses / Mermaid / Ball Gown catalogue filter and a five-pattern randomized Our Brides gallery with 18 Pexels photographs and blurred-backdrop image previews. See [the gallery specification](docs/implementation-14-gallery-filter.md). See [asset credits](docs/asset-credits.md).
+Third-party theme effects remain temporarily to preserve the approved interactions. Implementation 12 refactored the supporting code without replacing these dependencies. The page-turn lookbook is Implementation 13. The catalogue retains its All Dresses / Mermaid / Ball Gown filters. Wedding Moments now uses an independent media gallery with photos and native video support; see [Implementation 25](docs/implementation-25-wedding-moments.md). See [asset credits](docs/asset-credits.md).
 
 ## Engineering notes
 
