@@ -43,6 +43,8 @@ try {
     assert.equal(await template.evaluate(el => el.content.children.length), 71,
       "remaining 71 media tiles stay inert until selected");
     assert.equal(await loadMore.count(), 1);
+    const counter = page.locator("[data-wedding-count]");
+    assert.equal(await counter.textContent(), "Showing 16 of 87 wedding moments");
     assert.equal(await gallery.locator("button[data-wedding-media=video]").count(), 1);
     assert.equal(await gallery.locator("button[data-wedding-media=photo]").count(), 15);
     assert.equal(await gallery.locator("a[href*='pexels.com']").count(), 0,
@@ -90,6 +92,8 @@ try {
     for (const expected of [32, 48, 64, 80, 87]) {
       await loadMore.click();
       assert.equal(await cards.count(), expected, "Load More reveals another batch");
+      assert.equal(await counter.textContent(),
+        "Showing " + expected + " of 87 wedding moments");
     }
     assert.equal(await template.evaluate(el => el.content.children.length), 0);
     assert.equal(await loadMore.isVisible(), false, "Load More disappears when finished");

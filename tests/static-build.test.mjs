@@ -220,3 +220,19 @@ test('Implementation 22: every static page starts with a bounded, branded global
   }
  }
 });
+
+
+test('Wedding Moments production HTML preserves ImageKit URLs and visible pagination status',{skip:!available},()=>{
+ const html=readFileSync('dist/wedding-moments/index.html','utf8');
+ const base='https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/';
+ assert(html.includes('src="'+base+'wedding-moments-56.jpg"'), 'real image URL was modified during HTML generation');
+ assert(html.includes('data-wedding-src="'+base+'wedding-moments-88.mp4"'), 'client video URL was modified during HTML generation');
+ assert(html.includes('src="'+base+'wedding-moments-88.mp4/ik-thumbnail.jpg"'), 'ImageKit video poster URL was modified');
+ assert(html.includes('Showing 16 of 87 wedding moments'), 'initial gallery counter missing');
+ assert(html.includes('data-wedding-moments-remaining'), 'deferred media template missing');
+ assert(html.includes('data-wedding-load-more'), 'pagination control missing');
+ assert(!html.includes(base.replace('/wedding-moments/','/redcarpert-prototype/wedding-moments/')),
+   'external CDN URLs must never contain the GitHub Pages base');
+ assert(!html.includes('red-carpet-wedding-dresses/redcarpert-prototype/wedding-moments/'),
+   'prefix must not be inserted inside an ImageKit media URL');
+});

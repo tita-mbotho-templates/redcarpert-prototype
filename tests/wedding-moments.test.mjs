@@ -67,6 +67,12 @@ test("real client media renders as one gallery with sixteen visible square tiles
   assert.equal(WEDDING_MOMENTS_PAGE_SIZE, 16);
   assert.equal(grid.children.length, 16);
   assert.equal(template.children.length, 71);
+  const counter = nodes.find(n => n.attrs["data-wedding-count"] !== undefined);
+  assert(counter);
+  assert.deepEqual(counter.children, ["Showing 16 of 87 wedding moments"]);
+  assert.equal(counter.attrs["data-wedding-total"], "87");
+  assert.equal(counter.attrs.role, "status");
+  assert.equal(counter.attrs["aria-live"], "polite");
   assert.equal(nodes.filter(n => n.attrs["data-wedding-moment-id"] !== undefined).length, 87);
   assert.equal(nodes.filter(n => ["h2", "h3", "figcaption"].includes(n.tag)).length, 0);
   assert.equal(loadMore.tag, "button");
