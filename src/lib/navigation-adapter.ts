@@ -98,7 +98,7 @@ export function adaptNavigation(document: SiteDocumentData): SiteDocumentData {
     if (className !== item.attrs.class) replacements.set(item, { ...item, attrs: { ...item.attrs, class: className } });
   };
   const order = [0, 1, 5, 4, 2, 3];
-  const labels = ["Home", "Wedding Dresses", "Digital Lookbook", "Our Brides", "About Us", "Contact Us"];
+  const labels = ["Home", "Wedding Dresses", "Digital Lookbook", "Wedding Moments", "About Us", "Contact Us"];
   order.forEach((index, i) => updateItem(items[index], labels[i], false, index === 5 ? "/digital-lookbook/" : undefined));
   categories.slice(0, 2).forEach((item, i) => updateItem(item, i ? "Ball Gown" : "Mermaid"));
   const reorder = (node: DocumentElement, ordered: DocumentElement[]) => {

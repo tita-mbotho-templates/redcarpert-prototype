@@ -15,7 +15,7 @@ const icons=d=>find([header(d)],n=>n.attrs.class==='social-icons');
 test('all 8 canonical headers map exactly six items and two real categories; no header socials or invented destinations',()=>{
   for(const original of Object.values(sitePages)){
     const d=adaptNavigation(original);const menu=children(byId(d,'menu-blog-layouts'));
-    assert.deepEqual(menu.map(n=>link(n).children.join('')),['Home','Wedding Dresses','Digital Lookbook','Our Brides','About Us','Contact Us']);
+    assert.deepEqual(menu.map(n=>link(n).children.join('')),['Home','Wedding Dresses','Digital Lookbook','Wedding Moments','About Us','Contact Us']);
     assert.deepEqual(menu.map(n=>link(n).attrs.href),['/','/product/','/digital-lookbook/','/our-brides/','/about-us/','/contact-us/']);
     assert.equal(menu[0].attrs.id,'menu-item-15418');
     const lookbook=link(menu[2]);assert.equal(lookbook.attrs.href,'/digital-lookbook/');assert.equal(lookbook.attrs['aria-disabled'],undefined);

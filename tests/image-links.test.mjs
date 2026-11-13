@@ -13,13 +13,14 @@ const isSafeImageUrl = (value) => {
 
 test("the image manifest provides predictable sections for every editable page", () => {
   assert.deepEqual(Object.keys(imageLinks), [
-    "home_page", "products", "our_brides", "about_us", "contact_us", "digital_lookbook",
+    "home_page", "products", "our_brides", "wedding_moments", "about_us", "contact_us", "digital_lookbook",
   ]);
   assert(Array.isArray(imageLinks.home_page.hero));
   assert.deepEqual(Object.keys(imageLinks.products), ["mermaid", "ball_gown"]);
   assert(Array.isArray(imageLinks.products.mermaid));
   assert(Array.isArray(imageLinks.products.ball_gown));
   assert(Array.isArray(imageLinks.our_brides));
+  assert(Array.isArray(imageLinks.wedding_moments.events));
   assert.deepEqual(Object.keys(imageLinks.about_us), ["atelier", "team"]);
   assert(Array.isArray(imageLinks.about_us.atelier));
   assert(Array.isArray(imageLinks.about_us.team));
