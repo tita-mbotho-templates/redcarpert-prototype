@@ -1,0 +1,175 @@
+{
+  "home_page": {
+    "hero": [
+      {
+        "id": "home-page-1",
+        "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/home-page/home-page-1.webp?updatedAt=1794351596508"
+      },
+      {
+        "id": "home-page-2",
+        "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/home-page/home-page-2.webp?updatedAt=1794351597603"
+      },
+      {
+        "id": "home-page-3",
+        "url": "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/home-page/home-page-3.webp?updatedAt=1794351600184"
+      }
+    ]
+  },
+  "products": {
+    "mermaid": [
+      {
+        "id": "sample-mermaid",
+        "url": "https://images.pexels.com/photos/5984238/pexels-photo-5984238.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "sourceUrl": "https://www.pexels.com/photo/elegant-asian-bride-on-path-in-countryside-5984238/"
+      },
+      {
+        "id": "sample-mermaid-02",
+        "url": "https://images.pexels.com/photos/4122665/pexels-photo-4122665.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "sourceUrl": "https://www.pexels.com/photo/photo-of-woman-wearing-wedding-dress-4122665/"
+      },
+      {
+        "id": "sample-mermaid-03",
+        "url": "https://images.pexels.com/photos/2062534/pexels-photo-2062534.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "sourceUrl": "https://www.pexels.com/photo/woman-wearing-mermaid-wedding-gown-2062534/"
+      },
+      {
+        "id": "sample-mermaid-04",
+        "url": "https://images.pexels.com/photos/955127/pexels-photo-955127.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "sourceUrl": "https://www.pexels.com/photo/woman-standing-on-grass-field-wearing-mermaid-dress-955127/"
+      }
+    ],
+    "ball_gown": [
+      {
+        "id": "sample-ball-gown",
+        "url": "https://images.pexels.com/photos/4277970/pexels-photo-4277970.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "sourceUrl": "https://www.pexels.com/photo/woman-in-white-wedding-dress-4277970/"
+      },
+      {
+        "id": "sample-ball-gown-02",
+        "url": "https://images.pexels.com/photos/2929632/pexels-photo-2929632.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "sourceUrl": "https://www.pexels.com/photo/woman-wearing-white-wedding-dress-2929632/"
+      },
+      {
+        "id": "sample-ball-gown-03",
+        "url": "https://images.pexels.com/photos/36297021/pexels-photo-36297021.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "sourceUrl": "https://www.pexels.com/photo/elegant-bride-in-luxury-ballroom-setting-36297021/"
+      },
+      {
+        "id": "sample-ball-gown-04",
+        "url": "https://images.pexels.com/photos/36297026/pexels-photo-36297026.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "sourceUrl": "https://www.pexels.com/photo/elegant-bride-in-luxurious-ballroom-setting-36297026/"
+      }
+    ]
+  },
+  "our_brides": [
+    {
+      "id": "inspiration-01",
+      "url": "https://images.pexels.com/photos/4545094/pexels-photo-4545094.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/woman-in-white-floral-lace-wedding-dress-4545094/"
+    },
+    {
+      "id": "inspiration-02",
+      "url": "https://images.pexels.com/photos/10587269/pexels-photo-10587269.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/portrait-of-bride-in-white-dress-and-veil-10587269/"
+    },
+    {
+      "id": "inspiration-03",
+      "url": "https://images.pexels.com/photos/33435175/pexels-photo-33435175.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/elegant-bride-in-outdoor-wedding-ceremony-33435175/"
+    },
+    {
+      "id": "inspiration-04",
+      "url": "https://images.pexels.com/photos/39903996/pexels-photo-39903996.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/elegant-bridal-portrait-with-lace-veil-39903996/"
+    },
+    {
+      "id": "inspiration-05",
+      "url": "https://images.pexels.com/photos/10587270/pexels-photo-10587270.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/wedding-photo-of-bride-in-white-dress-and-long-veil-10587270/"
+    },
+    {
+      "id": "inspiration-06",
+      "url": "https://images.pexels.com/photos/2495648/pexels-photo-2495648.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/woman-in-wedding-dress-2495648/"
+    },
+    {
+      "id": "inspiration-07",
+      "url": "https://images.pexels.com/photos/4645961/pexels-photo-4645961.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/portrait-of-bride-wearing-veil-and-wedding-dress-4645961/"
+    },
+    {
+      "id": "inspiration-08",
+      "url": "https://images.pexels.com/photos/19751829/pexels-photo-19751829.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/portrait-of-a-bride-in-a-white-embroidered-wedding-dress-and-a-chiffon-veil-19751829/"
+    },
+    {
+      "id": "inspiration-09",
+      "url": "https://images.pexels.com/photos/4456481/pexels-photo-4456481.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/woman-in-white-floral-dress-4456481/"
+    },
+    {
+      "id": "inspiration-10",
+      "url": "https://images.pexels.com/photos/5646476/pexels-photo-5646476.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/a-beautiful-bride-wearing-white-gown-and-veil-5646476/"
+    },
+    {
+      "id": "inspiration-11",
+      "url": "https://images.pexels.com/photos/34328152/pexels-photo-34328152.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/elegant-bride-in-white-wedding-veil-portrait-34328152/"
+    },
+    {
+      "id": "inspiration-12",
+      "url": "https://images.pexels.com/photos/39903999/pexels-photo-39903999.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/smiling-bride-in-elegant-white-wedding-dress-39903999/"
+    },
+    {
+      "id": "inspiration-13",
+      "url": "https://images.pexels.com/photos/3031777/pexels-photo-3031777.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/woman-wearing-wedding-dress-and-veil-3031777/"
+    },
+    {
+      "id": "inspiration-14",
+      "url": "https://images.pexels.com/photos/7289121/pexels-photo-7289121.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/wedding-fashion-model-in-white-clothing-covered-with-tulle-fabric-7289121/"
+    },
+    {
+      "id": "inspiration-15",
+      "url": "https://images.pexels.com/photos/5038574/pexels-photo-5038574.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/woman-in-white-dress-wearing-straw-hat-and-veil-holding-flowers-5038574/"
+    },
+    {
+      "id": "inspiration-16",
+      "url": "https://images.pexels.com/photos/15865463/pexels-photo-15865463.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/bride-in-wedding-dress-and-hat-15865463/"
+    },
+    {
+      "id": "inspiration-17",
+      "url": "https://images.pexels.com/photos/39980506/pexels-photo-39980506.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/bride-in-wedding-dress-under-serene-tree-39980506/"
+    },
+    {
+      "id": "inspiration-18",
+      "url": "https://images.pexels.com/photos/39837863/pexels-photo-39837863.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "sourceUrl": "https://www.pexels.com/photo/elegant-outdoor-wedding-bride-with-bouquet-39837863/"
+    }
+  ],
+  "about_us": {
+    "atelier": [],
+    "team": [
+      {
+        "id": "bridal-styling",
+        "url": "https://images.pexels.com/photos/6665034/pexels-photo-6665034.jpeg?auto=compress&cs=tinysrgb&w=900"
+      },
+      {
+        "id": "atelier-craft",
+        "url": "https://images.pexels.com/photos/9850065/pexels-photo-9850065.jpeg?auto=compress&cs=tinysrgb&w=900"
+      },
+      {
+        "id": "thoughtful-details",
+        "url": "https://images.pexels.com/photos/3984870/pexels-photo-3984870.jpeg?auto=compress&cs=tinysrgb&w=900"
+      }
+    ]
+  },
+  "contact_us": [],
+  "digital_lookbook": []
+}

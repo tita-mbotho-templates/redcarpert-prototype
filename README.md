@@ -13,6 +13,10 @@ npm run dev
 
 Open `http://localhost:5173/redcarpert-prototype/`. Editing document data or adapters requires restarting the dev server to regenerate static HTML.
 
+## Adding page photographs
+
+Store image links in [`src/data/image-links.json`](src/data/image-links.json), grouped by page. The three homepage ImageKit images, 8 catalogue samples, 18 Our Brides inspiration pictures, and 3 About Us team illustrations now read from the same manifest. Pexels source/credit URLs are stored alongside the relevant records. Empty sections remain available for future client uploads; replacing an existing sample requires a separate content and attribution review. See [Implementation 24](docs/implementation-24-image-links.md) for upload folders, example entries and the branch review workflow.
+
 ## Validate and preview
 
 ```sh

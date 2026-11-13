@@ -1,5 +1,7 @@
 import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/site";
 import { bridalGalleryPhotos } from "../data/bridal-gallery.ts";
+import imageLinks from "../data/image-links.json" with { type: "json" };
+import { requireImageLink } from "./image-links.ts";
 
 const node = (tag: string, attrs: Record<string, string>, children: DocumentNode[]): DocumentElement => ({ tag, attrs, children });
 const elements = (list: DocumentNode[]) => list.filter((x): x is DocumentElement => typeof x !== "string");
@@ -85,19 +87,19 @@ function editorialContent(route: EditorialRoute): DocumentNode[] {
         ...[
           {
             title: "Bridal Styling",
-            image: "https://images.pexels.com/photos/6665034/pexels-photo-6665034.jpeg?auto=compress&cs=tinysrgb&w=900",
+            image: requireImageLink(imageLinks.about_us.team, "bridal-styling").url,
             alt: "Illustrative stock photograph of a fashion designer in her workshop",
             credit: "Antoni Shkraba",
           },
           {
             title: "Atelier Craft",
-            image: "https://images.pexels.com/photos/9850065/pexels-photo-9850065.jpeg?auto=compress&cs=tinysrgb&w=900",
+            image: requireImageLink(imageLinks.about_us.team, "atelier-craft").url,
             alt: "Illustrative stock photograph of designers working in an atelier",
             credit: "Ron Lach",
           },
           {
             title: "Thoughtful Details",
-            image: "https://images.pexels.com/photos/3984870/pexels-photo-3984870.jpeg?auto=compress&cs=tinysrgb&w=900",
+            image: requireImageLink(imageLinks.about_us.team, "thoughtful-details").url,
             alt: "Illustrative stock photograph of a dressmaker adjusting a bridal gown",
             credit: "Gustavo Fring",
           },

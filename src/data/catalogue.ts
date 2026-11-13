@@ -1,3 +1,6 @@
+import imageLinks from "./image-links.json" with { type: "json" };
+import { requireImageLink } from "../lib/image-links.ts";
+
 /** Eight curated Pexels demonstration dresses. Never describe these as Redcarpert stock. */
 export type DressCategory = "mermaid" | "ball_gown";
 export interface CatalogueProduct {
@@ -20,58 +23,58 @@ export const catalogueCategories = [
 export const catalogueProducts: readonly CatalogueProduct[] = [
   {
     id: "sample-mermaid", name: "Sample 01", category: "mermaid", status: "sample",
-    image: "https://images.pexels.com/photos/5984238/pexels-photo-5984238.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: requireImageLink(imageLinks.products.mermaid, "sample-mermaid").url,
     imageAlt: "Pexels demonstration bridal photograph (Mermaid silhouette) — not Redcarpert inventory",
     detailReference: null, previewRoute: "/product/preview/sample-01-mermaid",
-    imageCredit: { photographer: "Trần Long", sourceUrl: "https://www.pexels.com/photo/elegant-asian-bride-on-path-in-countryside-5984238/", provenance: "docs/asset-credits.md" },
+    imageCredit: { photographer: "Trần Long", sourceUrl: requireImageLink(imageLinks.products.mermaid, "sample-mermaid").sourceUrl, provenance: "docs/asset-credits.md" },
   },
   {
     id: "sample-mermaid-02", name: "Sample 03", category: "mermaid", status: "sample",
-    image: "https://images.pexels.com/photos/4122665/pexels-photo-4122665.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: requireImageLink(imageLinks.products.mermaid, "sample-mermaid-02").url,
     imageAlt: "Pexels demonstration bridal photograph (Mermaid silhouette) — not Redcarpert inventory",
     detailReference: null, previewRoute: "/product/preview/sample-03-mermaid",
-    imageCredit: { photographer: "Tangerine Vitamins", sourceUrl: "https://www.pexels.com/photo/photo-of-woman-wearing-wedding-dress-4122665/", provenance: "docs/asset-credits.md" },
+    imageCredit: { photographer: "Tangerine Vitamins", sourceUrl: requireImageLink(imageLinks.products.mermaid, "sample-mermaid-02").sourceUrl, provenance: "docs/asset-credits.md" },
   },
   {
     id: "sample-mermaid-03", name: "Sample 04", category: "mermaid", status: "sample",
-    image: "https://images.pexels.com/photos/2062534/pexels-photo-2062534.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: requireImageLink(imageLinks.products.mermaid, "sample-mermaid-03").url,
     imageAlt: "Pexels demonstration bridal photograph (Mermaid silhouette) — not Redcarpert inventory",
     detailReference: null, previewRoute: "/product/preview/sample-04-mermaid",
-    imageCredit: { photographer: "Bestbe Models", sourceUrl: "https://www.pexels.com/photo/woman-wearing-mermaid-wedding-gown-2062534/", provenance: "docs/asset-credits.md" },
+    imageCredit: { photographer: "Bestbe Models", sourceUrl: requireImageLink(imageLinks.products.mermaid, "sample-mermaid-03").sourceUrl, provenance: "docs/asset-credits.md" },
   },
   {
     id: "sample-mermaid-04", name: "Sample 05", category: "mermaid", status: "sample",
-    image: "https://images.pexels.com/photos/955127/pexels-photo-955127.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: requireImageLink(imageLinks.products.mermaid, "sample-mermaid-04").url,
     imageAlt: "Pexels demonstration bridal photograph (Mermaid silhouette) — not Redcarpert inventory",
     detailReference: null, previewRoute: "/product/preview/sample-05-mermaid",
-    imageCredit: { photographer: "Genaro Servín", sourceUrl: "https://www.pexels.com/photo/woman-standing-on-grass-field-wearing-mermaid-dress-955127/", provenance: "docs/asset-credits.md" },
+    imageCredit: { photographer: "Genaro Servín", sourceUrl: requireImageLink(imageLinks.products.mermaid, "sample-mermaid-04").sourceUrl, provenance: "docs/asset-credits.md" },
   },
   {
     id: "sample-ball-gown", name: "Sample 02", category: "ball_gown", status: "sample",
-    image: "https://images.pexels.com/photos/4277970/pexels-photo-4277970.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: requireImageLink(imageLinks.products.ball_gown, "sample-ball-gown").url,
     imageAlt: "Pexels demonstration bridal photograph (Ball Gown silhouette) — not Redcarpert inventory",
     detailReference: null, previewRoute: "/product/preview/sample-02-ball-gown",
-    imageCredit: { photographer: "Thalia villa", sourceUrl: "https://www.pexels.com/photo/woman-in-white-wedding-dress-4277970/", provenance: "docs/asset-credits.md" },
+    imageCredit: { photographer: "Thalia villa", sourceUrl: requireImageLink(imageLinks.products.ball_gown, "sample-ball-gown").sourceUrl, provenance: "docs/asset-credits.md" },
   },
   {
     id: "sample-ball-gown-02", name: "Sample 06", category: "ball_gown", status: "sample",
-    image: "https://images.pexels.com/photos/2929632/pexels-photo-2929632.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: requireImageLink(imageLinks.products.ball_gown, "sample-ball-gown-02").url,
     imageAlt: "Pexels demonstration bridal photograph (Ball Gown silhouette) — not Redcarpert inventory",
     detailReference: null, previewRoute: "/product/preview/sample-06-ball-gown",
-    imageCredit: { photographer: "Hiren Lad", sourceUrl: "https://www.pexels.com/photo/woman-wearing-white-wedding-dress-2929632/", provenance: "docs/asset-credits.md" },
+    imageCredit: { photographer: "Hiren Lad", sourceUrl: requireImageLink(imageLinks.products.ball_gown, "sample-ball-gown-02").sourceUrl, provenance: "docs/asset-credits.md" },
   },
   {
     id: "sample-ball-gown-03", name: "Sample 07", category: "ball_gown", status: "sample",
-    image: "https://images.pexels.com/photos/36297021/pexels-photo-36297021.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: requireImageLink(imageLinks.products.ball_gown, "sample-ball-gown-03").url,
     imageAlt: "Pexels demonstration bridal photograph (Ball Gown silhouette) — not Redcarpert inventory",
     detailReference: null, previewRoute: "/product/preview/sample-07-ball-gown",
-    imageCredit: { photographer: "Andrea Prochilo", sourceUrl: "https://www.pexels.com/photo/elegant-bride-in-luxury-ballroom-setting-36297021/", provenance: "docs/asset-credits.md" },
+    imageCredit: { photographer: "Andrea Prochilo", sourceUrl: requireImageLink(imageLinks.products.ball_gown, "sample-ball-gown-03").sourceUrl, provenance: "docs/asset-credits.md" },
   },
   {
     id: "sample-ball-gown-04", name: "Sample 08", category: "ball_gown", status: "sample",
-    image: "https://images.pexels.com/photos/36297026/pexels-photo-36297026.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: requireImageLink(imageLinks.products.ball_gown, "sample-ball-gown-04").url,
     imageAlt: "Pexels demonstration bridal photograph (Ball Gown silhouette) — not Redcarpert inventory",
     detailReference: null, previewRoute: "/product/preview/sample-08-ball-gown",
-    imageCredit: { photographer: "Andrea Prochilo", sourceUrl: "https://www.pexels.com/photo/elegant-bride-in-luxurious-ballroom-setting-36297026/", provenance: "docs/asset-credits.md" },
+    imageCredit: { photographer: "Andrea Prochilo", sourceUrl: requireImageLink(imageLinks.products.ball_gown, "sample-ball-gown-04").sourceUrl, provenance: "docs/asset-credits.md" },
   },
 ];
