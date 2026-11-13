@@ -5,8 +5,7 @@ export const WEDDING_MOMENTS_PAGE_SIZE = 16;
 
 export type WeddingMomentMedia =
   | { id: string; type: "photo"; url: string; alt: string; caption?: string }
-  | { id: string; type: "video"; url: string; caption: string; poster: string }
-  | { id: string; type: "video_link"; url: string; caption: string; poster: string };
+  | { id: string; type: "video"; url: string; caption: string; poster: string };
 
 export interface WeddingMomentEvent {
   id: string;
@@ -69,14 +68,10 @@ export function parseWeddingMomentEvents(input: unknown): WeddingMomentEvent[] {
         throw new Error("Wedding Moments: duplicate or invalid media id " + mediaId);
       }
       mediaIds.add(mediaId);
-      if (entry.type !== "photo" && entry.type !== "video" && entry.type !== "video_link") {
-        throw new Error("Wedding Moments: " + mediaId + " type must be photo, video or video_link");
+      if (entry.type !== "photo" && entry.type !== "video") {
+        throw new Error("Wedding Moments: " + mediaId + " type must be photo or video");
       }
       const url = safeUrl(entry.url, mediaId + " url", entry.type === "video");
-      if (entry.type === "video_link" &&
-          !/^https:\/\/www\.pexels\.com\/video\/[a-z0-9-]+\d+\/$/.test(url)) {
-        throw new Error("Wedding Moments: only Pexels stock video pages are allowed as links");
-      }
       if (entry.type === "photo") {
         const alt = text(entry.alt, mediaId + " alt");
         const caption = optionalText(entry.caption, mediaId + " caption");
@@ -84,14 +79,13 @@ export function parseWeddingMomentEvents(input: unknown): WeddingMomentEvent[] {
       }
       const caption = text(entry.caption, mediaId + " caption");
       const poster = safeUrl(entry.poster, mediaId + " poster");
-      return { id: mediaId, type: entry.type, url, caption, poster };
+      return { id: mediaId, type: "video", url, caption, poster };
     });
     return { id, title, ...(description ? { description } : {}), media };
   });
 }
 
 export const weddingMomentEvents = parseWeddingMomentEvents(imageLinks.wedding_moments.events);
-export const weddingMomentShowcase = parseWeddingMomentEvents(imageLinks.wedding_moments.showcase);
 
 /** New events are appended to JSON and appear first; each event keeps its photo order. */
 export function flattenWeddingMomentEvents(
@@ -116,25 +110,21 @@ function mediaCard(media: WeddingMomentMedia, index: number): DocumentElement {
     loading: index < 4 ? "eager" : "lazy",
     decoding: "async",
   });
-  const play = media.type === "photo" ? [] : [
+  const play = media.type === "video" ? [
     node("span", { class: "redcarpert-moment-play", "aria-hidden": "true" }, [
       node("i", { class: "fa-solid fa-play", "aria-hidden": "true" }),
     ]),
-  ];
-
-  const action = media.type === "video_link"
-    ? node("a", {
-      href: media.url, target: "_blank", rel: "noopener noreferrer",
-      "aria-label": "Watch sample wedding film on Pexels: " + media.caption,
-    }, [thumbnail, ...play])
-    : node("button", {
-      type: "button", "data-wedding-media": media.type,
-      "data-wedding-src": media.url,
-      "aria-haspopup": "dialog", "aria-label": label,
-    }, [thumbnail, ...play]);
-
+  ] : [];
+  const action = node("button", {
+    type: "button",
+    "data-wedding-media": media.type,
+    "data-wedding-src": media.url,
+    "aria-haspopup": "dialog",
+    "aria-label": label,
+  }, [thumbnail, ...play]);
   return node("div", {
-    class: "redcarpert-moments-media-card", "data-wedding-moment-id": media.id,
+    class: "redcarpert-moments-media-card",
+    "data-wedding-moment-id": media.id,
   }, [action]);
 }
 
