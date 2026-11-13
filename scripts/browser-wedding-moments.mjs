@@ -93,6 +93,9 @@ try {
     assert.equal(await fullImage.evaluate(el => getComputedStyle(el).objectFit), "contain");
     await page.keyboard.press("Escape");
     assert.equal(await dialog.evaluate(el => el.open), false);
+    await page.waitForFunction(() =>
+      !document.querySelector("[data-wedding-preview-photo]").hasAttribute("src"),
+      { timeout: 12000 });
     assert.equal(await fullImage.getAttribute("src"), null, "close removes large photo");
 
     const filmButton = gallery.locator("button[data-wedding-media=video]").first();
@@ -102,6 +105,9 @@ try {
     assert.equal(await player.getAttribute("src"), base + "wedding-moments-88.mp4");
     assert(await player.evaluate(el => el.controls), "native video controls");
     await page.keyboard.press("Escape");
+    await page.waitForFunction(() =>
+      !document.querySelector("[data-wedding-preview-video]").hasAttribute("src"),
+      { timeout: 12000 });
     assert.equal(await player.getAttribute("src"), null, "close unloads video");
 
     for (const expected of [32, 48, 64, 80, 87]) {
