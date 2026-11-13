@@ -20,7 +20,7 @@ The Wedding Moments page is at `/wedding-moments/`. The obsolete bridal-only gal
 
 1. Request approved media grouped by page and, for Wedding Moments, **by event**. Suggested ImageKit folders: `home-page/`, `products/mermaid/`, `products/ball-gown/`, `wedding-moments/<event-id>/`, `about-us/`, `contact-us/`, `digital-lookbook/`.
 2. Copy complete HTTPS ImageKit image/video URLs into `src/data/image-links.json`. Maintain unique stable IDs.
-3. For Wedding Moments, place real images and native MP4/WebM videos under `wedding_moments.events`; photos need an `alt`, videos need `caption`. A `poster` is recommended for videos.
+3. For Wedding Moments, place real images and native MP4/WebM videos under `wedding_moments.events`; photos need an `alt`, videos need `caption`. A `poster` image URL is required for every video to keep image-only cards consistent.
 4. Client media should be added **only after confirmation that all needed publication permissions have been obtained**, particularly for identifiable guests or children. Never publish private links.
 5. Run `npm run check`, then preview at desktop and mobile with `npm run dev`. No automatic GitHub Actions or deployment.
 

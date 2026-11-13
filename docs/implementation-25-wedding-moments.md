@@ -4,17 +4,19 @@
 
 Wedding Moments documents not only bridal styling but **the couple, family, friends, ceremony, reception and celebrations** through photos and films.
 
-## Visible content today
+## Visible design
 
-- Three gallery stories: **Together, at last**, **The people who make it special**, and **When the celebration begins**
-- Twelve Pexels stock photos featuring couples and guests instead of isolated bridal portraits
-- Two linked Pexels sample wedding films, marked as examples and opening the video source page in a new tab
-- Responsive square gallery cards (four columns desktop, two columns mobile), photo lightbox and a blurred backdrop
-- An explicit stock-media disclosure: **none of the current examples depict Redcarpert clients or events**
+The page shows just **Wedding Moments** and the subtitle:
 
-The Pexels photo links and film source pages reside in `src/data/image-links.json` under `wedding_moments.showcase`, grouped by editorial theme. The showcase is displayed **only while `wedding_moments.events` is empty**. The separate bridal-only gallery, scripts, CSS and JSON keys have been removed.
+> The love, the laughter, the unforgettable moments.
 
-The client has not provided approved real wedding photographs or video URLs yet; no real couple or event is claimed.
+Beneath them is **one continuous square gallery**: four columns on desktop and two on mobile. Cards have **no visible titles, event groups, captions or descriptions**. Photography stays edge-to-edge within each card; videos have a small play icon.
+
+For the current demonstration, the gallery contains 12 wedding-focused stock photographs and two linked Pexels sample films. A subtle notice below the grid says that the examples are not Redcarpert client events. The stock links are in `wedding_moments.showcase`; they are replaced by real photos/films automatically when `wedding_moments.events` has approved client content.
+
+**Scalability:** The first 16 cards are rendered immediately. If there are more, the remaining cards are stored in an inert HTML template (their images are not requested), and **Load More** inserts 16 at a time. New wedding events should be appended to the end of the JSON `events` array. The website displays these **newest event first**, while keeping the original order of photographs within each event. JSON grouping is internal only; visitors see one gallery with no categories.
+
+No old bridal-only gallery scripts, CSS, data keys or content are retained. The currently displayed images are demonstrative stock photography, not actual Redcarpert weddings.
 
 ## Adding real wedding events
 
@@ -52,9 +54,9 @@ Upload photos and films to ImageKit in **one folder per event**. For instance:
 
 This is a **fragment/example**, not a full replacement for the manifest. Only populate the existing `wedding_moments.events` array, leaving the other page sections untouched.
 
-Each event requires a unique lowercase hyphenated ID and title. Each media item needs a unique ID, type, HTTPS URL, and appropriate descriptive text. Photos require `alt`; videos require `caption`. Direct video files must end in `.mp4` or `.webm` (query strings allowed). A video `poster` is optional but recommended.
+Each event requires a unique lowercase hyphenated ID and title. Each media item needs a unique ID, type, HTTPS URL, and appropriate descriptive text. Photos require `alt`; videos require `caption`. Direct video files must end in `.mp4` or `.webm` (query strings allowed). A video `poster` is **required** so every video card has an image thumbnail. It carries no visible text label.
 
-When at least one approved event exists, it automatically replaces the themed stock showcase. Native videos only begin downloading when opened; they have player controls and are paused/unloaded when the preview closes. This is a static website: the client is responsible for hosting the files and managing the links.
+When at least one approved event exists, it automatically replaces the stock showcase. All events are visually flattened into one gallery, and the newest appended event appears at the top. Native videos only begin downloading when opened; they have player controls and are paused/unloaded when the preview closes. This is a static website: the client is responsible for hosting the files and managing the links.
 
 ## Publication and design safeguards
 

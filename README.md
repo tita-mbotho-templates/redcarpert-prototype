@@ -19,7 +19,7 @@ Client-approved and illustrative media URLs are managed in [`src/data/image-link
 
 ## Wedding Moments
 
-Visit **`/wedding-moments/`** to view couples, family, guests and wedding celebrations. The old bridal-only page and supporting gallery files have been removed. Until approved client material is supplied, the page displays 12 wedding-themed Pexels stock photos and links to two sample Pexels wedding films, clearly labelled as **examples, not client events**. Add approved event photos and MP4/WebM files under `wedding_moments.events` in the JSON manifest; see [Implementation 25](docs/implementation-25-wedding-moments.md). Real wedding events will replace the stock showcase when provided.
+Visit **`/wedding-moments/`** to view couples, family, guests and wedding celebrations. The old bridal-only page and supporting gallery files have been removed. The page now has only the title, **“The love, the laughter, the unforgettable moments.”** subtitle and one continuous square gallery with image-only cards. New wedding events appear first, and media beyond the first 16 cards is revealed in **Load More** batches of 16. Until approved client material is supplied, it displays 12 wedding-themed Pexels stock photos and two linked sample films, with a discreet stock-media notice beneath the gallery. Add approved event photos and MP4/WebM files under `wedding_moments.events` in the JSON manifest; see [Implementation 25](docs/implementation-25-wedding-moments.md). Real wedding events will replace the stock showcase when provided.
 
 ## Validate and preview
 
