@@ -83,3 +83,14 @@ test("every client-supplied Wedding Moments image, film and poster stays unmodif
     }
   }
 });
+
+
+
+test("editorial route metadata is not mistaken for a local hyperlink", () => {
+  const html = '<div data-editorial-route="/wedding-moments">' +
+    '<a href="/wedding-moments/">Open</a></div>';
+  const output = prefix(html);
+  assert(output.includes('data-editorial-route="/wedding-moments"'));
+  assert(output.includes('href="/redcarpert-prototype/wedding-moments/"'));
+  assert(!output.includes('data-editorial-route="/redcarpert-prototype/wedding-moments"'));
+});
