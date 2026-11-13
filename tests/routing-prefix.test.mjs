@@ -33,3 +33,36 @@ test("external media URLs are not rewritten as internal page URLs", () => {
   const markup = '<img src="' + url + '">';
   assert.equal(prefix(markup), markup);
 });
+
+
+test("ImageKit wedding photos, videos and thumbnails are never rewritten inside CDN URLs", () => {
+  const base = "https://ik.imagekit.io/kw8awoqvwi/red-carpet-wedding-dresses/wedding-moments/";
+  const photos = [
+    base + "wedding-moments-56.jpg",
+    base + "wedding-moments-19.jpg",
+    base + "wedding-moments-20.jpg",
+  ];
+  const video = base + "wedding-moments-88.mp4";
+  const poster = video + "/ik-thumbnail.jpg";
+  const html = [
+    '<a href="/wedding-moments/">Wedding Moments</a>',
+    ...photos.map(url => '<img src="' + url + '">'),
+    '<video poster="' + poster + '" src="' + video + '"></video>',
+    '<button data-wedding-src="' + video + '">Play</button>',
+  ].join("");
+  const rewritten = prefix(html);
+  assert(rewritten.includes('href="/redcarpert-prototype/wedding-moments/"'));
+  for (const url of [...photos, video, poster]) {
+    assert(rewritten.includes(url), "external media URL changed: " + url);
+  }
+  assert(!rewritten.includes("/redcarpert-prototype/wedding-moments/wedding-moments-56.jpg"));
+  assert(!rewritten.includes("/redcarpert-prototype/wedding-moments/wedding-moments-88.mp4"));
+  assert.equal(prefix(rewritten), rewritten, "prefixing must be idempotent");
+});
+
+test("root relative CSS assets still receive the repository prefix", () => {
+  assert.equal(prefix('url(/site-assets/example.png)'),
+    'url(/redcarpert-prototype/site-assets/example.png)');
+  assert.equal(prefix('background:url("/redcarpert/brand/logo.png")'),
+    'background:url("/redcarpert-prototype/redcarpert/brand/logo.png")');
+});
