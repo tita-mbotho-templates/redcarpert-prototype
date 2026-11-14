@@ -1,5 +1,6 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
+import products from '../src/data/products.json' with { type: 'json' };
 
 /** Test deterministic book behaviour without relying on third-party CDN availability. */
 const browser = await chromium.launch({args:['--no-sandbox']});
@@ -16,7 +17,13 @@ try {
   await page.locator('#redcarpert-flipbook[data-engine="fallback"]').waitFor({timeout:10000});
   assert.equal(await page.locator('[data-book-page]').count(),10);
   assert.equal(await page.locator('[data-book-price]').count(),8);
-  assert((await page.locator('[data-book-price]').allTextContents()).every(text=>text==='Price to be confirmed'));
+  const expectedPrices = new Map(products.dresses.map(({id,priceZar})=>[
+   id,priceZar===null?'Price to be confirmed':'R '+new Intl.NumberFormat('en-ZA',{maximumFractionDigits:0}).format(priceZar)
+  ]));
+  const renderedPrices=await page.locator('[data-book-price]').evaluateAll(nodes=>nodes.map(node=>[node.getAttribute('data-book-price'),node.textContent]));
+  assert.equal(new Set(renderedPrices.map(([id])=>id)).size,8);
+  assert(renderedPrices.every(([id,price])=>expectedPrices.has(id)&&price===expectedPrices.get(id)),
+   'lookbook prices must match products.json');
   assert.equal(await page.locator('.redcarpert-book-logo').count(),2);
   assert.equal(await page.locator('.redcarpert-book-dress').count(),8);
   assert.equal(await page.locator('.redcarpert-book-dress[data-sample-id^="sample-mermaid"]').count(),4);
