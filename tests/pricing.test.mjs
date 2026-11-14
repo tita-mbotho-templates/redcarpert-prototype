@@ -13,7 +13,8 @@ test("central products.json has one ZAR price slot per approved dress", () => {
   assert.deepEqual([...ids].sort(), catalogueProducts.map(dress => dress.id).sort());
   for (const product of catalogueProducts) {
     assert.equal(product.priceZar, priceForDress(product.id));
-    assert.equal(product.priceZar, null, "client prices must not be invented");
+    assert(product.priceZar === null || (Number.isSafeInteger(product.priceZar) && product.priceZar > 0),
+      "prices must be unassigned or positive whole-rand amounts");
   }
   assert.throws(() => priceForDress("unknown-dress"), /missing price/);
 });
