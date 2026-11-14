@@ -3,6 +3,7 @@ import test from 'node:test';
 import {sitePages} from '../src/data/site.ts';
 import {catalogueProducts} from '../src/data/catalogue.ts';
 import {createProductDetailPreview,sampleDetailTitle,sampleFittingMessage,sampleGalleryImages} from '../src/lib/product-detail-preview.ts';
+import { displayDressPrice } from '../src/lib/pricing.ts';
 const all=nodes=>nodes.flatMap(n=>typeof n==='string'?[]:[n,...all(n.children)]);
 const freeze=o=>{if(o&&typeof o==='object'&&!Object.isFrozen(o)){Object.values(o).forEach(freeze);Object.freeze(o);}return o;};
 test('previews are isolated, immutable, collision-free and contain one genuine sample slide with no commerce or inherited dress claims',()=>{
@@ -21,11 +22,24 @@ test('previews are isolated, immutable, collision-free and contain one genuine s
   assert.equal(content.find(n=>n.tag==='img').attrs.width,String(gallery.width));assert.equal(content.find(n=>n.tag==='img').attrs.height,String(gallery.height));
   assert(!nodes.some(n=>n.attrs.class==='social-share'||n.attrs.class?.includes('share-item')));
   assert.equal(all(source.nodes).filter(n=>n.attrs.class==='social-share').length,1);
-  assert.equal(content.find(n=>n.tag==='h1').children[0],sampleDetailTitle(product));
-  assert(content.some(n=>n.tag==='button'&&n.children[0]==='Enquire About a Fitting'&&Object.hasOwn(n.attrs,'data-whatsapp-preview')));
-  assert(content.some(n=>n.attrs.href===`/product-category/${product.category}/`));
+  assert.equal(content.find(n=>n.tag==='h1').children[0],product.name);
+  const card=content.find(n=>n.attrs.class==='redcarpert-detail-card');
+  assert(card,'detail information must be inside a floating card');
+  assert.equal(content.filter(n=>n.attrs.class==='redcarpert-detail-collection').length,1);
+  assert.equal(content.find(n=>n.attrs.class==='redcarpert-detail-collection').children[0],
+    (product.category==='mermaid'?'Mermaid':'Ball Gown')+' Collection');
+  assert.equal(content.find(n=>Object.hasOwn(n.attrs,'data-dress-price')).children[0],
+    displayDressPrice(product.priceZar));
+  assert(!all([card]).some(n=>n.attrs.class==='sample-detail-notice'),
+    'stock image disclosure must sit outside the floating card');
+  assert(content.some(n=>n.attrs.class==='sample-detail-notice'));
+  assert(content.some(n=>n.attrs.class==='redcarpert-detail-actions'),
+    'fitting action is inside card');
+  assert(content.some(n=>n.tag==='button'&&n.children[0]==='Book a Fitting'&&Object.hasOwn(n.attrs,'data-whatsapp-preview')));
+  assert(!content.some(n=>n.attrs.class==='product_meta'),'collection should never repeat');
   assert(!content.some(n=>['form','input','select','textarea'].includes(n.tag)));
-  assert(!content.some(n=>/\b(price|stock|instock|cart|quantity|related|reviews_tab)\b/.test(n.attrs.class||'')));
+  assert(!content.some(n=>/\b(stock|instock|cart|quantity|related|reviews_tab)\b/.test(n.attrs.class||'')));
+  assert(!content.some(n=>n.attrs.class==='tabs wc-tabs'),'remove inherited sample description tabs');
   assert(!content.some(n=>n.attrs.id==='wpgis-gallery'));
   const text=JSON.stringify(root);assert(!/Arabella|Worldwide Shipping|French|satin|checkout|payment|woocommerce_loop_add_to_cart/i.test(text));
   assert(text.includes('not confirmed Redcarpert inventory'));

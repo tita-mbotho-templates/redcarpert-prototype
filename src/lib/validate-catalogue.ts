@@ -10,6 +10,10 @@ export function validateCatalogue(products: readonly CatalogueProduct[]): void {
     ids.add(product.id);
     if (product.category !== 'mermaid' && product.category !== 'ball_gown') throw new Error(`Unapproved category for ${product.id}`);
     counts[product.category] += 1;
+    if (product.priceZar !== null &&
+      (!Number.isSafeInteger(product.priceZar) || product.priceZar <= 0)) {
+      throw new Error('Invalid catalogue price for ' + product.id);
+    }
     if (product.status !== 'sample' || product.detailReference !== null) throw new Error(`Unverified inventory: ${product.id}`);
     const image = /^https:\/\/images\.pexels\.com\/photos\/([1-9]\d+)\/pexels-photo-\1\.jpeg\?auto=compress&cs=tinysrgb&w=1200$/.exec(product.image);
     if (!image || images.has(image[1])) throw new Error(`Unapproved or duplicate Pexels image: ${product.id}`);

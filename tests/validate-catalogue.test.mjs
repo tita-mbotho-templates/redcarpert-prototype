@@ -22,6 +22,8 @@ test('reject unapproved hosts, paths, missing attribution, categories and invent
   [{status:'confirmed'},/Unverified inventory/],
   [{detailReference:'/product/real'},/Unverified inventory/],
   [{image:'https://example.com/bad.jpg'},/Unapproved or duplicate Pexels image/],
+  [{priceZar:-1},/Invalid catalogue price/],
+  [{priceZar:3499.99},/Invalid catalogue price/],
   [{image:'https://images.pexels.com.evil.com/photos/1/pexels-photo-1.jpeg'},/Unapproved or duplicate Pexels image/],
   [{image:'/redcarpert/../bad.webp'},/Unapproved or duplicate Pexels image/],
   [{image:samples[1].image},/Unapproved or duplicate Pexels image|Missing image provenance/],
