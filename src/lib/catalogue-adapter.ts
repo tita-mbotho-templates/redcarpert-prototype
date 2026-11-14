@@ -1,5 +1,6 @@
 import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/site";
 import type { CatalogueProduct } from "@/data/catalogue";
+import { displayDressPrice } from "./pricing.ts";
 
 const routes = { "/product": [100, "PRODUCTS", "Wedding Dresses"], "/product-category/mermaid": [78, "Mermaid", "Mermaid"], "/product-category/ball_gown": [36, "Ball Gown", "Ball Gown"] } as const;
 const elements = (nodes: DocumentNode[]) => nodes.filter((n): n is DocumentElement => typeof n !== "string");
@@ -77,7 +78,13 @@ export function adaptCatalogue(document: SiteDocumentData, catalogueProducts: re
       if (typeof node === "string") return [node];
       if (node !== anchor) return [];
       const attrs: Record<string, string> = { ...anchor.attrs, href: product.previewRoute, "aria-label": `${product.name}: view sample detail demonstration`, style: "cursor: pointer" };
-      return [{ ...anchor, attrs, children: anchor.children.map(child => child === image ? { ...image, attrs: imageAttrs } : child === title ? { ...title, children: [product.name] } : child === price ? { ...price, attrs: { class: "catalogue-sample-note" }, children: ["Sample imagery"] } : child) }];
+      return [{ ...anchor, attrs, children: anchor.children.map(child => child === image ? { ...image, attrs: imageAttrs } : child === title ? { ...title, children: [product.name] } : child === price ? { ...price, attrs: { class: "catalogue-sample-note" }, children: [
+        "Sample imagery",
+        ...(product.priceZar === null ? [] : [{
+          tag: "span", attrs: { class: "redcarpert-catalogue-price", "data-dress-price": "" },
+          children: [displayDressPrice(product.priceZar)],
+        }]),
+      ] } : child) }];
     }) };
   });
   replacements.set(grid, { ...grid, attrs: { ...grid.attrs, "data-catalogue-preview": "true" }, children });

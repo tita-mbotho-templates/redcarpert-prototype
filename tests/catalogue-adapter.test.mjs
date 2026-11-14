@@ -4,6 +4,7 @@ import test from 'node:test';
 import {sitePages} from '../src/data/site.ts';
 import {catalogueProducts,catalogueCategories} from '../src/data/catalogue.ts';
 import {adaptCatalogue} from '../src/lib/catalogue-adapter.ts';
+import {displayDressPrice} from '../src/lib/pricing.ts';
 const all=n=>n.flatMap(x=>typeof x==='string'?[]:[x,...all(x.children)]);
 const freeze=x=>{if(x&&typeof x==='object'&&!Object.isFrozen(x)){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};
 const listingRoutes=['/product','/product-category/mermaid','/product-category/ball_gown'];
@@ -34,5 +35,17 @@ test('unexpected structures/counts, commerce slots and unready data fail closed'
  ]){const d=structuredClone(sitePages[route]);mutate(d);assert.throws(()=>adaptCatalogue(d,catalogueProducts),/Catalogue .*incompatible capture/);}
  assert.throws(()=>adaptCatalogue(adaptCatalogue(sitePages[route],catalogueProducts),catalogueProducts),/Catalogue/);
  assert.throws(()=>adaptCatalogue(sitePages[route],catalogueProducts.map(p=>({...p,detailReference:'/unready'}))),/sample readiness/);
+ }
+});
+
+test('verified catalogue prices appear only when a ZAR amount is present',()=>{
+ const products=catalogueProducts.map((p,i)=>i===0?{...p,priceZar:14999}:p);
+ const doc=adaptCatalogue(sitePages['/product'],products);
+ const cards=all(doc.nodes).filter(n=>n.attrs['data-catalogue-id']);
+ assert.equal(cards.length,8);
+ for(const [i,card] of cards.entries()){
+  const prices=all([card]).filter(n=>Object.hasOwn(n.attrs,'data-dress-price'));
+  if(i===0){assert.equal(prices.length,1);assert.equal(prices[0].children[0],displayDressPrice(14999));}
+  else assert.equal(prices.length,0,'unassigned sample prices remain hidden');
  }
 });

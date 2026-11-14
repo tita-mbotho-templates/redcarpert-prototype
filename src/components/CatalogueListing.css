@@ -28,3 +28,11 @@
   object-fit: cover;
   object-position: center 25%;
 }
+
+/* Prices become visible on catalogue cards only after a real price is assigned. */
+#main-container .catalogue-sample-note .redcarpert-catalogue-price {
+  display: block;
+  margin-top: 7px;
+  color: #66503b;
+  font: 500 clamp(12px, 1.2vw, 15px)/1.4 Montserrat, sans-serif;
+}
