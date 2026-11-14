@@ -1,4 +1,5 @@
 import { catalogueProducts } from '../../src/data/catalogue.ts';
+import { displayDressPrice } from '../../src/lib/pricing.ts';
 import type { DocumentNode } from '../../src/types/site';
 
 export const escapeHtml = (s: string) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -10,6 +11,7 @@ function lookbook() {
    return '<article class="redcarpert-book-page redcarpert-book-dress" data-book-page="' + pageNumber + '" data-sample-id="' + escapeHtml(product.id) + '">' +
      '<div class="redcarpert-book-page-inner"><div class="redcarpert-book-photo"><img src="' + escapeHtml(product.image) + '" alt="' + escapeHtml(product.imageAlt) + '" loading="' + (i > 1 ? 'lazy' : 'eager') + '" decoding="async"></div>' +
      '<div class="redcarpert-book-copy"><span class="redcarpert-book-kicker">REDCARPERT / SAMPLE COLLECTION</span><h3>' + category + '</h3><p>' + escapeHtml(product.name) + ' · Demonstration photograph</p>' +
+     '<p class="redcarpert-book-price" data-book-price="' + escapeHtml(product.id) + '">' + escapeHtml(displayDressPrice(product.priceZar)) + '</p>' +
      '<a href="' + escapeHtml(product.previewRoute) + '/">View sample dress details</a><small>Stock photography only · Not confirmed Redcarpert inventory</small></div>' +
      '<span class="redcarpert-book-folio">' + String(pageNumber).padStart(2,'0') + ' / 10</span></div></article>';
  }).join('');

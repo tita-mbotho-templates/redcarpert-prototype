@@ -22,23 +22,15 @@ export function initializeLookbookReader() {
   const pages = [...book.querySelectorAll('[data-book-page]')];
   if (pages.length !== lookbookEntries.length + 2) throw new Error('Lookbook does not match catalogue');
 
-  // Each dress uses the same JSON-backed price as its product detail page.
-  // Insert the price before the flip animation snapshots the page DOM.
-  const dresses = [...book.querySelectorAll('.redcarpert-book-dress')];
-  if (dresses.length !== lookbookEntries.length) {
-    throw new Error('Lookbook dress pages do not match catalogue');
-  }
+  // Pricing is rendered into the static book during generation, so it remains
+  // visible without JavaScript. Verify it agrees with the catalogue data.
   for (const entry of lookbookEntries) {
-    const dress = dresses.find(element => element.dataset.sampleId === entry.id);
-    const heading = dress?.querySelector('.redcarpert-book-copy h3');
-    if (!heading) throw new Error('Lookbook missing dress information for ' + entry.id);
-    const price = document.createElement('p');
-    price.className = 'redcarpert-book-price';
-    price.dataset.bookPrice = entry.id;
-    price.textContent = entry.priceDisplay;
-    heading.after(price);
+    const label = [...book.querySelectorAll('[data-book-price]')]
+      .find(element => element.dataset.bookPrice === entry.id);
+    if (!label || label.textContent !== entry.priceDisplay) {
+      throw new Error('Lookbook price does not match products.json for ' + entry.id);
+    }
   }
-
   const previous = viewer.querySelector('[data-book-previous]');
   const next = viewer.querySelector('[data-book-next]');
   const status = viewer.querySelector('[data-book-status]');
