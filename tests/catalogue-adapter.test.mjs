@@ -45,7 +45,9 @@ test('verified catalogue prices appear only when a ZAR amount is present',()=>{
  assert.equal(cards.length,8);
  for(const [i,card] of cards.entries()){
   const prices=all([card]).filter(n=>Object.hasOwn(n.attrs,'data-dress-price'));
-  if(i===0){assert.equal(prices.length,1);assert.equal(prices[0].children[0],displayDressPrice(14999));}
+  const amount=products.find(product=>product.id===card.attrs['data-catalogue-id'])?.priceZar;
+  assert(amount!==undefined);
+  if(amount!==null){assert.equal(prices.length,1);assert.equal(prices[0].children[0],displayDressPrice(amount));}
   else assert.equal(prices.length,0,'unassigned sample prices remain hidden');
  }
 });
