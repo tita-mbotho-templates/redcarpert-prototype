@@ -23,6 +23,10 @@ Visit **`/wedding-moments/`** to view real client wedding photographs and video 
 
 Client media URLs are stored in `wedding_moments.events` inside [`src/data/image-links.json`](src/data/image-links.json). This initial upload batch retains the exact order the client sent. New upload batches can be appended to the JSON and appear first. [Implementation 25](docs/implementation-25-wedding-moments.md) documents the workflow and publication safeguards.
 
+## Dress pricing and details
+
+Dress amounts are stored in [`src/data/products.json`](src/data/products.json) as whole-number ZAR values. The eight sample listings currently have `null` prices until the client supplies verified product/price mappings. The floating right-hand dress detail card, the online Digital Lookbook and the sample PDF use this same price data. See [Implementation 26](docs/implementation-26-dress-card-and-pricing.md) for the approved card design, data rules and preview commands.
+
 ## Validate and preview
 
 ```sh
