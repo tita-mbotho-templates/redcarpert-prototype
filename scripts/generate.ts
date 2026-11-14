@@ -68,9 +68,9 @@ for(const route of routes) {
 track(await readFile('src/client/lookbook.js','utf8'));
 await copyTrackedAssets(root);
 const photos = await Promise.all([
- {src:'sample-01-mermaid-pexels.webp',category:'Mermaid' as const,sample:'Sample 01',photographer:'Tran Long'},
- {src:'sample-02-ball-gown-pexels.webp',category:'Ball Gown' as const,sample:'Sample 02',photographer:'Thalia villa'},
-].map(async item=>{const {data,info}=await sharp('public/redcarpert/gallery/'+item.src).removeAlpha().jpeg({quality:90,progressive:false}).toBuffer({resolveWithObject:true});return {...item,jpeg:data,width:info.width,height:info.height};}));
+ {src:'sample-01-mermaid-pexels.webp',productId:'sample-mermaid',category:'Mermaid' as const,sample:'Sample 01',photographer:'Tran Long'},
+ {src:'sample-02-ball-gown-pexels.webp',productId:'sample-ball-gown',category:'Ball Gown' as const,sample:'Sample 02',photographer:'Thalia villa'},
+].map(async item=>{const product=catalogueProducts.find(p=>p.id===item.productId);if(!product)throw new Error('Missing PDF dress '+item.productId);const {data,info}=await sharp('public/redcarpert/gallery/'+item.src).removeAlpha().jpeg({quality:90,progressive:false}).toBuffer({resolveWithObject:true});return {...item,priceZar:product.priceZar,jpeg:data,width:info.width,height:info.height};}));
 await mkdir(root+'/static/digital-lookbook',{recursive:true});
 await writeFile(root+'/static/digital-lookbook/Redcarpert-Sample-Lookbook.pdf',createSampleLookbookPdf(photos));
 await writeFile(root+'/404.html',`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page not found | Redcarpert</title><link rel="icon" type="image/png" sizes="32x32" href="${base}redcarpert/brand/redcarpert-bridal-favicon-v2-32.png"><link rel="apple-touch-icon" sizes="180x180" href="${base}redcarpert/brand/redcarpert-bridal-touch-v2-180.png"></head><body><main><h1>Page not found</h1><p>This page is unavailable.</p><a href="${base}">Return to Redcarpert Wedding Dresses</a></main></body></html>`);

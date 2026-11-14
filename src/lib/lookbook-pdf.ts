@@ -1,6 +1,8 @@
 /* Minimal PDF 1.4 writer for the two approved local stock photographs.
  * No remote requests, new dependencies, invented client inventory or external PDF service.
  * Inputs must be RGB baseline JPEGs converted from our existing gallery WebPs by Sharp. */
+import { displayDressPrice, type PriceZar } from './pricing.ts';
+
 interface PdfPhoto {
   readonly jpeg: Buffer;
   readonly width: number;
@@ -8,6 +10,7 @@ interface PdfPhoto {
   readonly category: "Mermaid" | "Ball Gown";
   readonly sample: string;
   readonly photographer: string;
+  readonly priceZar: PriceZar;
 }
 
 const ascii = (value: string): Buffer => Buffer.from(value, "latin1");
@@ -41,9 +44,10 @@ export function createSampleLookbookPdf(photos: readonly PdfPhoto[]): Buffer {
       operator(55, 785, 20, "REDCARPERT WEDDING DRESSES"),
       operator(55, 755, 12, "DIGITAL LOOKBOOK - SAMPLE COLLECTION"),
       `q ${iw} 0 0 ${ih} ${ix} ${iy} cm /Im1 Do Q\n`,
-      operator(55, 112, 17, photo.category.toUpperCase() + " | " + photo.sample),
-      operator(55, 88, 10, "Demonstration photograph by " + photo.photographer.replace(/[^\x20-\x7E]/g, "")),
-      operator(55, 65, 9, "Stock photography only - not confirmed Redcarpert inventory."),
+      operator(55, 129, 17, photo.category.toUpperCase() + " | " + photo.sample),
+      operator(55, 105, 13, "PRICE: " + displayDressPrice(photo.priceZar).replace(/\s/g, " ")),
+      operator(55, 82, 10, "Demonstration photograph by " + photo.photographer.replace(/[^\x20-\x7E]/g, "")),
+      operator(55, 59, 9, "Stock photography only - not confirmed Redcarpert inventory."),
     ].join("");
     const content = add(stream(ascii(commands)));
     const page = add(`<< /Type /Page /Parent ${pages} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${font} 0 R >> /XObject << /Im1 ${img} 0 R >> >> /Contents ${content} 0 R >>`);

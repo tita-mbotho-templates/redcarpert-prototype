@@ -64,13 +64,14 @@ test('new Redcarpert editorial content reuses source shell and never exposes ori
 test('lookbook PDF is a two-page illustrated PDF with correct xref and no client claims', async () => {
   const jpeg = await sharp({create:{width:24,height:36,channels:3,background:'#dddddd'}}).jpeg().toBuffer();
   const pdf = createSampleLookbookPdf([
-    { jpeg, width: 24, height: 36, category: 'Mermaid', sample: 'Sample 01', photographer: 'Stock' },
-    { jpeg, width: 24, height: 36, category: 'Ball Gown', sample: 'Sample 02', photographer: 'Stock' },
+    { jpeg, width: 24, height: 36, category: 'Mermaid', sample: 'Sample 01', photographer: 'Stock', priceZar: null },
+    { jpeg, width: 24, height: 36, category: 'Ball Gown', sample: 'Sample 02', photographer: 'Stock', priceZar: null },
   ]);
   assert.equal(pdf.toString('latin1',0,8),'%PDF-1.4');
   const text = pdf.toString('latin1');
   assert.match(text,/\/Count 2/);
   assert.match(text,/DIGITAL LOOKBOOK/);
+  assert.match(text,/PRICE: Price to be confirmed/);
   assert.match(text,/not confirmed Redcarpert inventory/);
   assert.match(text,/\/DCTDecode/);
   assert.match(text,/startxref\n\d+\n%%EOF/);
