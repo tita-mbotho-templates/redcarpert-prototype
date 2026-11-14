@@ -1,4 +1,5 @@
 import { catalogueProducts, type CatalogueProduct } from "../data/catalogue.ts";
+import { displayDressPrice } from "./pricing.ts";
 import type { DocumentElement, DocumentNode, SiteDocumentData } from "@/types/site";
 
 const elements = (nodes: DocumentNode[]) => nodes.filter((n): n is DocumentElement => typeof n !== "string");
@@ -61,18 +62,23 @@ export function createProductDetailPreview(source: SiteDocumentData, product: Ca
       node("img", { src: gallery.src, width: String(gallery.width), height: String(gallery.height), class: "attachment-shop_single size-shop_single wp-post-image", alt: product.imageAlt, decoding: "async", fetchpriority: "high" }, []),
       node("a", { href: gallery.src, class: "wpgis-popup fa fa-expand", "data-fancybox": "product-gallery", "aria-label": "Enlarge sample photograph" }, []),
     ])] }] },
-    { ...summary, children: [
-      { ...title, children: [sampleDetailTitle(product)] },
-      node("p", { class: "sample-detail-notice" }, ["Sample imagery — not confirmed Redcarpert inventory."]),
-      node("div", { class: "product_meta" }, ["Category: ", node("a", { href: `/product-category/${product.category}/`, rel: "tag" }, [category])]),
-      node("p", {}, [node("button", { type: "button", class: "button", "data-whatsapp-preview": "", "aria-haspopup": "dialog" }, ["Enquire About a Fitting"])]),
-    ] },
-    { ...tabs, children: [
-      node("ul", { class: "tabs wc-tabs", role: "tablist" }, [node("li", { role: "presentation", class: "description_tab", id: "tab-title-description" }, [node("a", { href: "#tab-description", role: "tab", "aria-controls": "tab-description" }, ["Sample information"])])]),
-      node("div", { class: "woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab", id: "tab-description", role: "tabpanel", "aria-labelledby": "tab-title-description" }, [
-        node("h2", {}, ["Sample information"]),
-        node("p", {}, ["This demonstration uses a stock photograph. Dress information will be added after client confirmation."]),
+    { ...summary, attrs: { ...summary.attrs, "data-redcarpert-detail-summary": "true" }, children: [
+      node("section", { class: "redcarpert-detail-card", "aria-label": "Dress information" }, [
+        node("p", { class: "redcarpert-detail-collection" }, [category + " Collection"]),
+        { ...title, attrs: { ...title.attrs, class: "product_title entry-title redcarpert-detail-name" }, children: [product.name] },
+        node("div", { class: "redcarpert-detail-divider", "aria-hidden": "true" }, []),
+        node("div", { class: "redcarpert-detail-pricing" }, [
+          node("span", { class: "redcarpert-detail-price-label" }, ["PRICE"]),
+          node("p", { class: "redcarpert-detail-price-value", "data-dress-price": "" },
+            [displayDressPrice(product.priceZar)]),
+        ]),
+        node("div", { class: "redcarpert-detail-actions" }, [
+          node("button", { type: "button", class: "button redcarpert-detail-fitting-button", "data-whatsapp-preview": "", "aria-haspopup": "dialog" }, ["Book a Fitting"]),
+          node("small", { class: "redcarpert-detail-enquiry-note" }, ["Enquire via WhatsApp"]),
+        ]),
       ]),
+      node("p", { class: "sample-detail-notice" },
+        ["Sample imagery — not confirmed Redcarpert inventory."]),
     ] },
   ] };
   const visit = (n: DocumentNode): DocumentNode | null => {
