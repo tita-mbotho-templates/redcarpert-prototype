@@ -15,6 +15,8 @@ try {
   await page.goto('http://localhost:4173/redcarpert-prototype/digital-lookbook/',{waitUntil:'domcontentloaded'});
   await page.locator('#redcarpert-flipbook[data-engine="fallback"]').waitFor({timeout:10000});
   assert.equal(await page.locator('[data-book-page]').count(),10);
+  assert.equal(await page.locator('[data-book-price]').count(),8);
+  assert((await page.locator('[data-book-price]').allTextContents()).every(text=>text==='Price to be confirmed'));
   assert.equal(await page.locator('.redcarpert-book-logo').count(),2);
   assert.equal(await page.locator('.redcarpert-book-dress').count(),8);
   assert.equal(await page.locator('.redcarpert-book-dress[data-sample-id^="sample-mermaid"]').count(),4);

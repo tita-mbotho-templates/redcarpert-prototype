@@ -60,6 +60,8 @@ test('copied classic scripts remain valid and every page uses modern Font Awesom
 test('ten-page interactive book and eight shared Pexels products are published without local copies',{skip:!available},()=>{
  const book=readFileSync('dist/digital-lookbook/index.html','utf8');
  assert.equal((book.match(/data-book-page=/g)||[]).length,10);
+ assert.equal((book.match(/data-book-price=/g)||[]).length,8);
+ assert.equal((book.match(/Price to be confirmed/g)||[]).length,8);
  assert.equal((book.match(/class="redcarpert-book-logo"/g)||[]).length,2);
  assert.match(book,/data-book-next/); assert.match(book,/data-book-previous/);
  const gallery=readFileSync('dist/product/index.html','utf8');
@@ -75,6 +77,10 @@ test('ten-page interactive book and eight shared Pexels products are published w
   const html=readFileSync('dist'+route+'/index.html','utf8');
   assert.match(html,/https:\/\/images\.pexels\.com\/photos\//);
   assert.match(html,/not confirmed Redcarpert inventory/i);
+  assert.match(html,/class="redcarpert-detail-card"/);
+  assert.match(html,/data-dress-price=""/);
+  assert.match(html,/Price to be confirmed/);
+  assert.match(html,/Book a Fitting/);
  }
 });
 
