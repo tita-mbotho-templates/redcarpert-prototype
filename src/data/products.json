@@ -1,0 +1,37 @@
+{
+  "currency": "ZAR",
+  "dresses": [
+    {
+      "id": "sample-mermaid",
+      "priceZar": null
+    },
+    {
+      "id": "sample-mermaid-02",
+      "priceZar": null
+    },
+    {
+      "id": "sample-mermaid-03",
+      "priceZar": null
+    },
+    {
+      "id": "sample-mermaid-04",
+      "priceZar": null
+    },
+    {
+      "id": "sample-ball-gown",
+      "priceZar": null
+    },
+    {
+      "id": "sample-ball-gown-02",
+      "priceZar": null
+    },
+    {
+      "id": "sample-ball-gown-03",
+      "priceZar": null
+    },
+    {
+      "id": "sample-ball-gown-04",
+      "priceZar": null
+    }
+  ]
+}
