@@ -4,6 +4,8 @@ import {readFileSync,readdirSync,existsSync} from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import sharp from 'sharp';
+import {catalogueProducts} from '../src/data/catalogue.ts';
+import {displayDressPrice} from '../src/lib/pricing.ts';
 const walk = dir => readdirSync(dir,{withFileTypes:true}).flatMap(file=>file.isDirectory()?walk(path.join(dir,file.name)):[path.join(dir,file.name)]);
 const available = existsSync('dist/index.html');
 test('static deployment contains complete approved pages, local paths and no application server', {skip:!available},()=>{
@@ -61,7 +63,10 @@ test('ten-page interactive book and eight shared Pexels products are published w
  const book=readFileSync('dist/digital-lookbook/index.html','utf8');
  assert.equal((book.match(/data-book-page=/g)||[]).length,10);
  assert.equal((book.match(/data-book-price=/g)||[]).length,8);
- assert.equal((book.match(/Price to be confirmed/g)||[]).length,8);
+ for(const product of catalogueProducts){
+  assert(book.includes('data-book-price="'+product.id+'">'+displayDressPrice(product.priceZar)+'</p>'),
+    'book price does not match products.json for '+product.id);
+ }
  assert.equal((book.match(/class="redcarpert-book-logo"/g)||[]).length,2);
  assert.match(book,/data-book-next/); assert.match(book,/data-book-previous/);
  const gallery=readFileSync('dist/product/index.html','utf8');
@@ -79,7 +84,10 @@ test('ten-page interactive book and eight shared Pexels products are published w
   assert.match(html,/not confirmed Redcarpert inventory/i);
   assert.match(html,/class="redcarpert-detail-card"/);
   assert.match(html,/data-dress-price=""/);
-  assert.match(html,/Price to be confirmed/);
+  const product=catalogueProducts.find(p=>p.previewRoute===route);
+  assert(product,'unknown sample detail route: '+route);
+  assert(html.includes('data-dress-price="">'+displayDressPrice(product.priceZar)+'</p>'),
+    'detail price does not match products.json for '+route);
   assert.match(html,/Book a Fitting/);
  }
 });
